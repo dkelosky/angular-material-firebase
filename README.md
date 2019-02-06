@@ -1,5 +1,8 @@
 # Angular Material Firebase Boiler Plate
 
+This is a boiler plate project with a "users" service to show a logon screen when no logon has occurred or
+otherwise show content for a logged in user.
+
 ## Technologies
 
 * [TypeScript](https://www.typescriptlang.org/) - language used
