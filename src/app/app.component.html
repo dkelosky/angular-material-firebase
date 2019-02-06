@@ -1,9 +1,14 @@
 <section class="mat-typography">
-    <mat-toolbar color="primary">
+    <mat-toolbar ngClass="header" color="primary">
         <span fxFlex fxLayoutAlign="center">
             <span>Check In</span>
         </span>
     </mat-toolbar>
     <app-home></app-home>
+    <mat-toolbar ngClass="footer" color="primary">
+        <span fxFlex fxLayoutAlign="center">
+            <span>&copy; 2019</span>
+        </span>
+    </mat-toolbar>
 </section>
 <router-outlet></router-outlet>

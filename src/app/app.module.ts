@@ -1,8 +1,10 @@
+// import 'hammerjs';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatCheckboxModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +23,7 @@ import { environment } from '../environments/environment';
 import { InComponent } from './component/in/in.component';
 import { TermsOfServiceComponent } from './component/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,8 +39,14 @@ import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-polic
     FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
