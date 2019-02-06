@@ -1,6 +1,9 @@
 <div fxLayout="row" fxLayoutAlign="center center">
   <div fxLayout="column" fxLayoutGap="20px">
     <div></div>
+    <div *ngIf="afAuth.user | async as user">
+      <div>Welcome {{user.displayName}}</div>
+    </div>
     <button mat-button color="warn" (click)="logout()">Logout</button>
   </div>
 </div>
