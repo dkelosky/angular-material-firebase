@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,19 +18,22 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { environment } from '../environments/environment';
+import { InComponent } from './component/in/in.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginMessageComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    InComponent
   ],
   imports: [
     FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatButtonModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

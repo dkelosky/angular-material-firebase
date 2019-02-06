@@ -1,6 +1,5 @@
 <div *ngIf="afAuth.user | async as user; else showLogin">
-  <!-- <app-in-instructions [hidden]="hidden"></app-in-instructions> -->
-  <p>instructions</p>
+  <app-in>[hidden]="hidden"></app-in>
 </div>
 <ng-template #showLogin>
   <app-login></app-login>

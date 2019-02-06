@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 // save token
                 console.log(`Permission granted; saving token server: ${token}`);
                 this.u.setUser(token); // NOTE(Kelosky): saves entire user - need to update just token
-                this.router.navigateByUrl('/subscribe');
+                // this.router.navigateByUrl('/in');
               },
               (error) => {
                 // TODO(Kelosky): warning - you will not receive any notifications
