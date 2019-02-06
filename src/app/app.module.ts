@@ -19,6 +19,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { environment } from '../environments/environment';
 import { InComponent } from './component/in/in.component';
+import { TermsOfServiceComponent } from './component/terms-of-service/terms-of-service.component';
+import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { InComponent } from './component/in/in.component';
     LoginMessageComponent,
     LoginComponent,
     HomeComponent,
-    InComponent
+    InComponent,
+    TermsOfServiceComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     FlexLayoutModule,

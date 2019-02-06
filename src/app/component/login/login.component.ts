@@ -14,7 +14,7 @@ import { UsersService } from '../../service/users.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   private ui: firebaseui.auth.AuthUI;
-  private url;
+  private url = '';
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -22,10 +22,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     private u: UsersService,
     private router: Router,
   ) {
-    this.url = this.router.url;
   }
 
   ngOnInit() {
+    // this.url = this.router.serializeUrl;
+    // console.log(`this ${this.url.}`)
     this.ui = new firebaseui.auth.AuthUI(this.afAuth.auth);
     this.ui.start(
       '#firebaseui-auth-container',
@@ -70,10 +71,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         firebase.auth.PhoneAuthProvider.PROVIDER_ID,
       ],
       // Terms of service url/callback.
-      tosUrl: this.url + '/terms-of-service',
-      // Privacy policy url/callback.
-      privacyPolicyUrl: function () {
-        window.location.assign(this.url + '/private-policy');
+      tosUrl: () => {
+        console.log('TODO(Kelosky) - launch ToS');
+      },
+      privacyPolicyUrl: () => {
+        console.log('TODO(Kelosky) - launch Privacy policy');
       }
     };
   }
