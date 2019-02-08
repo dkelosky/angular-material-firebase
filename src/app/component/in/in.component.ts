@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-in',
   templateUrl: './in.component.html',
-  styleUrls: ['./in.component.less']
+  styleUrls: ['./in.component.less', '../../app.component.less']
 })
 export class InComponent implements OnInit {
   constructor(
