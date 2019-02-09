@@ -9,7 +9,7 @@ import { UsersService } from '../../service/users.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less']
+  styleUrls: ['./login.component.less', '../../app.component.less']
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
