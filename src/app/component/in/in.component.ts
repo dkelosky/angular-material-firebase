@@ -15,10 +15,4 @@ export class InComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  logout() {
-    this.router.navigateByUrl('/');
-    this.afAuth.auth.signOut();
-  }
-
 }

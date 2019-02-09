@@ -1,0 +1,7 @@
+<mat-toolbar ngClass="header" color="primary">
+  Check In
+  <span fxFlex fxLayoutAlign="center"></span>
+  <div *ngIf="afAuth.user | async as user; else showLogin">
+    <app-header-menu></app-header-menu>
+  </div>
+</mat-toolbar>
