@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatCheckboxModule, MatIconModule, MatMenuModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +45,7 @@ import { HeaderComponent } from './component/header/header.component';
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    DragDropModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
