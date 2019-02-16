@@ -13,7 +13,7 @@
       class="example-list" (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let item of todo" cdkDrag>
         <div>{{item}}</div>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="edit(item)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
       </div>

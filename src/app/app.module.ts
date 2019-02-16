@@ -27,6 +27,8 @@ import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-polic
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderMenuComponent } from './component/header-menu/header-menu.component';
 import { HeaderComponent } from './component/header/header.component';
+import { AddChildComponent } from './component/add-child/add-child.component';
+import { EditChildComponent } from './component/edit-child/edit-child.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { HeaderComponent } from './component/header/header.component';
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
     HeaderMenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddChildComponent,
+    EditChildComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -65,6 +69,8 @@ import { HeaderComponent } from './component/header/header.component';
   entryComponents: [
     PrivacyPolicyComponent,
     TermsOfServiceComponent,
+    AddChildComponent,
+    EditChildComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

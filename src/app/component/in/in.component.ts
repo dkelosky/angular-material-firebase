@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { moveItemInArray, transferArrayItem, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ToggleSideNavService } from 'src/app/service/toggle-side-nav.service';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialog } from '@angular/material';
+import { AddChildComponent } from '../add-child/add-child.component';
+import { EditChildComponent } from '../edit-child/edit-child.component';
 @Component({
   selector: 'app-in',
   templateUrl: './in.component.html',
@@ -43,9 +44,9 @@ export class InComponent implements OnInit, OnDestroy {
     }
   }
   constructor(
-    public afAuth: AngularFireAuth,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
+    public dialog: MatDialog,
     private toggle: ToggleSideNavService,
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -62,7 +63,29 @@ export class InComponent implements OnInit, OnDestroy {
   }
 
   add() {
-    console.log('addd');
+    this.openAddDialog();
+  }
+
+  edit(item: string) {
+    console.log(item);
+    this.openEditDialog();
+  }
+
+  openAddDialog() {
+    const dialogRef = this.dialog.open(AddChildComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+
+  openEditDialog() {
+    const dialogRef = this.dialog.open(EditChildComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   ngOnDestroy(): void {
