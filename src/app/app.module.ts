@@ -15,7 +15,9 @@ import {
   MatCheckboxModule,
   MatIconModule,
   MatMenuModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSnackBarModule,
+  MatInputModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +37,7 @@ import { environment } from '../environments/environment';
 import { InComponent } from './component/in/in.component';
 import { TermsOfServiceComponent } from './component/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderMenuComponent } from './component/header-menu/header-menu.component';
 import { HeaderComponent } from './component/header/header.component';
 import { AddChildComponent } from './component/add-child/add-child.component';
@@ -69,9 +71,13 @@ import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
     MatListModule,
     MatCardModule,
     MatCheckboxModule,
+    MatInputModule,
     MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatDialogModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),

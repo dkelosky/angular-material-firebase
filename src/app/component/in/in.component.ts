@@ -5,7 +5,7 @@ import { ToggleSideNavService } from 'src/app/service/toggle-side-nav.service';
 import { MatSidenav, MatDialog } from '@angular/material';
 import { AddChildComponent } from '../add-child/add-child.component';
 import { EditChildComponent } from '../edit-child/edit-child.component';
-import { ChildrenService, Child, ChildId } from 'src/app/service/children.service';
+import { ChildrenService, ChildId } from 'src/app/service/children.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
 import { CategoriesService, CategoryId } from 'src/app/service/categories.service';
 import { Observable } from 'rxjs';
@@ -22,9 +22,12 @@ export class InComponent implements OnInit, OnDestroy {
   @ViewChild('snav') snav: MatSidenav;
 
   mobileQuery: MediaQueryList;
-  childrenListData: Observable<ChildId[]>; // = [{ name: 'daniel', age: 15, gender: 'boy' }];
+
+  // childrenListData: Observable<ChildId[]>; // = [{ name: 'daniel', age: 15, gender: 'boy' }];
   // childrenListData: Child[] = [{name: 'daniel', age: 15, gender: 'boy'}];
-  categoriesListData: Observable<CategoryId[]>; //
+
+  children: ChildId[] = [];
+  categories: Observable<CategoryId[]>; //
 
   done = [
   ];
@@ -35,21 +38,27 @@ export class InComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public dialog: MatDialog,
-    private toggle: ToggleSideNavService,
-    private children: ChildrenService,
-    private organizations: OrganizationsService,
-    private categories: CategoriesService,
+    private tgglSrvc: ToggleSideNavService,
+    private chldrnSrvc: ChildrenService,
+    private orgsSrvc: OrganizationsService,
+    private catsgrSrvc: CategoriesService,
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.toggle.toggle.subscribe(() => {
+    this.tgglSrvc.toggle.subscribe(() => {
       this.snav.toggle();
     });
 
-    this.organizations.getOrganizations('lmcc').subscribe((orgs) => {
-      this.categoriesListData = this.categories.getCategories(orgs[0].id); // .subscribe((cats) => {
+    this.orgsSrvc.getOrganizations('lmcc').subscribe((orgs) => {
+      console.log(`got orgs`);
+      this.categories = this.catsgrSrvc.getCategories(orgs[0].id);
+    });
+
+    this.chldrnSrvc.getChildren().subscribe((children) => {
+      console.log(`got children`);
+      this.children = children;
     });
   }
 
@@ -69,7 +78,8 @@ export class InComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(AddChildComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      // NOTE(Kelosky): if using MAT_DIALOG_DATA presumably
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -77,7 +87,7 @@ export class InComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(EditChildComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
