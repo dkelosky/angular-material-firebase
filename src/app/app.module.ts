@@ -40,6 +40,7 @@ import { HeaderMenuComponent } from './component/header-menu/header-menu.compone
 import { HeaderComponent } from './component/header/header.component';
 import { AddChildComponent } from './component/add-child/add-child.component';
 import { EditChildComponent } from './component/edit-child/edit-child.component';
+import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { EditChildComponent } from './component/edit-child/edit-child.component'
     HeaderMenuComponent,
     HeaderComponent,
     AddChildComponent,
-    EditChildComponent
+    EditChildComponent,
+    LmccHomeComponent
   ],
   imports: [
     FlexLayoutModule,

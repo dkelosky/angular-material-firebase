@@ -1,6 +1,6 @@
-<div *ngIf="afAuth.user | async as user; else showLogin">
-  <app-in>[hidden]="hidden"></app-in>
-</div>
-<ng-template #showLogin>
-  <app-login></app-login>
-</ng-template>
+<section class="mat-typography">
+  <div fxLayout="column" fxLayoutAlign="center center" ngClass="body">
+    <p>Choose organization</p>
+    <button mat-button color="primary" (click)="lmcc()">LMCC</button>
+  </div>
+</section>
