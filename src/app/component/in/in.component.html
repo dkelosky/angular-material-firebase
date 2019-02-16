@@ -2,18 +2,18 @@
 <!-- <mat-sidenav-container ngClass="body " [style.marginTop.px]="mobileQuery.matches ? 56 : 0"> -->
   <!-- <mat-sidenav-container ngClass="body"> -->
   <!-- <mat-sidenav #snav [mode]="mobileQuery.matches ? 'side' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" -->
-  <mat-sidenav #snav fixedTopGap="56" mode="side" [opened]="mobileQuery.matches ? 'false' : 'true'">
+  <mat-sidenav ngClass="sidenav" #snav fixedTopGap="56" mode="side" [opened]="mobileQuery.matches ? 'false' : 'true'">
     <!-- <mat-sidenav ngClass="sidenav" mode="side" opened> -->
     <div fxLayout="column" fxLayoutAlign="center center">
       <h2></h2>
       <h2>Children</h2>
     </div>
 
-    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList, done2List]"
+    <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="childrenListData" [cdkDropListConnectedTo]="[doneList, done2List]"
       class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of todo" cdkDrag>
-        <div>{{item}}</div>
-        <button mat-icon-button (click)="edit(item)">
+      <div class="example-box" *ngFor="let item of childrenListData" cdkDrag>
+        <div>{{childrenListData[0].name}}</div>
+        <button mat-icon-button (click)="edit(childrenListData.name)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
       </div>
@@ -28,18 +28,21 @@
   </mat-sidenav>
 
   <mat-sidenav-content ngClass="sidenav-content">
-    <h2>Hugs</h2>
 
-    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+    <div *ngFor="let category of categoriesListData | async">
+      <h2>{{category.name}}</h2>
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[childrenList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.name}}</div>
+      </div>
     </div>
 
-    <h2>Junior Worship</h2>
-    <div cdkDropList #done2List="cdkDropList" [cdkDropListData]="done2" [cdkDropListConnectedTo]="[todoList]"
+    <!-- <h2>Junior Worship</h2>
+    <div cdkDropList #done2List="cdkDropList" [cdkDropListData]="done2" [cdkDropListConnectedTo]="[childrenList]"
       class="example-list" (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let item of done2" cdkDrag>{{item}}</div>
-    </div>
+    </div> -->
+
   </mat-sidenav-content>
 </mat-sidenav-container>
 
