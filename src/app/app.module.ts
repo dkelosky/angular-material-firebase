@@ -5,7 +5,18 @@ import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatDialogModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatListModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatMenuModule,
+  MatDialogModule
+} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
