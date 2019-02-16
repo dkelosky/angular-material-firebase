@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ToggleSideNavService } from 'src/app/service/toggle-side-nav.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,12 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public afAuth: AngularFireAuth,
+    private toggle: ToggleSideNavService,
   ) { }
+
+  runToggle() {
+    this.toggle.trigger();
+  }
 
   ngOnInit() {
   }
