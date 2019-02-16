@@ -1,0 +1,36 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { TermsOfServiceComponent } from './component/terms-of-service/terms-of-service.component';
+import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
+
+const routes: Routes = [
+  {
+<<<<<<< HEAD
+    path: 'terms-of-service',
+    pathMatch: 'full',
+    component: TermsOfServiceComponent
+  },
+  {
+    path: 'privacy-policy',
+    pathMatch: 'full',
+    component: PrivacyPolicyComponent
+  },
+  {
+    path: 'add',
+    pathMatch: 'full',
+    component: PrivacyPolicyComponent
+  },
+  {
+=======
+>>>>>>> master
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: ''
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
