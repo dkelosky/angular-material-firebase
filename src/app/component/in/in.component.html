@@ -1,5 +1,9 @@
 <mat-sidenav-container ngClass="body">
-  <mat-sidenav ngClass="sidenav" mode="side" opened>
+<!-- <mat-sidenav-container ngClass="body " [style.marginTop.px]="mobileQuery.matches ? 56 : 0"> -->
+  <!-- <mat-sidenav-container ngClass="body"> -->
+  <!-- <mat-sidenav #snav [mode]="mobileQuery.matches ? 'side' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" -->
+  <mat-sidenav #snav fixedTopGap="56" mode="side" [opened]="mobileQuery.matches ? 'false' : 'true'">
+    <!-- <mat-sidenav ngClass="sidenav" mode="side" opened> -->
     <div fxLayout="column" fxLayoutAlign="center center">
       <h2></h2>
       <h2>Children</h2>
