@@ -15,6 +15,11 @@ const routes: Routes = [
     component: PrivacyPolicyComponent
   },
   {
+    path: 'add',
+    pathMatch: 'full',
+    component: PrivacyPolicyComponent
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: ''

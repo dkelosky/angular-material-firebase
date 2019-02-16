@@ -35,4 +35,8 @@ export class InComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  add() {
+    console.log('addd')
+  }
 }
