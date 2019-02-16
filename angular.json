@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lmcc-check-in-home": {
+    "kelosky-check-in-home": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/lmcc-check-in-home",
+            "outputPath": "dist/kelosky-check-in-home",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lmcc-check-in-home:build"
+            "browserTarget": "kelosky-check-in-home:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "lmcc-check-in-home:build:production"
+              "browserTarget": "kelosky-check-in-home:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "lmcc-check-in-home:build"
+            "browserTarget": "kelosky-check-in-home:build"
           }
         },
         "test": {
@@ -108,7 +108,7 @@
         }
       }
     },
-    "lmcc-check-in-home-e2e": {
+    "kelosky-check-in-home-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -117,11 +117,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "lmcc-check-in-home:serve"
+            "devServerTarget": "kelosky-check-in-home:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "lmcc-check-in-home:serve:production"
+              "devServerTarget": "kelosky-check-in-home:serve:production"
             }
           }
         },
@@ -137,5 +137,5 @@
       }
     }
   },
-  "defaultProject": "lmcc-check-in-home"
+  "defaultProject": "kelosky-check-in-home"
 }

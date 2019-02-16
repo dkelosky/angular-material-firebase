@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyBNlw24ARHaJoWhwwST8cccZ2AzdnBWqQA',
-    authDomain: 'lmcc-check-in.firebaseapp.com',
-    databaseURL: 'https://lmcc-check-in.firebaseio.com',
-    projectId: 'lmcc-check-in',
-    storageBucket: 'lmcc-check-in.appspot.com',
-    messagingSenderId: '546671518129'
+    apiKey: 'AIzaSyCcaa3qLSyksED14s7-81vc2pmCrJuncfs',
+    authDomain: 'kelosky-check-in.firebaseapp.com',
+    databaseURL: 'https://kelosky-check-in.firebaseio.com',
+    projectId: 'kelosky-check-in',
+    storageBucket: 'kelosky-check-in.appspot.com',
+    messagingSenderId: '223666143636'
   }
 };
 
