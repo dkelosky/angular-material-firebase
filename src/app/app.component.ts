@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'lmcc-check-in-home';
+  title = 'kelosky-check-in-home';
 }
