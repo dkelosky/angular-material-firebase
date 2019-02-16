@@ -5,16 +5,6 @@ import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-polic
 
 const routes: Routes = [
   {
-    path: 'terms-of-service',
-    pathMatch: 'full',
-    component: TermsOfServiceComponent
-  },
-  {
-    path: 'privacy-policy',
-    pathMatch: 'full',
-    component: PrivacyPolicyComponent
-  },
-  {
     path: 'add',
     pathMatch: 'full',
     component: PrivacyPolicyComponent

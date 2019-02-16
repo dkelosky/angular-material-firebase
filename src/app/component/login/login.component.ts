@@ -2,9 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
-import { Router } from '@angular/router';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { UsersService } from '../../service/users.service';
+import { MatDialog } from '@angular/material';
+import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +16,12 @@ import { UsersService } from '../../service/users.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   private ui: firebaseui.auth.AuthUI;
-  private url = '';
 
   constructor(
     public afAuth: AngularFireAuth,
     private afMessaging: AngularFireMessaging,
     private u: UsersService,
-    private router: Router,
+    public dialog: MatDialog,
   ) {
   }
 
@@ -32,6 +33,22 @@ export class LoginComponent implements OnInit, OnDestroy {
       '#firebaseui-auth-container',
       this.config
     );
+  }
+
+  openPrivacyDialog() {
+    const dialogRef = this.dialog.open(PrivacyPolicyComponent);
+
+    dialogRef.afterClosed().subscribe( (result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openTocDialog() {
+    const dialogRef = this.dialog.open(TermsOfServiceComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   async ngOnDestroy() {
@@ -73,9 +90,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       // Terms of service url/callback.
       tosUrl: () => {
         console.log('TODO(Kelosky) - launch ToS');
+        this.openTocDialog();
       },
       privacyPolicyUrl: () => {
         console.log('TODO(Kelosky) - launch Privacy policy');
+        this.openPrivacyDialog();
       }
     };
   }
