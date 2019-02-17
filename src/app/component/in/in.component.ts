@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
-import { moveItemInArray, transferArrayItem, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { moveItemInArray, transferArrayItem, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ToggleSideNavService } from 'src/app/service/toggle-side-nav.service';
 import { MatSidenav, MatDialog } from '@angular/material';
@@ -27,13 +27,15 @@ export class InComponent implements OnInit, OnDestroy {
   // childrenListData: Child[] = [{name: 'daniel', age: 15, gender: 'boy'}];
 
   children: ChildId[] = [];
-  categories: CategoryId[]; //
-  // categories: Observable<CategoryId[]>; //
+  // categories: CategoryId[]; //
+  categories: Observable<CategoryId[]>; //
 
-  done = [
+  done1 = [
   ];
   done2 = [
   ];
+
+  lists: CdkDropList[] = [];
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -55,18 +57,74 @@ export class InComponent implements OnInit, OnDestroy {
     this.orgsSrvc.getOrganizations('lmcc').subscribe((orgs) => {
 
       // NOTE(Kelosky): not accounting for multple lmcc orgs in the DB
-      this.catsgrSrvc.getCategories(orgs[0].id).subscribe((categories) => {
-        this.categories = categories;
-      });
-      // this.categories = this.catsgrSrvc.getCategories(orgs[0].id); // .subscribe((categories) => {
-        //  = categories;
+      // this.catsgrSrvc.getCategories(orgs[0].id).subscribe((categories) => {
+        // this.categories = categories;
+      // });
+      this.categories = this.catsgrSrvc.getCategories(orgs[0].id); // .subscribe((categories) => {
+      //  = categories;
       // });
     });
+
 
     this.chldrnSrvc.getChildren().subscribe((children) => {
       console.log(`got children`);
       this.children = children;
     });
+  }
+
+  addtest(test: CdkDropList, index: number) {
+    let found = false;
+    this.lists.forEach((entry) => {
+      if (entry.id === test.id) {
+        found = true;
+      }
+    });
+    if (!found) {
+      console.log(`adding ${test.id}`);
+      this.lists.push(test);
+    }
+    return this.donetest(index);
+  }
+
+  donetest(index: number): any[] {
+    console.log(`index ${index}`);
+    if (index === 0) {
+      console.log(`using 0`);
+      return this.done1;
+    } else {
+      console.log(`using 1`);
+      return this.done2;
+    }
+    // console.log(`how does this ${some}`);
+    // console.log(test.id);
+    // let found = false;
+    // this.lists.forEach((entry) => {
+    //   if (entry.id === test.id) {
+    //     found = true;
+    //   }
+    // });
+
+    // if (test) {
+
+    // if (!found) {
+    //   console.log(`adding ${test.id}`)
+    //   this.lists.push(test);
+    // }
+    // }
+    console.log(test.id)
+
+    // if (test.id === `cdk-drop-list-1`) {
+    // if (this.lists.length < 2) {
+    // this.lists.push(test);
+    // }
+    return this.done1;
+    // } else {
+    //   // console.log('one');
+    //   if (this.lists.length < 2) {
+    //     this.lists.push(test);
+    //   }
+    //   return this.done2;
+    // }
   }
 
   ngOnInit() {
@@ -79,6 +137,11 @@ export class InComponent implements OnInit, OnDestroy {
   edit(item: string) {
     console.log(item);
     this.openEditDialog();
+  }
+
+  getthem() {
+    console.log(`current length is ${this.lists.length}`);
+    return this.lists;
   }
 
   openAddDialog() {
