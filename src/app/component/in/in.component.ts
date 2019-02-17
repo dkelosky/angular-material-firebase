@@ -27,7 +27,8 @@ export class InComponent implements OnInit, OnDestroy {
   // childrenListData: Child[] = [{name: 'daniel', age: 15, gender: 'boy'}];
 
   children: ChildId[] = [];
-  categories: Observable<CategoryId[]>; //
+  categories: CategoryId[]; //
+  // categories: Observable<CategoryId[]>; //
 
   done = [
   ];
@@ -52,8 +53,14 @@ export class InComponent implements OnInit, OnDestroy {
     });
 
     this.orgsSrvc.getOrganizations('lmcc').subscribe((orgs) => {
-      console.log(`got orgs`);
-      this.categories = this.catsgrSrvc.getCategories(orgs[0].id);
+
+      // NOTE(Kelosky): not accounting for multple lmcc orgs in the DB
+      this.catsgrSrvc.getCategories(orgs[0].id).subscribe((categories) => {
+        this.categories = categories;
+      });
+      // this.categories = this.catsgrSrvc.getCategories(orgs[0].id); // .subscribe((categories) => {
+        //  = categories;
+      // });
     });
 
     this.chldrnSrvc.getChildren().subscribe((children) => {

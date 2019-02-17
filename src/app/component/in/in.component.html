@@ -9,8 +9,9 @@
       <h2>Children</h2>
     </div>
 
-    <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children"
-      [cdkDropListConnectedTo]="[doneList, done2List]" class="example-list" (cdkDropListDropped)="drop($event)">
+    <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children" [cdkDropListConnectedTo]="[doneList, doneList2]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <!-- [cdkDropListConnectedTo]="[doneList, done2List]" class="example-list" (cdkDropListDropped)="drop($event)"> -->
       <div class="example-box" *ngFor="let child of children" cdkDrag>
         <div>{{child.name}}</div>
         <button mat-icon-button (click)="edit(child.name)">
@@ -29,14 +30,28 @@
 
   <mat-sidenav-content ngClass="sidenav-content">
     <h2></h2> <!-- padding -->
-    <div *ngFor="let category of categories | async">
+    <!-- <div *ngFor="let category of categories | async"> -->
+
+      <h2>{{categories[0].name}}</h2>
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[childrenList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.name}}</div>
+      </div>
+      <h2></h2>
+      <h2>{{categories[1].name}}</h2>
+      <div cdkDropList #doneList2="cdkDropList" [cdkDropListData]="done2" [cdkDropListConnectedTo]="[childrenList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done2" cdkDrag>{{item.name}}</div>
+      </div>
+      <h2></h2>
+    <!-- <div *ngFor="let category of categories | async">
       <h2>{{category.name}}</h2>
       <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[childrenList]"
         class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.name}}</div>
       </div>
       <h2></h2>
-    </div>
+    </div> -->
 
     <!-- <h2>Junior Worship</h2>
     <div cdkDropList #done2List="cdkDropList" [cdkDropListData]="done2" [cdkDropListConnectedTo]="[childrenList]"
