@@ -1,4 +1,4 @@
-import { Entity } from './Entity.interface';
+import { Entity } from './entity.interface';
 
 export interface Contact extends Entity {
     phone: string;

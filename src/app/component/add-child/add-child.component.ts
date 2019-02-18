@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ChildrenService } from 'src/app/service/children.service';
+import { ChildConstant } from 'src/app/constant/child.constant';
 
 @Component({
   selector: 'app-add-child',
@@ -10,7 +11,7 @@ import { ChildrenService } from 'src/app/service/children.service';
 })
 export class AddChildComponent implements OnInit {
 
-  ages = [];
+  ages = ChildConstant.AGE_RANGE;
   childForm = this.fb.group({
     name: ['', Validators.required],
     age: ['', Validators.required],
@@ -25,9 +26,6 @@ export class AddChildComponent implements OnInit {
     private sb: MatSnackBar,
     private childrenService: ChildrenService,
   ) {
-    for (let i = 1; i < 19; i++) {
-      this.ages.push(i);
-    }
   }
 
   ngOnInit() {

@@ -9,7 +9,7 @@ import { ChildrenService } from 'src/app/service/children.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
 import { CategoriesService, CategoryId } from 'src/app/service/categories.service';
 import { Observable } from 'rxjs';
-import { ChildId } from 'src/app/interface/Child.interface';
+import { ChildId } from 'src/app/interface/child.interface';
 
 interface CdkDLValuePair {
   values: ChildId[];

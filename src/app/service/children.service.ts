@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ChildId, Child } from '../interface/Child.interface';
+import { ChildId, Child } from '../interface/child.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import { MatDialogRef } from '@angular/material';
-import { Entity } from './Entity.interface';
+import { Entity } from './entity.interface';
 
 export interface Confirm {
     message?: string;

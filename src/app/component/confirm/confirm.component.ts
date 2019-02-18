@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef, MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import { Confirm } from 'src/app/interface/Confirm.interface';
+import { Confirm } from 'src/app/interface/confirm.interface';
 
 @Component({
   selector: 'app-confirm',

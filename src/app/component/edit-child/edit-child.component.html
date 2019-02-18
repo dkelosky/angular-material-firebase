@@ -1,8 +1,8 @@
-<form [formGroup]="childForm"(ngSubmit)="submit()">
+<form [formGroup]="childForm" (ngSubmit)="submit()">
   <div fxLayout="row" fxLayoutAlign="left center">
-    <h2 fxFlexAlign="start">
+    <h3 fxFlexAlign="start">
       {{child.name}}
-    </h2>
+    </h3>
     <span fxFlex fxLayoutAlign="center"></span>
     <button mat-icon-button type="button" color="warn" (click)="remove()">
       <mat-icon>delete</mat-icon>
@@ -10,8 +10,19 @@
   </div>
 
   <div fxLayout="row">
-    <mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-select [(ngModel)]="child.age" placeholder="Child's Age" required formControlName="age">
+        <div *ngFor="let age of ages">
+          <mat-option value="{{age}}">{{age}}</mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row">
+    <mat-form-field fxFlex>
       <textarea matInput [(ngModel)]="child.important" placeholder="Important" formControlName="important"></textarea>
+      <mat-hint>e.g. Allergies</mat-hint>
     </mat-form-field>
   </div>
 
