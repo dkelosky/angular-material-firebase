@@ -17,7 +17,7 @@ export class ConfirmComponent implements OnInit {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) private data: Confirm,
     private bottomSheetRef: MatBottomSheetRef<Component>,
-    private snackbarSrvc: MatSnackBar,
+    private snackbarService: MatSnackBar,
   ) {
 
     if (this.data.affirm) {
@@ -52,7 +52,7 @@ export class ConfirmComponent implements OnInit {
         const config: MatSnackBarConfig<any> = {
           duration: 1000 * 1.5
         };
-        this.snackbarSrvc.open(this.data.successMessage, null, config);
+        this.snackbarService.open(this.data.successMessage, null, config);
       });
     }
 

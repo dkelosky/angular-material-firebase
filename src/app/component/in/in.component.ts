@@ -37,25 +37,25 @@ export class InComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public dialog: MatDialog,
-    private tgglSrvc: ToggleSideNavService,
-    private chldrnSrvc: ChildrenService,
-    private orgsSrvc: OrganizationsService,
-    private catsgrSrvc: CategoriesService,
+    private toggleService: ToggleSideNavService,
+    private childrenService: ChildrenService,
+    private organizationsService: OrganizationsService,
+    private categoriesService: CategoriesService,
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.tgglSrvc.toggle.subscribe(() => {
+    this.toggleService.toggle.subscribe(() => {
       this.snav.toggle();
     });
 
-    this.orgsSrvc.getOrganizations('lmcc').subscribe((orgs) => {
-      this.categories = this.catsgrSrvc.getCategories(orgs[0].id);
+    this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
+      this.categories = this.categoriesService.getCategories(orgs[0].id);
     });
 
 
-    this.chldrnSrvc.getChildren().subscribe((children) => {
+    this.childrenService.getChildren().subscribe((children) => {
       this.children = children;
     });
   }

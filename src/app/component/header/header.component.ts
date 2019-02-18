@@ -11,11 +11,11 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public afAuth: AngularFireAuth,
-    private tgglSrvc: ToggleSideNavService,
+    private toggleService: ToggleSideNavService,
   ) { }
 
   runToggle() {
-    this.tgglSrvc.trigger();
+    this.toggleService.trigger();
   }
 
   ngOnInit() {

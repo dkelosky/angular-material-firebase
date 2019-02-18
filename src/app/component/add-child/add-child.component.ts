@@ -22,7 +22,7 @@ export class AddChildComponent implements OnInit {
     // @Inject(MAT_DIALOG_DATA) public data: Child,
     private fb: FormBuilder,
     private sb: MatSnackBar,
-    private chldrnSrvc: ChildrenService,
+    private childrenService: ChildrenService,
   ) { }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class AddChildComponent implements OnInit {
 
   submit() {
     console.log(`Form input: ${JSON.stringify(this.childForm.value, null, 2)}`);
-    this.chldrnSrvc.addChild(this.childForm.value);
+    this.childrenService.addChild(this.childForm.value);
     const message = `Created child ${this.childForm.value.name}!`;
     const config: MatSnackBarConfig<any> = {
       duration: 1000 * 1.5
