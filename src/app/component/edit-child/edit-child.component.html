@@ -1,4 +1,4 @@
-<form [formGroup]="childForm" (ngSubmit)="submit()">
+<form [formGroup]="childForm"(ngSubmit)="submit()">
   <div fxLayout="row" fxLayoutAlign="left center">
     <h2 fxFlexAlign="start">
       {{child.name}}
@@ -8,9 +8,10 @@
       <mat-icon>delete</mat-icon>
     </button>
   </div>
+
   <div fxLayout="row">
     <mat-form-field>
-      <textarea matInput placeholder="{{child.info}}" formControlName="info"></textarea>
+      <textarea matInput [(ngModel)]="child.important" placeholder="Important" formControlName="important"></textarea>
     </mat-form-field>
   </div>
 
