@@ -40,7 +40,6 @@ export class AddChildComponent implements OnInit {
     };
     this.dialogRef.close();
     this.sb.open(message, null, config);
-
   }
 
 }

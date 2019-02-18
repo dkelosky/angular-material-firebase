@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatBottomSheet } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatBottomSheet, MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { ChildId } from 'src/app/interface/child.interface';
@@ -27,6 +27,7 @@ export class EditChildComponent implements OnInit {
     private fb: FormBuilder,
     private childrenService: ChildrenService,
     private bottomSheet: MatBottomSheet,
+    private sb: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public child: ChildId,
   ) {
   }
@@ -35,7 +36,19 @@ export class EditChildComponent implements OnInit {
   }
 
   submit() {
+    console.log(`Form input: ${JSON.stringify(this.childForm.value, null, 2)}`);
+
+    // change values from form
+    this.child.important = this.childForm.value.important;
+    this.child.age = this.childForm.value.age;
+
+    this.childrenService.setChild(this.child);
+    const message = `Updated child ${this.child.name}!`;
+    const config: MatSnackBarConfig<any> = {
+      duration: 1000 * 1.5
+    };
     this.dialogRef.close();
+    this.sb.open(message, null, config);
   }
 
   cancel() {

@@ -28,6 +28,6 @@
 
   <div fxLayout="row">
     <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
-    <button mat-button fxFlex fxFlexAlign="end" color="primary">Submit</button>
+    <button mat-button fxFlex fxFlexAlign="end" color="primary" [disabled]="!childForm.valid">Save</button>
   </div>
 </form>

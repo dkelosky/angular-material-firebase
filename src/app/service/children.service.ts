@@ -33,12 +33,24 @@ export class ChildrenService {
     }
   }
 
+  async setChild(child: ChildId) {
+    const id = child.id;
+    delete child.id;
+    try {
+      console.log(`Updating child: ${child.name} with ${id}`);
+      await this.afs.doc<Child>(`${this.getCollectionString()}/${id}`).set(child);
+    } catch (err) {
+      console.log('set error');
+      console.error(err);
+    }
+  }
+
   async deleteChild(child: ChildId) {
     try {
       console.log(`Delete child: ${child.name} with ${child.id}`);
       await this.afs.collection<Child>(this.getCollectionString()).doc(child.id).delete();
     } catch (err) {
-      console.log('deletTopic error');
+      console.log('delete error');
       console.error(err);
     }
   }
