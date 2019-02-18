@@ -6,6 +6,7 @@ export interface Confirm {
     entity: Entity;
     ref?: MatDialogRef<any>;
     affirm?: string;
+    affirmAction?: () => void;
     deny?: string;
     successMessage?: string;
 }

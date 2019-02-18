@@ -42,6 +42,10 @@ export class ConfirmComponent implements OnInit {
   affirmed() {
     console.log(`Affirmed to delete ${this.data.entity.name}`);
 
+    if (this.data.affirmAction) {
+      this.data.affirmAction();
+    }
+
     // if success message, show after the bottom sheet disappears
     if (this.data.successMessage) {
       this.bottomSheetRef.afterDismissed().subscribe(() => {

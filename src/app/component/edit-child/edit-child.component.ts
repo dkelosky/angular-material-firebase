@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { ChildId } from 'src/app/interface/Child.interface';
 import { Confirm } from 'src/app/interface/Confirm.interface';
+import { ChildrenService } from 'src/app/service/children.service';
 
 @Component({
   selector: 'app-edit-child',
@@ -23,6 +24,7 @@ export class EditChildComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditChildComponent>,
     private fb: FormBuilder,
+    private childrenService: ChildrenService,
     private bottomSheet: MatBottomSheet,
     @Inject(MAT_DIALOG_DATA) public child: ChildId,
   ) {
@@ -49,11 +51,14 @@ export class EditChildComponent implements OnInit {
       message: `Are you sure you want to remove ${this.child.name}?`,
       affirm: 'Yes',
       deny: 'Cancel',
+      affirmAction: () => {
+        this.childrenService.deleteChild(this.child);
+      },
       successMessage: `Removed entry for ${this.child.name}`,
     };
     const sheet = this.bottomSheet.open(ConfirmComponent, {
       data,
     });
-
   }
+
 }
