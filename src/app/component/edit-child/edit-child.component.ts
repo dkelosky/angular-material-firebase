@@ -33,6 +33,7 @@ export class EditChildComponent implements OnInit {
 
   submit() {
     // test
+    this.dialogRef.close();
   }
 
   cancel() {
@@ -41,9 +42,9 @@ export class EditChildComponent implements OnInit {
 
   delete() {
     console.log(`deleting`);
-    this.bottomSheet.open(ConfirmComponent, {
+    const sheet = this.bottomSheet.open(ConfirmComponent, {
       data: this.child,
     });
-  }
 
+  }
 }
