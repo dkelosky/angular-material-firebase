@@ -10,6 +10,11 @@ import { OrganizationsService } from 'src/app/service/organizations.service';
 import { CategoriesService, CategoryId } from 'src/app/service/categories.service';
 import { Observable } from 'rxjs';
 
+interface CdkDLValuePair {
+  values: ChildId[];
+  cdkDL: CdkDropList;
+}
+
 @Component({
   selector: 'app-in',
   templateUrl: './in.component.html',
@@ -22,6 +27,7 @@ export class InComponent implements OnInit, OnDestroy {
   @ViewChild('snav') snav: MatSidenav;
 
   mobileQuery: MediaQueryList;
+  cdkDLs: Map<string, CdkDLValuePair> = new Map<string, CdkDLValuePair>();
 
   // childrenListData: Observable<ChildId[]>; // = [{ name: 'daniel', age: 15, gender: 'boy' }];
   // childrenListData: Child[] = [{name: 'daniel', age: 15, gender: 'boy'}];
@@ -36,6 +42,8 @@ export class InComponent implements OnInit, OnDestroy {
   ];
 
   lists: CdkDropList[] = [];
+
+  hack = [];
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -58,7 +66,7 @@ export class InComponent implements OnInit, OnDestroy {
 
       // NOTE(Kelosky): not accounting for multple lmcc orgs in the DB
       // this.catsgrSrvc.getCategories(orgs[0].id).subscribe((categories) => {
-        // this.categories = categories;
+      // this.categories = categories;
       // });
       this.categories = this.catsgrSrvc.getCategories(orgs[0].id); // .subscribe((categories) => {
       //  = categories;
@@ -67,64 +75,26 @@ export class InComponent implements OnInit, OnDestroy {
 
 
     this.chldrnSrvc.getChildren().subscribe((children) => {
-      console.log(`got children`);
+      // console.log(`got children`);
       this.children = children;
     });
   }
 
-  addtest(test: CdkDropList, index: number) {
-    let found = false;
-    this.lists.forEach((entry) => {
-      if (entry.id === test.id) {
-        found = true;
-      }
-    });
-    if (!found) {
-      console.log(`adding ${test.id}`);
-      this.lists.push(test);
+  addtest(cdkDL: CdkDropList, index: number) {
+    if (!this.cdkDLs.get(cdkDL.id)) {
+      this.lists.push(cdkDL);
+      this.cdkDLs.set(cdkDL.id, {
+        values: new Array(),
+        cdkDL
+      });
     }
-    return this.donetest(index);
+    return this.donetest(cdkDL);
   }
 
-  donetest(index: number): any[] {
-    console.log(`index ${index}`);
-    if (index === 0) {
-      console.log(`using 0`);
-      return this.done1;
-    } else {
-      console.log(`using 1`);
-      return this.done2;
+  donetest(cdkDL: CdkDropList) {
+    if (this.cdkDLs.get(cdkDL.id)) {
+      return this.cdkDLs.get(cdkDL.id).values;
     }
-    // console.log(`how does this ${some}`);
-    // console.log(test.id);
-    // let found = false;
-    // this.lists.forEach((entry) => {
-    //   if (entry.id === test.id) {
-    //     found = true;
-    //   }
-    // });
-
-    // if (test) {
-
-    // if (!found) {
-    //   console.log(`adding ${test.id}`)
-    //   this.lists.push(test);
-    // }
-    // }
-    console.log(test.id)
-
-    // if (test.id === `cdk-drop-list-1`) {
-    // if (this.lists.length < 2) {
-    // this.lists.push(test);
-    // }
-    return this.done1;
-    // } else {
-    //   // console.log('one');
-    //   if (this.lists.length < 2) {
-    //     this.lists.push(test);
-    //   }
-    //   return this.done2;
-    // }
   }
 
   ngOnInit() {
@@ -140,7 +110,7 @@ export class InComponent implements OnInit, OnDestroy {
   }
 
   getthem() {
-    console.log(`current length is ${this.lists.length}`);
+    // console.log(`current length is ${this.lists.length}`);
     return this.lists;
   }
 

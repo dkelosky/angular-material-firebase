@@ -1,4 +1,6 @@
+<div cdkDropListGroup>
 <mat-sidenav-container ngClass="body">
+
   <!-- <mat-sidenav-container ngClass="body " [style.marginTop.px]="mobileQuery.matches ? 56 : 0"> -->
   <!-- <mat-sidenav-container ngClass="body"> -->
   <!-- <mat-sidenav #snav [mode]="mobileQuery.matches ? 'side' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" -->
@@ -41,7 +43,8 @@
       <h2>{{category.name}}</h2>
       <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="addtest(doneList, i)" [cdkDropListConnectedTo]="[childrenList]"
         class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of donetest(i)" cdkDrag>{{item.name}}</div>
+        <!-- <div class="example-box" *ngFor="let item of done1" cdkDrag>{{item.name}}</div> -->
+        <div class="example-box" *ngFor="let item of donetest(doneList)" cdkDrag>{{item.name}}</div>
       </div>
       <h2></h2>
 
@@ -71,6 +74,7 @@
 
   </mat-sidenav-content>
 </mat-sidenav-container>
+</div>
 
 <!-- <div *ngIf="afAuth.user | async as user">
       <div>Welcome {{user.displayName}}</div>
