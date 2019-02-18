@@ -1,4 +1,5 @@
 import { Entity } from './entity.interface';
+import { DocumentReference } from '@angular/fire/firestore';
 
 export interface Contact extends Entity {
     phone: string;
@@ -9,6 +10,7 @@ export interface Child extends Entity {
     gender: 'boy' | 'girl';
     important?: string;
     info?: string;
+    in?: DocumentReference;
     contacts?: Contact[];
 }
 

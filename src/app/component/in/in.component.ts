@@ -7,9 +7,10 @@ import { AddChildComponent } from '../add-child/add-child.component';
 import { EditChildComponent } from '../edit-child/edit-child.component';
 import { ChildrenService } from 'src/app/service/children.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
-import { CategoriesService, CategoryId } from 'src/app/service/categories.service';
+import { CategoriesService } from 'src/app/service/categories.service';
 import { Observable } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
+import { CategoryId } from 'src/app/interface/category.interface';
 
 interface CdkDLValuePair {
   values: ChildId[];
@@ -30,8 +31,8 @@ export class InComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   cdkDLs: Map<string, CdkDLValuePair> = new Map<string, CdkDLValuePair>();
 
-  children: ChildId[] = [];
-  categories: Observable<CategoryId[]>; //
+  $children: Observable<ChildId[]>; // = [];
+  $categories: Observable<CategoryId[]>; //
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -51,13 +52,17 @@ export class InComponent implements OnInit, OnDestroy {
     });
 
     this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
-      this.categories = this.categoriesService.getCategories(orgs[0].id);
+      this.$categories = this.categoriesService.getCategories(orgs[0].id);
     });
 
-
-    this.childrenService.getChildren().subscribe((children) => {
-      this.children = children;
-    });
+    this.$children = this.childrenService.getChildren(); // .subscribe((children) => {
+      // this.children = children;
+      // this.children.forEach((child) => {
+        // if (child.in) {
+          // console.log(child.in)
+        // }
+      // });
+    // });
   }
 
   allocate(cdkDL: CdkDropList) {

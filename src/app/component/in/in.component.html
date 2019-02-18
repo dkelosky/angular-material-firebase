@@ -1,17 +1,13 @@
 <div cdkDropListGroup>
 <mat-sidenav-container ngClass="body">
 
-  <!-- <mat-sidenav-container ngClass="body " [style.marginTop.px]="mobileQuery.matches ? 56 : 0"> -->
-  <!-- <mat-sidenav-container ngClass="body"> -->
-  <!-- <mat-sidenav #snav [mode]="mobileQuery.matches ? 'side' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" -->
   <mat-sidenav ngClass="sidenav" #snav fixedTopGap="56" mode="side" [opened]="mobileQuery.matches ? 'false' : 'true'">
-    <!-- <mat-sidenav ngClass="sidenav" mode="side" opened> -->
     <div fxLayout="column" fxLayoutAlign="center center">
       <h2></h2> <!-- padding -->
       <h2>Children</h2>
     </div>
 
-    <div *ngIf="categories">
+      <div *ngIf="$children | async as children">
 
       <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children"
         class="example-list" (cdkDropListDropped)="drop($event)">
@@ -22,7 +18,7 @@
           </button>
         </div>
       </div>
-    </div>
+      </div>
 
     <div fxLayout="column" fxLayoutAlign="center center">
       <h2></h2> <!-- padding -->
@@ -34,7 +30,8 @@
 
   <mat-sidenav-content ngClass="sidenav-content">
     <h2></h2> <!-- padding -->
-    <div *ngFor="let category of categories | async">
+
+    <div *ngFor="let category of $categories | async">
 
       <h2>{{category.name}}</h2>
       <div cdkDropList #categoryHolder="cdkDropList" [cdkDropListData]="allocate(categoryHolder)"

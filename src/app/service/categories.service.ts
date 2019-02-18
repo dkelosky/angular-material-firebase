@@ -1,18 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Organization } from './organizations.service';
-
-export interface Category {
-  name: string;
-  description: string;
-  requirements: string;
-}
-
-export interface CategoryId extends Category {
-  id: string;
-}
+import { Category } from '../interface/category.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +13,7 @@ export class CategoriesService {
   ) { }
 
   getCategories(orgId: string) {
-    return this.afs.collection<CategoryId>(`organizations/${orgId}/categories`)
+    return this.afs.collection<Category>(`organizations/${orgId}/categories`)
       .snapshotChanges().pipe(
         map(actions => actions.map(a => {
           const data = a.payload.doc.data() as Category;
