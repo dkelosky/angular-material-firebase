@@ -51,18 +51,18 @@ export class InComponent implements OnInit, OnDestroy {
       this.snav.toggle();
     });
 
+    // TODO(Kelosky): make generic
     this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
       this.$categories = this.categoriesService.getCategories(orgs[0].id);
     });
 
-    this.$children = this.childrenService.getChildren(); // .subscribe((children) => {
-      // this.children = children;
-      // this.children.forEach((child) => {
-        // if (child.in) {
-          // console.log(child.in)
-        // }
-      // });
-    // });
+    this.$children = this.childrenService.getChildren();
+  }
+
+  refresh() {
+    this.$children.subscribe((children) => {
+      // children.
+    });
   }
 
   allocate(cdkDL: CdkDropList) {
@@ -104,7 +104,7 @@ export class InComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<ChildId[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
