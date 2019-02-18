@@ -19,7 +19,6 @@ export class AddChildComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddChildComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: Child,
     private fb: FormBuilder,
     private sb: MatSnackBar,
     private childrenService: ChildrenService,

@@ -14,9 +14,7 @@ import { ChildrenService } from 'src/app/service/children.service';
 export class EditChildComponent implements OnInit {
 
   childForm = this.fb.group({
-    // NOTE(Kelosky): regex, HTML5 pattern, or pre-canned
     age: ['', Validators.required],
-    // age: ['', Validators.min(1), Validators.max(18), Validators.minLength(1), Validators.maxLength(2)],
     important: [''],
     info: [''],
   });
@@ -28,14 +26,12 @@ export class EditChildComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     @Inject(MAT_DIALOG_DATA) public child: ChildId,
   ) {
-    console.log(`Got ${this.child}`);
   }
 
   ngOnInit() {
   }
 
   submit() {
-    // test
     this.dialogRef.close();
   }
 
@@ -44,7 +40,8 @@ export class EditChildComponent implements OnInit {
   }
 
   remove() {
-    console.log(`deleting`);
+    console.log(`Remove called for ${this.child.name}`);
+
     const data: Confirm = {
       entity: this.child,
       ref: this.dialogRef,
@@ -56,7 +53,7 @@ export class EditChildComponent implements OnInit {
       },
       successMessage: `Removed entry for ${this.child.name}`,
     };
-    const sheet = this.bottomSheet.open(ConfirmComponent, {
+    this.bottomSheet.open(ConfirmComponent, {
       data,
     });
   }
