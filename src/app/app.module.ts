@@ -23,7 +23,8 @@ import {
   MatDividerModule,
   MatExpansionModule,
   MatBadgeModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSelectModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -78,6 +79,7 @@ import { ConfirmComponent } from './component/confirm/confirm.component';
     MatSidenavModule,
     MatTableModule,
     MatDividerModule,
+    MatSelectModule,
     MatExpansionModule,
     MatBadgeModule,
     MatListModule,

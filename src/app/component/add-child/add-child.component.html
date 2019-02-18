@@ -7,9 +7,18 @@
   </div>
   <div fxLayout="row">
     <mat-form-field fxFlex>
+      <mat-select placeholder="Age" required formControlName="age">
+        <div *ngFor="let age of ages">
+          <mat-option value="option">{{age}}</mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row">
+    <mat-form-field fxFlex>
       <textarea matInput placeholder="Info" formControlName="info"></textarea>
     </mat-form-field>
   </div>
-  
-  <button mat-button>Submit</button>
+
+  <button mat-button [disabled]="!childForm.valid">Submit</button>
 </form>

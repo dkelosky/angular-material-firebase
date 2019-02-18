@@ -10,6 +10,7 @@ import { ChildrenService } from 'src/app/service/children.service';
 })
 export class AddChildComponent implements OnInit {
 
+  ages = [];
   childForm = this.fb.group({
     name: ['', Validators.required],
     age: ['', Validators.required],
@@ -22,7 +23,11 @@ export class AddChildComponent implements OnInit {
     private fb: FormBuilder,
     private sb: MatSnackBar,
     private childrenService: ChildrenService,
-  ) { }
+  ) {
+    for (let i = 1; i < 19; i++) {
+      this.ages.push(i);
+    }
+  }
 
   ngOnInit() {
   }
@@ -36,6 +41,7 @@ export class AddChildComponent implements OnInit {
     };
     this.dialogRef.close();
     this.sb.open(message, null, config);
+
   }
 
 }
