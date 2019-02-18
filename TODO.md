@@ -2,19 +2,23 @@
 
 ## v1.0
 
-Subscribe to group (like LMCC)
+Subscribe to group (like LMCC) for generic info (like classes canceled or need a substitute)
 
-View info on individual classes
+View info on individual classes -> age group information, teachers, curriculum.
 
-Admin UI to see students
--> view important info
--> notify
+Admin UI to:
+-> see students
+-> view important info tag
+-> view all info
+-> notify (parents background and foreground)
 -> view parents contact
 -> end class, reset all
 
+## v1.x (future)
+
 Admin UI to add categories
 
-## v1.x (future)
+## v2.0 (future)
 
 Genericise for other churches
 Genericise for other child care activities (dances)
