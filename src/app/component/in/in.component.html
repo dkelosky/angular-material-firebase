@@ -14,8 +14,7 @@
     <div *ngIf="categories">
 
       <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children"
-        [cdkDropListConnectedTo]="getthem()" class="example-list" (cdkDropListDropped)="drop($event)">
-        <!-- [cdkDropListConnectedTo]="[doneList, done2List]" class="example-list" (cdkDropListDropped)="drop($event)"> -->
+        class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let child of children" cdkDrag>
           <div>{{child.name}}</div>
           <button mat-icon-button (click)="edit(child.name)">
@@ -35,47 +34,18 @@
 
   <mat-sidenav-content ngClass="sidenav-content">
     <h2></h2> <!-- padding -->
-    <div *ngFor="let category of categories | async; let i=index">
-    <!-- <div *ngFor="let category of categories | async; let i=index"> -->
-
-      <!-- <div *ngIf="categories"> -->
+    <div *ngFor="let category of categories | async">
 
       <h2>{{category.name}}</h2>
-      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="addtest(doneList, i)" [cdkDropListConnectedTo]="[childrenList]"
+      <div cdkDropList #categoryHolder="cdkDropList" [cdkDropListData]="allocate(categoryHolder)"
         class="example-list" (cdkDropListDropped)="drop($event)">
         <!-- <div class="example-box" *ngFor="let item of done1" cdkDrag>{{item.name}}</div> -->
-        <div class="example-box" *ngFor="let item of donetest(doneList)" cdkDrag>{{item.name}}</div>
+        <div class="example-box" *ngFor="let child of retrieve(categoryHolder)" cdkDrag>{{child.name}}</div>
       </div>
       <h2></h2>
 
-
-      <!-- <h2>{{categories[1].name}}</h2>
-    <div cdkDropList #doneList2="cdkDropList" [cdkDropListData]="done2" [cdkDropListConnectedTo]="[childrenList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done2" cdkDrag>{{item.name}}</div>
-    </div> -->
-      <!-- <h2></h2> -->
     </div>
-    <!-- </div> -->
-    <!-- <div *ngFor="let category of categories | async">
-      <h2>{{category.name}}</h2>
-      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[childrenList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.name}}</div>
-      </div>
-      <h2></h2>
-    </div> -->
-
-    <!-- <h2>Junior Worship</h2>
-    <div cdkDropList #done2List="cdkDropList" [cdkDropListData]="done2" [cdkDropListConnectedTo]="[childrenList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done2" cdkDrag>{{item}}</div>
-    </div> -->
 
   </mat-sidenav-content>
 </mat-sidenav-container>
 </div>
-
-<!-- <div *ngIf="afAuth.user | async as user">
-      <div>Welcome {{user.displayName}}</div>
-    </div> -->

@@ -29,21 +29,8 @@ export class InComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   cdkDLs: Map<string, CdkDLValuePair> = new Map<string, CdkDLValuePair>();
 
-  // childrenListData: Observable<ChildId[]>; // = [{ name: 'daniel', age: 15, gender: 'boy' }];
-  // childrenListData: Child[] = [{name: 'daniel', age: 15, gender: 'boy'}];
-
   children: ChildId[] = [];
-  // categories: CategoryId[]; //
   categories: Observable<CategoryId[]>; //
-
-  done1 = [
-  ];
-  done2 = [
-  ];
-
-  lists: CdkDropList[] = [];
-
-  hack = [];
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -63,35 +50,26 @@ export class InComponent implements OnInit, OnDestroy {
     });
 
     this.orgsSrvc.getOrganizations('lmcc').subscribe((orgs) => {
-
-      // NOTE(Kelosky): not accounting for multple lmcc orgs in the DB
-      // this.catsgrSrvc.getCategories(orgs[0].id).subscribe((categories) => {
-      // this.categories = categories;
-      // });
-      this.categories = this.catsgrSrvc.getCategories(orgs[0].id); // .subscribe((categories) => {
-      //  = categories;
-      // });
+      this.categories = this.catsgrSrvc.getCategories(orgs[0].id);
     });
 
 
     this.chldrnSrvc.getChildren().subscribe((children) => {
-      // console.log(`got children`);
       this.children = children;
     });
   }
 
-  addtest(cdkDL: CdkDropList, index: number) {
+  allocate(cdkDL: CdkDropList) {
     if (!this.cdkDLs.get(cdkDL.id)) {
-      this.lists.push(cdkDL);
       this.cdkDLs.set(cdkDL.id, {
         values: new Array(),
         cdkDL
       });
     }
-    return this.donetest(cdkDL);
+    return this.retrieve(cdkDL);
   }
 
-  donetest(cdkDL: CdkDropList) {
+  retrieve(cdkDL: CdkDropList) {
     if (this.cdkDLs.get(cdkDL.id)) {
       return this.cdkDLs.get(cdkDL.id).values;
     }
@@ -109,26 +87,12 @@ export class InComponent implements OnInit, OnDestroy {
     this.openEditDialog();
   }
 
-  getthem() {
-    // console.log(`current length is ${this.lists.length}`);
-    return this.lists;
-  }
-
   openAddDialog() {
-    const dialogRef = this.dialog.open(AddChildComponent);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      // NOTE(Kelosky): if using MAT_DIALOG_DATA presumably
-      // console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(AddChildComponent);
   }
 
   openEditDialog() {
-    const dialogRef = this.dialog.open(EditChildComponent);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      // console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(EditChildComponent);
   }
 
   ngOnDestroy(): void {
