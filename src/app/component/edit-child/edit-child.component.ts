@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatBottomSheet } from '@angular/material';
-import { ChildId } from 'src/app/service/children.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ConfirmComponent } from '../confirm/confirm.component';
+import { ChildId } from 'src/app/interface/Child.interface';
+import { Confirm } from 'src/app/interface/Confirm.interface';
 
 @Component({
   selector: 'app-edit-child',
@@ -40,10 +41,18 @@ export class EditChildComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  delete() {
+  remove() {
     console.log(`deleting`);
+    const data: Confirm = {
+      entity: this.child,
+      ref: this.dialogRef,
+      message: `Are you sure you want to remove ${this.child.name}?`,
+      affirm: 'Yes',
+      deny: 'Cancel',
+      successMessage: `Removed entry for ${this.child.name}`,
+    };
     const sheet = this.bottomSheet.open(ConfirmComponent, {
-      data: this.child,
+      data,
     });
 
   }

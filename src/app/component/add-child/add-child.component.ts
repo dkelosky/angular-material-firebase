@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ChildrenService, ChildId, Child } from 'src/app/service/children.service';
+import { ChildrenService } from 'src/app/service/children.service';
 
 @Component({
   selector: 'app-add-child',

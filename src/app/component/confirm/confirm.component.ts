@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material';
-import { ChildId } from 'src/app/service/children.service';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { Confirm } from 'src/app/interface/Confirm.interface';
 
 @Component({
   selector: 'app-confirm',
@@ -9,31 +9,51 @@ import { ChildId } from 'src/app/service/children.service';
 })
 export class ConfirmComponent implements OnInit {
 
-  constructor(
-    @Inject(MAT_BOTTOM_SHEET_DATA) private child: ChildId,
-    private bottomSheetRef: MatBottomSheetRef<ConfirmComponent>,
+  // default messages
+  affirm = 'OK';
+  deny = 'Cancel';
+  message = 'Are you sure?';
 
-  ) { }
+  constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) private data: Confirm,
+    private bottomSheetRef: MatBottomSheetRef<Component>,
+    private snackbarSrvc: MatSnackBar,
+  ) {
+
+    if (this.data.affirm) {
+      this.affirm = this.data.affirm;
+    }
+    if (this.data.deny) {
+      this.deny = this.data.deny;
+    }
+    if (this.data.message) {
+      this.message = this.data.message;
+    }
+  }
 
   ngOnInit() {
   }
 
-  cancel() {
-    console.log(`Called cancel`);
+  denied() {
+    console.log(`Denied removal of ${this.data.entity.name}`);
     this.bottomSheetRef.dismiss();
   }
 
-  delete() {
-    console.log(`Called delete ${this.child.name}`);
-    // console.log(`Deleting topic: ${JSON.stringify(this.data.topic, null, 2)}`);
-    // this.t.deleteTopic(this.data.topic);
-    console.log(`Navigating back`);
-    this.bottomSheetRef.afterDismissed().subscribe(() => {
-      console.log(`Dismissed after delete, navigating back`);
-      // this.router.navigateByUrl(`/notify`);
-    });
+  affirmed() {
+    console.log(`Affirmed to delete ${this.data.entity.name}`);
+
+    // if success message, show after the bottom sheet disappears
+    if (this.data.successMessage) {
+      this.bottomSheetRef.afterDismissed().subscribe(() => {
+        const config: MatSnackBarConfig<any> = {
+          duration: 1000 * 1.5
+        };
+        this.snackbarSrvc.open(this.data.successMessage, null, config);
+      });
+    }
+
+    // close sheet and dialogg
     this.bottomSheetRef.dismiss();
+    this.data.ref.close();
   }
-
-
 }

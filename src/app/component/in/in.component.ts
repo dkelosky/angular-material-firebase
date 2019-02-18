@@ -5,10 +5,11 @@ import { ToggleSideNavService } from 'src/app/service/toggle-side-nav.service';
 import { MatSidenav, MatDialog } from '@angular/material';
 import { AddChildComponent } from '../add-child/add-child.component';
 import { EditChildComponent } from '../edit-child/edit-child.component';
-import { ChildrenService, ChildId } from 'src/app/service/children.service';
+import { ChildrenService } from 'src/app/service/children.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
 import { CategoriesService, CategoryId } from 'src/app/service/categories.service';
 import { Observable } from 'rxjs';
+import { ChildId } from 'src/app/interface/Child.interface';
 
 interface CdkDLValuePair {
   values: ChildId[];

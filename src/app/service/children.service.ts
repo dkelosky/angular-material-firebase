@@ -2,24 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-
-export interface Contact {
-  name: string;
-  phone: string;
-}
-
-export interface Child {
-  name: string;
-  age: number;
-  gender: 'boy' | 'girl';
-  important?: string;
-  info?: string;
-  contacts?: Contact[];
-}
-
-export interface ChildId extends Child {
-  id: string;
-}
+import { ChildId, Child } from '../interface/Child.interface';
 
 @Injectable({
   providedIn: 'root'
