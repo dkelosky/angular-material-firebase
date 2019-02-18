@@ -6,12 +6,18 @@ Subscribe to group (like LMCC) for generic info (like classes canceled or need a
 
 View info on individual classes -> age group information, teachers, curriculum.
 
+Require code
+
+Share info with other parents
+Share info with other account
+
 Admin UI to:
 -> see students
 -> view important info tag
 -> view all info
 -> notify (parents background and foreground)
 -> view parents contact
+-> generate code
 -> end class, reset all
 
 ## v1.x (future)
