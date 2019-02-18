@@ -28,7 +28,7 @@ export class AddChildComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
+  submit() {
     console.log(`Form input: ${JSON.stringify(this.childForm.value, null, 2)}`);
     this.chldrnSrvc.addChild(this.childForm.value);
     const message = `Created child ${this.childForm.value.name}!`;
@@ -36,7 +36,6 @@ export class AddChildComponent implements OnInit {
       duration: 1000 * 1.5
     };
     this.dialogRef.close();
-    // this.children.addChild()
     this.sb.open(message, null, config);
   }
 

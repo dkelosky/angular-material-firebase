@@ -17,7 +17,13 @@ import {
   MatMenuModule,
   MatDialogModule,
   MatSnackBarModule,
-  MatInputModule
+  MatInputModule,
+  MatBottomSheetModule,
+  MatTableModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatBadgeModule,
+  MatTabsModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +49,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { AddChildComponent } from './component/add-child/add-child.component';
 import { EditChildComponent } from './component/edit-child/edit-child.component';
 import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
+import { ConfirmComponent } from './component/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +64,8 @@ import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
     HeaderComponent,
     AddChildComponent,
     EditChildComponent,
-    LmccHomeComponent
+    LmccHomeComponent,
+    ConfirmComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -68,11 +76,17 @@ import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
+    MatTableModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatBadgeModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
     MatCheckboxModule,
     MatInputModule,
     MatFormFieldModule,
+    MatBottomSheetModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
@@ -90,6 +104,7 @@ import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
     TermsOfServiceComponent,
     AddChildComponent,
     EditChildComponent,
+    ConfirmComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

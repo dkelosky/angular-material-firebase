@@ -1,3 +1,21 @@
-<p>
-  edit-child works!
-</p>
+<form [formGroup]="childForm" (ngSubmit)="submit()">
+  <div fxLayout="row" fxLayoutAlign="left center">
+    <h2 fxFlexAlign="start">
+      {{child.name}}
+    </h2>
+    <span fxFlex fxLayoutAlign="center"></span>
+    <button mat-icon-button color="warn" (click)="delete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="row">
+    <mat-form-field>
+      <textarea autofocus matInput placeholder="Info" formControlName="info"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row">
+    <button mat-button type="button" fxFlex fxFlexAlign="start" autofocus >Cancel</button>
+    <button mat-button fxFlex fxFlexAlign="end" color="primary">Submit</button>
+  </div>
+</form>

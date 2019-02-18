@@ -17,8 +17,8 @@
         class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let child of children" cdkDrag>
           <div>{{child.name}}</div>
-          <button mat-icon-button (click)="edit(child.name)">
-            <mat-icon aria-label="Edit">edit</mat-icon>
+          <button mat-icon-button (click)="edit(child)">
+            <mat-icon aria-label="Edit">launch</mat-icon>
           </button>
         </div>
       </div>
@@ -39,7 +39,6 @@
       <h2>{{category.name}}</h2>
       <div cdkDropList #categoryHolder="cdkDropList" [cdkDropListData]="allocate(categoryHolder)"
         class="example-list" (cdkDropListDropped)="drop($event)">
-        <!-- <div class="example-box" *ngFor="let item of done1" cdkDrag>{{item.name}}</div> -->
         <div class="example-box" *ngFor="let child of retrieve(categoryHolder)" cdkDrag>{{child.name}}</div>
       </div>
       <h2></h2>

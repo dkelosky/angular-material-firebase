@@ -82,17 +82,16 @@ export class InComponent implements OnInit, OnDestroy {
     this.openAddDialog();
   }
 
-  edit(item: string) {
-    console.log(item);
-    this.openEditDialog();
+  edit(child: ChildId) {
+    this.openEditDialog(child);
   }
 
   openAddDialog() {
     this.dialog.open(AddChildComponent);
   }
 
-  openEditDialog() {
-    this.dialog.open(EditChildComponent);
+  openEditDialog(child: ChildId) {
+    this.dialog.open(EditChildComponent, {data: child});
   }
 
   ngOnDestroy(): void {
