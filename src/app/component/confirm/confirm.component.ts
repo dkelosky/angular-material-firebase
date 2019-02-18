@@ -24,7 +24,7 @@ export class ConfirmComponent implements OnInit {
   }
 
   delete() {
-    console.log(`Called delete confirm`);
+    console.log(`Called delete ${this.child.name}`);
     // console.log(`Deleting topic: ${JSON.stringify(this.data.topic, null, 2)}`);
     // this.t.deleteTopic(this.data.topic);
     console.log(`Navigating back`);

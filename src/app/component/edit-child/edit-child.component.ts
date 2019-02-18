@@ -36,7 +36,7 @@ export class EditChildComponent implements OnInit {
   }
 
   cancel() {
-
+    this.dialogRef.close();
   }
 
   delete() {
