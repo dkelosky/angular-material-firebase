@@ -14,6 +14,7 @@ export class AddChildComponent implements OnInit {
   childForm = this.fb.group({
     name: ['', Validators.required],
     age: ['', Validators.required],
+    gender: ['', Validators.required],
     important: [''],
     info: [''],
   });

@@ -1,18 +1,30 @@
 <form [formGroup]="childForm" (ngSubmit)="submit()">
+
   <div fxLayout="row">
     <mat-form-field fxFlex>
       <input matInput placeholder="Child's Name" required formControlName="name">
     </mat-form-field>
   </div>
 
-  <div fxLayout="row">
-    <mat-form-field fxFlex>
-      <mat-select placeholder="Child's Age" required formControlName="age">
-        <div *ngFor="let age of ages">
-          <mat-option value="option">{{age}}</mat-option>
-        </div>
-      </mat-select>
-    </mat-form-field>
+  <div fxLayout="column" fxLayoutGap="20px">
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-radio-group required fxLayoutGap="20px" fxFlex>
+        <mat-radio-button value="boy">Boy</mat-radio-button>
+        <mat-radio-button value="girl">Girl</mat-radio-button>
+      </mat-radio-group>
+      <div></div>
+    </div>
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Child's Age" required formControlName="age">
+          <div *ngFor="let age of ages">
+            <mat-option value="option">{{age}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 
   <div fxLayout="row">
@@ -31,4 +43,5 @@
   <div fxLayout="row" fxLayoutAlign="end">
     <button color="primary" mat-button [disabled]="!childForm.valid">Add</button>
   </div>
+
 </form>
