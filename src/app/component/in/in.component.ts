@@ -130,12 +130,13 @@ export class InComponent implements OnInit, OnDestroy {
     } else {
 
       // update DB
-      event.previousContainer.data[event.previousIndex].in = this.containersService.getCategoryRef(`lmcc`, containers);
-      this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
-
-      console.log(`previous index: ${event.previousIndex}`);
-      console.log(`in: ${event.previousContainer.data[event.previousIndex].in.id}`);
-      console.log(`containers id: ${this.containersService.getCategoryRef(`lmcc`, containers).id}`);
+      if (containers) {
+        event.previousContainer.data[event.previousIndex].in = this.containersService.getCategoryRef(`lmcc`, containers);
+        this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
+      } else {
+        delete event.previousContainer.data[event.previousIndex].in;
+        this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
+      }
 
       // update UI
       transferArrayItem(event.previousContainer.data,
