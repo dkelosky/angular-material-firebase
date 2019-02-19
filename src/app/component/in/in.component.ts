@@ -7,15 +7,15 @@ import { AddChildComponent } from '../add-child/add-child.component';
 import { EditChildComponent } from '../edit-child/edit-child.component';
 import { ChildrenService } from 'src/app/service/children.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
-import { CategoriesService } from 'src/app/service/categories.service';
+import { ContainersService } from 'src/app/service/containers.service';
 import { Observable, combineLatest } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
-import { CategoryId } from 'src/app/interface/category.interface';
+import { CategoryId } from 'src/app/interface/containers.interface';
 
 interface CdkDLValuePair {
   values: ChildId[];
   cdkDL: CdkDropList;
-  category: CategoryId;
+  containers: CategoryId;
 }
 
 @Component({
@@ -33,10 +33,10 @@ export class InComponent implements OnInit, OnDestroy {
   cdkDLs: Map<string, CdkDLValuePair> = new Map<string, CdkDLValuePair>();
 
   $children: Observable<ChildId[]>;
-  $categories: Observable<CategoryId[]>;
+  $containers: Observable<CategoryId[]>;
   children: ChildId[] = [];
   unallocatedChildren: ChildId[] = [];
-  categories: CategoryId[] = [];
+  containers: CategoryId[] = [];
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -45,7 +45,7 @@ export class InComponent implements OnInit, OnDestroy {
     private toggleService: ToggleSideNavService,
     private childrenService: ChildrenService,
     private organizationsService: OrganizationsService,
-    private categoriesService: CategoriesService,
+    private containersService: ContainersService,
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -59,34 +59,34 @@ export class InComponent implements OnInit, OnDestroy {
     this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
 
       // get observables from database
-      this.$categories = this.categoriesService.getCategories(orgs[0].id);
+      this.$containers = this.containersService.getContainers(orgs[0].id);
       this.$children = this.childrenService.getChildren();
 
       // combine to single subscribe (and provide custom mapping)
-      combineLatest(this.$children, this.$categories, (children, categories) => {
+      combineLatest(this.$children, this.$containers, (children, containers) => {
         return {
           children,
-          categories
+          containers
         };
       }).subscribe((combined) => {
 
         this.unallocatedChildren = combined.children.filter((child => child.in != null));
         this.children = combined.children.filter((child => child.in == null));
 
-        this.categories = combined.categories;
+        this.containers = combined.containers;
       });
     });
   }
 
-  allocate(cdkDL: CdkDropList, category: CategoryId) {
+  allocate(cdkDL: CdkDropList, containers: CategoryId) {
     if (!this.cdkDLs.get(cdkDL.id)) {
 
       // TODO(Kelosky): error for children that are not allocated anywhere
-      const values = this.unallocatedChildren.filter((child => category.id.trim() === child.in.id.trim()));
+      const values = this.unallocatedChildren.filter((child => containers.id.trim() === child.in.id.trim()));
       this.cdkDLs.set(cdkDL.id, {
         values,
         cdkDL,
-        category,
+        containers,
       });
     }
     return this.retrieve(cdkDL);
@@ -121,13 +121,13 @@ export class InComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  drop(event: CdkDragDrop<ChildId[]>, category: CategoryId) {
+  drop(event: CdkDragDrop<ChildId[]>, containers: CategoryId) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
 
       // update DB
-      event.previousContainer.data[event.previousIndex].in = this.categoriesService.getCategoryRef(`lmcc`, category);
+      event.previousContainer.data[event.previousIndex].in = this.containersService.getCategoryRef(`lmcc`, containers);
       this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
 
       // update UI

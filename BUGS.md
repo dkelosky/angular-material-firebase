@@ -1,0 +1,1 @@
+Have all child in container and then delete child from db - does not remove entry

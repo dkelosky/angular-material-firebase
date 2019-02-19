@@ -22,7 +22,7 @@ Admin UI to:
 
 ## v1.x (future)
 
-Admin UI to add categories
+Admin UI to add containers
 
 ## v2.0 (future)
 
