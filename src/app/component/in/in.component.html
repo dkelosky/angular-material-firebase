@@ -1,16 +1,17 @@
 <div cdkDropListGroup>
-<mat-sidenav-container ngClass="body">
+  <mat-sidenav-container ngClass="body">
 
-  <mat-sidenav ngClass="sidenav" #snav fixedTopGap="56" mode="side" [opened]="mobileQuery.matches ? 'false' : 'true'">
-    <div fxLayout="column" fxLayoutAlign="center center">
-      <h2></h2> <!-- padding -->
-      <h2>Children</h2>
-    </div>
+    <mat-sidenav ngClass="sidenav" #snav fixedTopGap="56" mode="side" [opened]="mobileQuery.matches ? 'false' : 'true'">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <h2></h2> <!-- padding -->
+        <h2>Children</h2>
+      </div>
 
-      <div *ngIf="$children | async as children">
+      <!-- <div *ngIf="$children | async as children"> -->
+      <!-- <div *ngIf="children"> -->
 
-      <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children"
-        class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children" class="example-list"
+        (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let child of children" cdkDrag>
           <div>{{child.name}}</div>
           <button mat-icon-button (click)="edit(child)">
@@ -18,30 +19,30 @@
           </button>
         </div>
       </div>
-      </div>
+      <!-- </div> -->
 
-    <div fxLayout="column" fxLayoutAlign="center center">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <h2></h2> <!-- padding -->
+        <button mat-mini-fab color="primary">
+          <mat-icon aria-label="Add" (click)="add()">add</mat-icon>
+        </button>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content ngClass="sidenav-content">
       <h2></h2> <!-- padding -->
-      <button mat-mini-fab color="primary">
-        <mat-icon aria-label="Add" (click)="add()">add</mat-icon>
-      </button>
-    </div>
-  </mat-sidenav>
 
-  <mat-sidenav-content ngClass="sidenav-content">
-    <h2></h2> <!-- padding -->
+      <div *ngFor="let category of categories">
 
-    <div *ngFor="let category of $categories | async">
+        <h2>{{category.name}}</h2>
+        <div cdkDropList #categoryHolder="cdkDropList" [cdkDropListData]="allocate(categoryHolder, category)"
+          class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let child of retrieve(categoryHolder)" cdkDrag>{{child.name}}</div>
+        </div>
+        <h2></h2>
 
-      <h2>{{category.name}}</h2>
-      <div cdkDropList #categoryHolder="cdkDropList" [cdkDropListData]="allocate(categoryHolder)"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let child of retrieve(categoryHolder)" cdkDrag>{{child.name}}</div>
       </div>
-      <h2></h2>
 
-    </div>
-
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

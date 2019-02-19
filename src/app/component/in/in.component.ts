@@ -8,13 +8,15 @@ import { EditChildComponent } from '../edit-child/edit-child.component';
 import { ChildrenService } from 'src/app/service/children.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
 import { CategoriesService } from 'src/app/service/categories.service';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
 import { CategoryId } from 'src/app/interface/category.interface';
+// import { combineLatest } from 'rxjs/operators';
 
 interface CdkDLValuePair {
   values: ChildId[];
   cdkDL: CdkDropList;
+  category: CategoryId;
 }
 
 @Component({
@@ -31,8 +33,11 @@ export class InComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   cdkDLs: Map<string, CdkDLValuePair> = new Map<string, CdkDLValuePair>();
 
-  $children: Observable<ChildId[]>; // = [];
-  $categories: Observable<CategoryId[]>; //
+  $children: Observable<ChildId[]>;
+  $categories: Observable<CategoryId[]>;
+  children: ChildId[] = [];
+  unallocatedChildren: ChildId[] = [];
+  categories: CategoryId[] = [];
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -53,23 +58,35 @@ export class InComponent implements OnInit, OnDestroy {
 
     // TODO(Kelosky): make generic
     this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
+
+      // get observables from database
       this.$categories = this.categoriesService.getCategories(orgs[0].id);
-    });
+      this.$children = this.childrenService.getChildren();
 
-    this.$children = this.childrenService.getChildren();
+      // combine to single subscribe (and provide custom mapping)
+      combineLatest(this.$children, this.$categories, (children, categories) => {
+        return {
+          children,
+          categories
+        };
+      }).subscribe((combined) => {
+
+        this.unallocatedChildren = combined.children.filter((child => child.in != null));
+        this.children = combined.children.filter((child => child.in == null));
+
+        this.categories = combined.categories;
+      });
+    });
   }
 
-  refresh() {
-    this.$children.subscribe((children) => {
-      // children.
-    });
-  }
-
-  allocate(cdkDL: CdkDropList) {
+  allocate(cdkDL: CdkDropList, category: CategoryId) {
     if (!this.cdkDLs.get(cdkDL.id)) {
+
+      const values = this.unallocatedChildren.filter((child => category.id.trim() === child.in.id.trim()));
       this.cdkDLs.set(cdkDL.id, {
-        values: new Array(),
-        cdkDL
+        values,
+        cdkDL,
+        category,
       });
     }
     return this.retrieve(cdkDL);
@@ -97,7 +114,7 @@ export class InComponent implements OnInit, OnDestroy {
   }
 
   openEditDialog(child: ChildId) {
-    this.dialog.open(EditChildComponent, {data: child});
+    this.dialog.open(EditChildComponent, { data: child });
   }
 
   ngOnDestroy(): void {
