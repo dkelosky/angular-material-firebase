@@ -74,6 +74,9 @@ export class InComponent implements OnInit, OnDestroy {
         this.children = combined.children.filter((child => child.in == null));
 
         this.containers = combined.containers;
+
+        // TODO(Kelosky): BUGS.md here if we have the cdkDL we should get
+        // values and update with unallocated children below on filter
       });
     });
   }
@@ -129,6 +132,10 @@ export class InComponent implements OnInit, OnDestroy {
       // update DB
       event.previousContainer.data[event.previousIndex].in = this.containersService.getCategoryRef(`lmcc`, containers);
       this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
+
+      console.log(`previous index: ${event.previousIndex}`);
+      console.log(`in: ${event.previousContainer.data[event.previousIndex].in.id}`);
+      console.log(`containers id: ${this.containersService.getCategoryRef(`lmcc`, containers).id}`);
 
       // update UI
       transferArrayItem(event.previousContainer.data,
