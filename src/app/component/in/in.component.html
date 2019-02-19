@@ -36,7 +36,7 @@
 
         <h2>{{category.name}}</h2>
         <div cdkDropList #categoryHolder="cdkDropList" [cdkDropListData]="allocate(categoryHolder, category)"
-          class="example-list" (cdkDropListDropped)="drop($event)">
+          class="example-list" (cdkDropListDropped)="drop($event, category)">
           <div class="example-box" *ngFor="let child of retrieve(categoryHolder)" cdkDrag>{{child.name}}</div>
         </div>
         <h2></h2>

@@ -69,6 +69,7 @@ export class EditChildComponent implements OnInit {
       },
       successMessage: `Removed entry for ${this.child.name}`,
     };
+
     this.bottomSheet.open(ConfirmComponent, {
       data,
     });

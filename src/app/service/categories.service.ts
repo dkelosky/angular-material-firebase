@@ -13,7 +13,7 @@ export class CategoriesService {
   ) { }
 
   getCategories(orgId: string) {
-    return this.afs.collection<Category>(`organizations/${orgId}/categories`)
+    return this.afs.collection<Category>(`organizations/${orgId}/categories/`)
       .snapshotChanges().pipe(
         map(actions => actions.map(a => {
           const data = a.payload.doc.data() as Category;
@@ -21,6 +21,10 @@ export class CategoriesService {
           return { id, ...data };
         }))
       );
+  }
+
+  getCategoryRef(orgId: string) {
+    return this.afs.doc<Category>(`organizations/${orgId}/categories`).ref;
   }
 
 }

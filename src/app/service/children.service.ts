@@ -38,7 +38,7 @@ export class ChildrenService {
     delete child.id;
     try {
       console.log(`Updating child: ${child.name} with ${id}`);
-      await this.afs.doc<Child>(`${this.getCollectionString()}/${id}`).set(child);
+      await this.afs.doc<Child>(`${this.getCollectionString()}${id}`).set(child);
     } catch (err) {
       console.log('set error');
       console.error(err);
@@ -48,7 +48,7 @@ export class ChildrenService {
   async deleteChild(child: ChildId) {
     try {
       console.log(`Delete child: ${child.name} with ${child.id}`);
-      await this.afs.collection<Child>(this.getCollectionString()).doc(child.id).delete();
+      await this.afs.doc<Child>(`${this.getCollectionString()}${child.id}`).delete();
     } catch (err) {
       console.log('delete error');
       console.error(err);
@@ -56,6 +56,6 @@ export class ChildrenService {
   }
 
   private getCollectionString() {
-    return `users/${this.afAuth.auth.currentUser.uid}/children`;
+    return `users/${this.afAuth.auth.currentUser.uid}/children/`;
   }
 }

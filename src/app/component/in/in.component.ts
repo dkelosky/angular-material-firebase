@@ -11,7 +11,6 @@ import { CategoriesService } from 'src/app/service/categories.service';
 import { Observable, combineLatest } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
 import { CategoryId } from 'src/app/interface/category.interface';
-// import { combineLatest } from 'rxjs/operators';
 
 interface CdkDLValuePair {
   values: ChildId[];
@@ -82,6 +81,7 @@ export class InComponent implements OnInit, OnDestroy {
   allocate(cdkDL: CdkDropList, category: CategoryId) {
     if (!this.cdkDLs.get(cdkDL.id)) {
 
+      // TODO(Kelosky): error for children that are not allocated anywhere
       const values = this.unallocatedChildren.filter((child => category.id.trim() === child.in.id.trim()));
       this.cdkDLs.set(cdkDL.id, {
         values,
@@ -121,10 +121,11 @@ export class InComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  drop(event: CdkDragDrop<ChildId[]>) {
+  drop(event: CdkDragDrop<ChildId[]>, category: CategoryId) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      // event.previousContainer.data[event.previousIndex].in = 
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,

@@ -25,7 +25,7 @@ export class OrganizationsService {
   ) { }
 
   getOrganizations(orgName: string) {
-    return this.afs.collection<OrganizationId>('organizations', ref => ref.where('name', '==', orgName))
+    return this.afs.collection<OrganizationId>('organizations/', ref => ref.where('name', '==', orgName))
       .snapshotChanges().pipe(
         map(actions => actions.map(a => {
           const data = a.payload.doc.data() as Organization;

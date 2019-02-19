@@ -18,7 +18,7 @@ export class UsersService {
   ) { }
 
   setUser(token: string) {
-    this.afs.collection<User>('users').doc(this.afAuth.auth.currentUser.uid).set(
+    this.afs.doc<User>(`users/${this.afAuth.auth.currentUser.uid}`).set(
       {
         name: this.afAuth.auth.currentUser.displayName,
         token,
