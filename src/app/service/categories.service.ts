@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { Category } from '../interface/category.interface';
+import { Category, CategoryId } from '../interface/category.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +23,8 @@ export class CategoriesService {
       );
   }
 
-  getCategoryRef(orgId: string) {
-    return this.afs.doc<Category>(`organizations/${orgId}/categories`).ref;
+  getCategoryRef(orgId: string, category: CategoryId) {
+    return this.afs.doc<Category>(`organizations/${orgId}/categories/${category.id}`).ref;
   }
 
 }

@@ -125,7 +125,12 @@ export class InComponent implements OnInit, OnDestroy {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      // event.previousContainer.data[event.previousIndex].in = 
+
+      // update DB
+      event.previousContainer.data[event.previousIndex].in = this.categoriesService.getCategoryRef(`lmcc`, category);
+      this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
+
+      // update UI
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
