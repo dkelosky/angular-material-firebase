@@ -10,12 +10,12 @@ import { OrganizationsService } from 'src/app/service/organizations.service';
 import { ContainersService } from 'src/app/service/containers.service';
 import { Observable, combineLatest } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
-import { CategoryId } from 'src/app/interface/containers.interface';
+import { ContainerId } from 'src/app/interface/container.interface';
 
 interface CdkDLValuePair {
   values: ChildId[];
   cdkDL: CdkDropList;
-  containers: CategoryId;
+  containers: ContainerId;
 }
 
 @Component({
@@ -33,10 +33,10 @@ export class InComponent implements OnInit, OnDestroy {
   cdkDLs: Map<string, CdkDLValuePair> = new Map<string, CdkDLValuePair>();
 
   $children: Observable<ChildId[]>;
-  $containers: Observable<CategoryId[]>;
+  $containers: Observable<ContainerId[]>;
   children: ChildId[] = [];
   unallocatedChildren: ChildId[] = [];
-  containers: CategoryId[] = [];
+  containers: ContainerId[] = [];
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -81,7 +81,7 @@ export class InComponent implements OnInit, OnDestroy {
     });
   }
 
-  allocate(cdkDL: CdkDropList, containers: CategoryId) {
+  allocate(cdkDL: CdkDropList, containers: ContainerId) {
     if (!this.cdkDLs.get(cdkDL.id)) {
 
       // TODO(Kelosky): error for children that are not allocated anywhere
@@ -124,7 +124,7 @@ export class InComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  drop(event: CdkDragDrop<ChildId[]>, containers: CategoryId) {
+  drop(event: CdkDragDrop<ChildId[]>, containers: ContainerId) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

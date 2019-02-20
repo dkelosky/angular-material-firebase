@@ -11,13 +11,28 @@
       <!-- <div *ngIf="children"> -->
 
       <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children" class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let child of children" cdkDrag>
-          <div>{{child.name}}</div>
-          <button mat-icon-button (click)="edit(child)">
-            <mat-icon aria-label="Edit">launch</mat-icon>
-          </button>
-        </div>
+        (cdkDropListDropped)="drop($event)" fxLayout="column" fxLayoutGap="5px">
+
+        <mat-card cdkDrag *ngFor="let child of children">
+          <mat-card-header>
+            <div ngClass="example-header-image" mat-card-avatar></div>
+            <mat-card-title>
+              {{child.name}}
+            </mat-card-title>
+            <mat-card-subtitle>
+              <div>
+                (Age {{child.age}})
+              </div>
+  
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="end start">
+                        <button mat-icon-button (click)="edit(child)" color="primary">
+                          <mat-icon aria-label="Edit">edit</mat-icon>
+                        </button>
+          </mat-card-actions>
+        </mat-card>
+
       </div>
       <!-- </div> -->
 
@@ -34,10 +49,22 @@
 
       <div *ngFor="let container of containers">
 
-        <h2>{{container.name}}</h2>
+        <h1>{{container.name}}</h1>
         <div cdkDropList #containerHolder="cdkDropList" [cdkDropListData]="allocate(containerHolder, container)"
-          class="example-list" (cdkDropListDropped)="drop($event, container)">
-          <div class="example-box" *ngFor="let child of retrieve(containerHolder)" cdkDrag>{{child.name}}</div>
+          class="example-list" (cdkDropListDropped)="drop($event, container)" fxLayout="column" fxLayoutGap="5px">
+
+          <mat-card cdkDrag *ngFor="let child of retrieve(containerHolder)">
+            <mat-card-header>
+              <div ngClass="example-header-image" mat-card-avatar></div>
+              <mat-card-title>
+                {{child.name}}
+              </mat-card-title>
+              <mat-card-subtitle>
+                (Age {{child.age}})
+              </mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+
         </div>
         <h2></h2>
 
