@@ -63,6 +63,10 @@
                 (Age {{child.age}})
               </mat-card-subtitle>
             </mat-card-header>
+            <div *ngIf="child.important" fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon color="warn">warning</mat-icon>
+              <div>{{child.important}}</div>
+            </div>
           </mat-card>
 
         </div>
