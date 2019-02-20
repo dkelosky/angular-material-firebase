@@ -27,21 +27,16 @@
     </div>
   </div>
 
-  <div fxLayout="row">
+  <div fxLayout="column" fxLayoutGap="30px">
+
     <mat-form-field fxFlex>
       <textarea matInput placeholder="Important" formControlName="important"></textarea>
-      <mat-hint>e.g. Allergies</mat-hint>
+      <mat-hint>Special instructions, e.g. medical conditions, food allergies, special needs, etc.</mat-hint>
     </mat-form-field>
+
+    <div fxLayout="row" fxLayoutAlign="end">
+      <button color="primary" mat-button [disabled]="!childForm.valid">Add</button>
+    </div>
+
   </div>
-
-  <!-- <div fxLayout="row">
-    <mat-form-field fxFlex>
-      <textarea matInput placeholder="Info" formControlName="info"></textarea>
-    </mat-form-field>
-  </div> -->
-
-  <div fxLayout="row" fxLayoutAlign="end">
-    <button color="primary" mat-button [disabled]="!childForm.valid">Add</button>
-  </div>
-
 </form>

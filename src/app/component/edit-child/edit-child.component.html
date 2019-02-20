@@ -19,15 +19,19 @@
     </mat-form-field>
   </div>
 
-  <div fxLayout="row">
-    <mat-form-field fxFlex>
-      <textarea matInput [(ngModel)]="child.important" placeholder="Important" formControlName="important"></textarea>
-      <mat-hint>e.g. Allergies</mat-hint>
-    </mat-form-field>
+  <div fxLayout="column" fxLayoutGap="30px">
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <textarea matInput [(ngModel)]="child.important" placeholder="Important" formControlName="important"></textarea>
+        <mat-hint>Special instructions, e.g. medical conditions, food allergies, special needs, etc.</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row">
+      <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
+      <button mat-button fxFlex fxFlexAlign="end" color="primary" [disabled]="!childForm.valid">Save</button>
+    </div>
   </div>
 
-  <div fxLayout="row">
-    <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
-    <button mat-button fxFlex fxFlexAlign="end" color="primary" [disabled]="!childForm.valid">Save</button>
-  </div>
 </form>
