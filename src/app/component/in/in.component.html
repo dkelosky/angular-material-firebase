@@ -2,13 +2,17 @@
   <mat-sidenav-container ngClass="body">
 
     <mat-sidenav ngClass="sidenav" #snav fixedTopGap="56" mode="side" [opened]="mobileQuery.matches ? 'false' : 'true'">
-      <div fxLayout="column" fxLayoutAlign="center center">
-        <h2></h2> <!-- padding -->
+      <h2></h2>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <span fxFlex></span>
         <h2>Children</h2>
+        <span fxFlex></span>
+        <button mat-mini-fab color="primary">
+          <mat-icon aria-label="Add" (click)="add()">add</mat-icon>
+        </button>
+        <span fxFlex></span>
       </div>
-
-      <!-- <div *ngIf="$children | async as children"> -->
-      <!-- <div *ngIf="children"> -->
+      <h2></h2>
 
       <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children" class="example-list"
         (cdkDropListDropped)="drop($event)" fxLayout="column" fxLayoutGap="5px">
@@ -23,25 +27,22 @@
               <div>
                 (Age {{child.age}})
               </div>
-  
+
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-actions fxLayout="row" fxLayoutAlign="end start">
-                        <button mat-icon-button (click)="edit(child)" color="primary">
-                          <mat-icon aria-label="Edit">edit</mat-icon>
-                        </button>
+            <button mat-icon-button (click)="edit(child)" color="primary">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
           </mat-card-actions>
         </mat-card>
 
       </div>
       <!-- </div> -->
 
-      <div fxLayout="column" fxLayoutAlign="center center">
-        <h2></h2> <!-- padding -->
-        <button mat-mini-fab color="primary">
-          <mat-icon aria-label="Add" (click)="add()">add</mat-icon>
-        </button>
-      </div>
+      <!-- <div fxLayout="column" fxLayoutAlign="center center">
+        <h2></h2>
+      </div> -->
     </mat-sidenav>
 
     <mat-sidenav-content ngClass="sidenav-content">
