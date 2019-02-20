@@ -24,6 +24,8 @@ Admin UI to:
 
 Admin UI to add containers
 
+Admin to certain classes only
+
 ## v2.0 (future)
 
 Genericise for other churches
