@@ -19,7 +19,7 @@
 
         <mat-card cdkDrag *ngFor="let child of children">
           <mat-card-header>
-            <div ngClass="example-header-image" mat-card-avatar></div>
+            <mat-icon mat-card-avatar ngClass="mat-icon md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">face</mat-icon>
             <mat-card-title>
               {{child.name}}
             </mat-card-title>
