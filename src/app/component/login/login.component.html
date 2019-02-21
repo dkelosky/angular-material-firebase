@@ -1,4 +1,9 @@
 <div fxLayout="column" fxLayoutAlign="center center" ngClass="body">
     <app-login-message></app-login-message>
+
+    <div *ngIf="!uiShown">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+
     <div id="firebaseui-auth-container"></div>
 </div>

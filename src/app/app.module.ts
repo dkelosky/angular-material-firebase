@@ -25,7 +25,8 @@ import {
   MatBadgeModule,
   MatTabsModule,
   MatSelectModule,
-  MatRadioModule
+  MatRadioModule,
+  MatProgressBarModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -89,6 +90,7 @@ import { ConfirmComponent } from './component/confirm/confirm.component';
     MatTabsModule,
     MatCheckboxModule,
     MatInputModule,
+    MatProgressBarModule,
     MatFormFieldModule,
     MatBottomSheetModule,
     FormsModule,

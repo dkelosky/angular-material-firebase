@@ -16,6 +16,7 @@ import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.co
 export class LoginComponent implements OnInit, OnDestroy {
 
   private ui: firebaseui.auth.AuthUI;
+  uiShown = false;
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   openPrivacyDialog() {
     const dialogRef = this.dialog.open(PrivacyPolicyComponent);
 
-    dialogRef.afterClosed().subscribe( (result) => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
@@ -56,8 +57,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private get config(): firebaseui.auth.Config {
-    // console.log(this.location.path() + " full")
-    // console.log(this.url)
     return {
       callbacks: {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
@@ -68,8 +67,9 @@ export class LoginComponent implements OnInit, OnDestroy {
               (token) => {
                 // save token
                 console.log(`Permission granted; saving token server: ${token}`);
-                this.u.setUser(token); // NOTE(Kelosky): saves entire user - need to update just token
-                // this.router.navigateByUrl('/in');
+
+                // NOTE(Kelosky): saves entire user - need to update just token
+                this.u.setUser(token);
               },
               (error) => {
                 // TODO(Kelosky): warning - you will not receive any notifications
@@ -77,9 +77,12 @@ export class LoginComponent implements OnInit, OnDestroy {
               },
             );
           return true;
+        },
+        uiShown: () => {
+          this.uiShown = true;
         }
       },
-      // signInSuccessUrl: this.url + '/subscribe',
+
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
