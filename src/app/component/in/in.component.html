@@ -58,7 +58,7 @@
               <mat-card-title>
                 {{child.name}}
               </mat-card-title>
-              <mat-card-subtitle >
+              <mat-card-subtitle>
                 (Age {{child.age}})
               </mat-card-subtitle>
             </mat-card-header>
@@ -68,6 +68,13 @@
                 <div>{{child.important}}</div>
               </div>
             </mat-card-content>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="start start">
+              <!-- <button mat-icon-button (click)="edit(child)" color="primary">
+                <mat-icon aria-label="Edit">edit</mat-icon>
+              </button> -->
+              <mat-icon>drag_indicator</mat-icon>
+              <div fxFlex></div>
+            </mat-card-actions>
           </mat-card>
 
         </div>
