@@ -32,7 +32,7 @@ Genericise for other churches
 Genericise for other child care activities (dances)
 Genericise for everything:
 
-class of catories and admin panel
+class of categories and admin panel
 
 Type: People, Children, Objects
 

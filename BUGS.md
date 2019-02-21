@@ -1,7 +1,9 @@
 # Bugs
 
-- Have all child in container and then delete child from db - does not remove entry
-- Can't scroll when > kids added in mobile view
+0. Have all child in container and then delete child from db - does not remove entry
+0. Cannot use Facebook or twitter auth
+0.  Cannot use domain checkin.kelosky.com
+
+## Low Priority
+
 - Scroll in desktop view strikes through children list
-- dialog with keyboard on a phone goes away if you click off the dialog
-- progress bar at login
