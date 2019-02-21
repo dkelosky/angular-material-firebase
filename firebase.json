@@ -11,6 +11,10 @@
     "source": "functions"
   },
   "hosting": {
+    "predeploy": [
+      "npm run lint",
+      "npm run build"
+    ],
     "public": "dist/kelosky-check-in-home",
     "ignore": [
       "firebase.json",
