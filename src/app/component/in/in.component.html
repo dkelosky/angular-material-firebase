@@ -18,20 +18,22 @@
         (cdkDropListDropped)="drop($event)" fxLayout="column" fxLayoutGap="5px">
 
         <mat-card cdkDrag *ngFor="let child of children">
-          <mat-card-header>
+          <mat-card-header fxFlexLayout="row">
             <mat-icon mat-card-avatar ngClass="mat-icon md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">
               face</mat-icon>
-            <mat-card-title fxLayout="row" fxLayoutAlign="end end">
-                  {{child.name}}
+            <mat-card-title>
+              {{child.name}}
             </mat-card-title>
             <mat-card-subtitle>
               (Age {{child.age}})
             </mat-card-subtitle>
           </mat-card-header>
-          <mat-card-actions fxLayout="row" fxLayoutAlign="end start">
+          <mat-card-actions fxLayout="row" fxLayoutAlign="start start">
             <button mat-icon-button (click)="edit(child)" color="primary">
               <mat-icon aria-label="Edit">edit</mat-icon>
             </button>
+            <div fxFlex></div>
+            <mat-icon>drag_indicator</mat-icon>
           </mat-card-actions>
         </mat-card>
 
@@ -56,14 +58,16 @@
               <mat-card-title>
                 {{child.name}}
               </mat-card-title>
-              <mat-card-subtitle>
+              <mat-card-subtitle >
                 (Age {{child.age}})
               </mat-card-subtitle>
             </mat-card-header>
-            <div *ngIf="child.important" fxLayout="row" fxLayoutAlign="start center">
-              <mat-icon color="warn">warning</mat-icon>
-              <div>{{child.important}}</div>
-            </div>
+            <mat-card-content>
+              <div *ngIf="child.important" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon color="warn">warning</mat-icon>
+                <div>{{child.important}}</div>
+              </div>
+            </mat-card-content>
           </mat-card>
 
         </div>
