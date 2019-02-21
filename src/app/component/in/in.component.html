@@ -19,7 +19,8 @@
 
         <mat-card cdkDrag *ngFor="let child of children">
           <mat-card-header>
-            <mat-icon mat-card-avatar ngClass="mat-icon md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">face</mat-icon>
+            <mat-icon mat-card-avatar ngClass="mat-icon md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">
+              face</mat-icon>
             <mat-card-title>
               {{child.name}}
             </mat-card-title>
@@ -38,11 +39,7 @@
         </mat-card>
 
       </div>
-      <!-- </div> -->
 
-      <!-- <div fxLayout="column" fxLayoutAlign="center center">
-        <h2></h2>
-      </div> -->
     </mat-sidenav>
 
     <mat-sidenav-content ngClass="sidenav-content">
@@ -56,7 +53,9 @@
 
           <mat-card cdkDrag *ngFor="let child of retrieve(containerHolder)">
             <mat-card-header>
-              <div ngClass="example-header-image" mat-card-avatar></div>
+              <mat-icon mat-card-avatar ngClass="mat-icon md-48"
+                [color]="child.gender === 'boy' ? 'primary' : 'accent'">face
+              </mat-icon>
               <mat-card-title>
                 {{child.name}}
               </mat-card-title>
