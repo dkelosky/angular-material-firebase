@@ -16,9 +16,9 @@ export class UsersService {
 
   // NOTE(Kelosky): note UserId because caller cannot influence the .id
   async setUser(user: User) {
+    console.log(`setting user ${user.name}`);
     try {
       await this.afs.doc<User>(`users/${this.afAuth.auth.currentUser.uid}`).set(user);
-
     } catch (err) {
       console.log(`setUser error`);
       console.error(err);
@@ -26,6 +26,7 @@ export class UsersService {
   }
 
   getUser() {
+    console.log(`get user`);
     return this.afs.doc<UserId>(`users/${this.afAuth.auth.currentUser.uid}`)
       .snapshotChanges().pipe(
         map(actions => {

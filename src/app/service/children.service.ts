@@ -15,6 +15,7 @@ export class ChildrenService {
   ) { }
 
   getChildren() {
+    console.log(`getting children`);
     return this.afs.collection<ChildId>(this.getCollectionString()).snapshotChanges().pipe(
       map(actions => actions.map((a) => {
         const data = a.payload.doc.data() as Child;
@@ -25,6 +26,7 @@ export class ChildrenService {
   }
 
   async addChild(child: Child) {
+    console.log(`adding ${child.name}`);
     try {
       await this.afs.collection<Child>(this.getCollectionString()).add(child);
     } catch (err) {
@@ -34,8 +36,8 @@ export class ChildrenService {
   }
 
   async setChild(child: ChildId) {
+    console.log(`Updating ${child.name}, id: ${child.id}`);
     try {
-      console.log(`Updating ${child.name}, id: ${child.id}`);
       await this.afs.doc<Child>(`${this.getCollectionString()}${child.id}`).set(child);
     } catch (err) {
       console.log('set error');
@@ -44,8 +46,8 @@ export class ChildrenService {
   }
 
   async deleteChild(child: ChildId) {
+    console.log(`Deleting ${child.name}, id: ${child.id}`);
     try {
-      console.log(`Deleting ${child.name}, id: ${child.id}`);
       await this.afs.doc<Child>(`${this.getCollectionString()}${child.id}`).delete();
     } catch (err) {
       console.log('delete error');

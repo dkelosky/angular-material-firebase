@@ -13,7 +13,8 @@ export class ContainersService {
   ) { }
 
   getContainers(orgId: string) {
-    return this.afs.collection<Container>(`organizations/${orgId}/categories/`)
+    console.log(`getting containers`);
+    return this.afs.collection<Container>(`organizations/${orgId}/containers/`)
       .snapshotChanges().pipe(
         map(actions => actions.map(a => {
           const data = a.payload.doc.data() as Container;
@@ -24,7 +25,7 @@ export class ContainersService {
   }
 
   getContainerRef(orgId: string, container: ContainerId) {
-    return this.afs.doc<Container>(`organizations/${orgId}/categories/${container.id}`).ref;
+    return this.afs.doc<Container>(`organizations/${orgId}/containers/${container.id}`).ref;
   }
 
 }
