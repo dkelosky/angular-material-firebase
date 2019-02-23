@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<div mat-dialog-content>
 
   <form [formGroup]="childForm" (ngSubmit)="submit()">
     <div fxLayout="row" fxLayoutAlign="left center">
@@ -31,7 +31,7 @@
         </mat-form-field>
       </div>
 
-      <div fxLayout="row">
+      <div mat-dialog-actions fxLayout="row">
         <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
         <button mat-button fxFlex fxFlexAlign="end" color="primary" [disabled]="!childForm.valid">Save</button>
       </div>
@@ -39,4 +39,4 @@
 
   </form>
 
-</mat-dialog-content>
+</div>
