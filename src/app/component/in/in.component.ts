@@ -167,21 +167,33 @@ export class InComponent implements OnInit, OnDestroy {
       affirm: 'Yes',
       deny: 'Cancel',
       affirmAction: () => {
-        console.log('token user');
-        // after logon, request a token and create an entry for user
+        console.log('User requested web notifications');
         this.requestToken();
-
       },
       denyAction: () => {
-        console.log('non token user');
+        console.log(`User chose to to deny web notifications`);
         this.justDenied = true;
         this.u.setUser({
           name: this.afAuth.auth.currentUser.displayName,
         });
       },
     };
-    this.bottomSheet.open(ConfirmComponent, {
+    const bottomRef = this.bottomSheet.open(ConfirmComponent, {
       data,
+    });
+
+    bottomRef.afterDismissed().subscribe((data) => {
+      console.log(`Web notification prompt dismissed with ${data}`);
+      if (this.user.name) {
+        // do nothing
+        console.log(`User existed, doing nothing`);
+      } else {
+        console.log(`New user, assuming denied web notifications`);
+        this.justDenied = true;
+        this.u.setUser({
+          name: this.afAuth.auth.currentUser.displayName,
+        });
+      }
     });
   }
 

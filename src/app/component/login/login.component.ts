@@ -59,22 +59,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     return {
       callbacks: {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-          // // after logon, request a token and create an entry for user
-          // this.afMessaging.requestToken
-          //   .subscribe(
-          //     (token) => {
-
-          //       // NOTE(Kelosky): saves entire user - need to update just token
-          //       this.u.setUser({
-          //         name: this.afAuth.auth.currentUser.uid,
-          //         token
-          //       });
-          //     },
-          //     (error) => {
-          //       // TODO(Kelosky): warning - you will not receive any notifications
-          //       console.error(error);
-          //     },
-          //   );
           return true;
         },
         uiShown: () => {
