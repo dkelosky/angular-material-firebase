@@ -6,6 +6,8 @@ Subscribe to group (like LMCC) for generic info (like classes canceled or need a
 
 View info on individual classes -> age group information, teachers, curriculum.
 
+Custom prompt prior to asking for notifications.
+
 Calendar
 
 Require code if requested

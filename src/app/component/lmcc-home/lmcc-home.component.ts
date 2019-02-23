@@ -17,15 +17,11 @@ export class LmccHomeComponent implements OnInit {
     this.hidden = true;
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
-        console.log(`Navigation start ${event.url}`);
         if (event.url === '/') {
           this.hidden = false;
         } else {
           this.hidden = true;
         }
-      }
-      if (event instanceof NavigationEnd) {
-        console.log(`Navigation end ${event.url}`);
       }
     });
   }
