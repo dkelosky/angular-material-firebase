@@ -65,8 +65,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.afMessaging.requestToken
             .subscribe(
               (token) => {
-                // save token
-                console.log(`Permission granted; saving token server: ${token}`);
 
                 // NOTE(Kelosky): saves entire user - need to update just token
                 this.u.setUser(token);

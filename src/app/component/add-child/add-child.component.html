@@ -1,42 +1,46 @@
-<form [formGroup]="childForm" (ngSubmit)="submit()">
+<mat-dialog-content>
 
-  <div fxLayout="row">
-    <mat-form-field fxFlex>
-      <input matInput placeholder="Child's Name" required formControlName="name">
-    </mat-form-field>
-  </div>
-
-  <div fxLayout="column" fxLayoutGap="20px">
-
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <mat-radio-group required fxLayoutGap="20px" fxFlex formControlName="gender">
-        <mat-radio-button value="boy">Boy</mat-radio-button>
-        <mat-radio-button value="girl">Girl</mat-radio-button>
-      </mat-radio-group>
-      <div></div>
-    </div>
+  <form [formGroup]="childForm" (ngSubmit)="submit()">
 
     <div fxLayout="row">
       <mat-form-field fxFlex>
-        <mat-select placeholder="Child's Age" required formControlName="age">
-          <div *ngFor="let age of ages">
-            <mat-option value="{{age}}">{{age}}</mat-option>
-          </div>
-        </mat-select>
+        <input matInput placeholder="Child's Name" required formControlName="name">
       </mat-form-field>
     </div>
-  </div>
 
-  <div fxLayout="column" fxLayoutGap="30px">
+    <div fxLayout="column" fxLayoutGap="20px">
 
-    <mat-form-field fxFlex>
-      <textarea matInput placeholder="Important" formControlName="important"></textarea>
-      <mat-hint>Special instructions, e.g. medical conditions, food allergies, special needs, etc.</mat-hint>
-    </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-radio-group required fxLayoutGap="20px" fxFlex formControlName="gender">
+          <mat-radio-button value="boy">Boy</mat-radio-button>
+          <mat-radio-button value="girl">Girl</mat-radio-button>
+        </mat-radio-group>
+        <div></div>
+      </div>
 
-    <div fxLayout="row" fxLayoutAlign="end">
-      <button color="primary" mat-button [disabled]="!childForm.valid">Add</button>
+      <div fxLayout="row">
+        <mat-form-field fxFlex>
+          <mat-select placeholder="Child's Age" required formControlName="age">
+            <div *ngFor="let age of ages">
+              <mat-option value="{{age}}">{{age}}</mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
-  </div>
-</form>
+    <div fxLayout="column" fxLayoutGap="30px">
+
+      <mat-form-field fxFlex>
+        <textarea matInput placeholder="Important" formControlName="important"></textarea>
+        <mat-hint>Special instructions, e.g. medical conditions, food allergies, special needs, etc.</mat-hint>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button color="primary" mat-button [disabled]="!childForm.valid">Add</button>
+      </div>
+
+    </div>
+  </form>
+
+</mat-dialog-content>

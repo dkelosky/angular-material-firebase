@@ -1,37 +1,42 @@
-<form [formGroup]="childForm" (ngSubmit)="submit()">
-  <div fxLayout="row" fxLayoutAlign="left center">
-    <h3 fxFlexAlign="start">
-      {{child.name}}
-    </h3>
-    <div fxFlex></div>
-    <button mat-icon-button type="button" color="warn" (click)="remove()">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
+<mat-dialog-content>
 
-  <div fxLayout="row">
-    <mat-form-field fxFlex>
-      <mat-select [(ngModel)]="child.age" placeholder="Child's Age" required formControlName="age">
-        <div *ngFor="let age of ages">
-          <mat-option value="{{age}}">{{age}}</mat-option>
-        </div>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <div fxLayout="column" fxLayoutGap="30px">
+  <form [formGroup]="childForm" (ngSubmit)="submit()">
+    <div fxLayout="row" fxLayoutAlign="left center">
+      <h3 fxFlexAlign="start">
+        {{child.name}}
+      </h3>
+      <div fxFlex></div>
+      <button mat-icon-button type="button" color="warn" (click)="remove()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
 
     <div fxLayout="row">
       <mat-form-field fxFlex>
-        <textarea matInput [(ngModel)]="child.important" placeholder="Important" formControlName="important"></textarea>
-        <mat-hint>Special instructions, e.g. medical conditions, food allergies, special needs, etc.</mat-hint>
+        <mat-select [(ngModel)]="child.age" placeholder="Child's Age" required formControlName="age">
+          <div *ngFor="let age of ages">
+            <mat-option value="{{age}}">{{age}}</mat-option>
+          </div>
+        </mat-select>
       </mat-form-field>
     </div>
 
-    <div fxLayout="row">
-      <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
-      <button mat-button fxFlex fxFlexAlign="end" color="primary" [disabled]="!childForm.valid">Save</button>
-    </div>
-  </div>
+    <div fxLayout="column" fxLayoutGap="30px">
 
-</form>
+      <div fxLayout="row">
+        <mat-form-field fxFlex>
+          <textarea matInput [(ngModel)]="child.important" placeholder="Important"
+            formControlName="important"></textarea>
+          <mat-hint>Special instructions, e.g. medical conditions, food allergies, special needs, etc.</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row">
+        <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
+        <button mat-button fxFlex fxFlexAlign="end" color="primary" [disabled]="!childForm.valid">Save</button>
+      </div>
+    </div>
+
+  </form>
+
+</mat-dialog-content>
