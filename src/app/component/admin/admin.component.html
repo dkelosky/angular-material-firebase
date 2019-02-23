@@ -1,5 +1,61 @@
-<div ngClass="body">
-  <p>
-    admin works!
-  </p>
+<div ngClass="body" fxLayout="column" fxLayoutAlign="center center">
+  <mat-accordion>
+    <div *ngFor="let container of containers" fxLayout="column" fxLayoutGap="20px">
+      <mat-expansion-panel>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{container.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{container.requirements}} | {{container.description}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let child of children; let i=index">
+          <div *ngIf="child.in && child.in.id == container.id; else">
+            <mat-card>
+              <mat-card-header>
+                <mat-icon mat-card-avatar ngClass="md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">
+                  face</mat-icon>
+                <mat-card-title>
+                  {{child.name}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                  (Age {{child.age}})
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <div *ngIf="child.important" fxLayout="row">
+                  <mat-icon color="warn">warning</mat-icon>
+                  <div>{{child.important}}</div>
+                </div>
+              </mat-card-content>
+              <!-- TODO(Kelosky): phone number and contact -->
+              <mat-action-row>
+                <button mat-icon-button (click)="message(child)" color="primary">
+                  <mat-icon aria-label="Message">message</mat-icon>
+                </button>
+                <button mat-icon-button (click)="call(child)" color="primary">
+                  <mat-icon aria-label="Call">phone</mat-icon>
+                </button>
+                <button mat-icon-button (click)="info(child)" color="primary">
+                  <mat-icon aria-label="More Info">launch</mat-icon>
+                </button>
+              </mat-action-row>
+            </mat-card>
+            <ng-template>
+              <h2>No children</h2>
+              <h2>No children</h2>
+            </ng-template>
+          </div>
+        </div>
+        <mat-action-row fxLayout="row">
+          <div fxFlex></div>
+          <button mat-icon-button (click)="edit(container)" color="primary">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </div>
+  </mat-accordion>
 </div>
