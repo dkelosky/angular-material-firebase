@@ -35,7 +35,7 @@ export class ChildrenService {
 
   async setChild(child: ChildId) {
     try {
-      console.log(`Updating child: ${child.name} with ${child.id}`);
+      console.log(`Updating ${child.name}, id: ${child.id}`);
       await this.afs.doc<Child>(`${this.getCollectionString()}${child.id}`).set(child);
     } catch (err) {
       console.log('set error');
@@ -45,7 +45,7 @@ export class ChildrenService {
 
   async deleteChild(child: ChildId) {
     try {
-      console.log(`Delete child: ${child.name} with ${child.id}`);
+      console.log(`Deleting ${child.name}, id: ${child.id}`);
       await this.afs.doc<Child>(`${this.getCollectionString()}${child.id}`).delete();
     } catch (err) {
       console.log('delete error');

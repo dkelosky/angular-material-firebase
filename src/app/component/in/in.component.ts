@@ -16,6 +16,7 @@ import { AngularFireMessaging } from '@angular/fire/messaging';
 import { UsersService } from 'src/app/service/users.service';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { UserId } from 'src/app/interface/user.interface';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 interface CdkDLValuePair {
   values: ChildId[];
@@ -39,7 +40,6 @@ export class InComponent implements OnInit, OnDestroy {
 
   $children: Observable<ChildId[]>;
   $containers: Observable<ContainerId[]>;
-  $user: Observable<UserId>;
 
   children: ChildId[] = [];
   unallocatedChildren: ChildId[] = [];
@@ -47,13 +47,18 @@ export class InComponent implements OnInit, OnDestroy {
 
   user: UserId;
 
+  justDenied = false;
+
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public dialog: MatDialog,
     private toggleService: ToggleSideNavService,
     private childrenService: ChildrenService,
+    private afMessaging: AngularFireMessaging,
     private u: UsersService,
+    private bottomSheet: MatBottomSheet,
+    public afAuth: AngularFireAuth,
     private organizationsService: OrganizationsService,
     private containersService: ContainersService,
   ) {
@@ -65,26 +70,40 @@ export class InComponent implements OnInit, OnDestroy {
       this.snav.toggle();
     });
 
+    this.u.getUser().subscribe((user) => {
+      this.user = user;
+      if (this.user.token) {
+
+        // TODO(Kelosky): Test if you can get the browser prompt for existing user without getting bottom sheet prompt
+        console.log(`This is an existing user which already as approved notifications, don't prompt again`);
+        this.requestToken();
+      } else {
+
+        if (!this.justDenied) {
+          console.log(`This is a new user, ask for web notifications`);
+          this.initWebToken(`LMCC`);
+        } else {
+          console.log(`Not prompting user again, user was just created and denied web notifications`);
+        }
+
+      }
+    });
+
     // TODO(Kelosky): make generic
     this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
 
       // get observables from database
       this.$containers = this.containersService.getContainers(orgs[0].id);
       this.$children = this.childrenService.getChildren();
-      this.$user = this.u.getUser();
 
       // combine to single subscribe (and provide custom mapping)
-      combineLatest(this.$user, this.$children, this.$containers, (user, children, containers) => {
+      combineLatest(this.$children, this.$containers, (children, containers) => {
         return {
-          user,
           children,
           containers
         };
       }).subscribe((combined) => {
 
-        this.user = combined.user;
-
-        // this.initWebToken(orgs[0].name);
 
         this.unallocatedChildren = combined.children.filter((child => child.in != null));
         this.children = combined.children.filter((child => child.in == null));
@@ -140,35 +159,48 @@ export class InComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  // initWebToken(orgName: string) {
+  initWebToken(orgName: string) {
 
-  //   const data: Confirm = {
-  //     entity: { name: '' },
-  //     message: `Do you want ${orgName} web notifications?`,
-  //     affirm: 'Yes',
-  //     deny: 'Cancel',
-  //     affirmAction: () => {
-  //       // after logon, request a token and create an entry for user
-  //       this.afMessaging.requestToken
-  //         .subscribe(
-  //           (token) => {
-  //             if (this)
-  //             this.u.setUser(this.u);
-  //           },
-  //           (error) => {
-  //             // TODO(Kelosky): warning - you will not receive any notifications
-  //             console.error(error);
-  //           },
-  //         );
-  //     },
-  //     denyAction: () => {
+    const data: Confirm = {
+      entity: { name: '' },
+      message: `Do you want ${orgName} web notifications?`,
+      affirm: 'Yes',
+      deny: 'Cancel',
+      affirmAction: () => {
+        console.log('token user');
+        // after logon, request a token and create an entry for user
+        this.requestToken();
 
-  //     },
-  //   };
-  //   this.bottomSheet.open(ConfirmComponent, {
-  //     data,
-  //   });
-  // }
+      },
+      denyAction: () => {
+        console.log('non token user');
+        this.justDenied = true;
+        this.u.setUser({
+          name: this.afAuth.auth.currentUser.displayName,
+        });
+      },
+    };
+    this.bottomSheet.open(ConfirmComponent, {
+      data,
+    });
+  }
+
+  requestToken() {
+
+    this.afMessaging.requestToken
+      .subscribe(
+        (token) => {
+          this.u.setUser({
+            name: this.afAuth.auth.currentUser.displayName,
+            token
+          });
+        },
+        (error) => {
+          // TODO(Kelosky): warning - you will not receive any notifications
+          console.error(error);
+        },
+      );
+  }
 
   drop(event: CdkDragDrop<ChildId[]>, containers: ContainerId) {
     if (event.previousContainer === event.container) {
@@ -178,8 +210,12 @@ export class InComponent implements OnInit, OnDestroy {
       // update DB
       if (containers) {
         event.previousContainer.data[event.previousIndex].in = this.containersService.getContainerRef(`lmcc`, containers);
+        console.log(`${event.previousContainer.data[event.previousIndex].name} ` +
+          `will be added to ${event.previousContainer.data[event.previousIndex].in.id}`);
         this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
       } else {
+        console.log(`${event.previousContainer.data[event.previousIndex].name} ` +
+        `will be removed from ${event.previousContainer.data[event.previousIndex].in.id}`);
         delete event.previousContainer.data[event.previousIndex].in;
         this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
       }
