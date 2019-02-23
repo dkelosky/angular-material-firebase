@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
-import { AngularFireMessaging } from '@angular/fire/messaging';
-import { UsersService } from '../../service/users.service';
 import { MatDialog } from '@angular/material';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
+import { AngularFireMessaging } from '@angular/fire/messaging';
+import { UsersService } from 'src/app/service/users.service';
 
 @Component({
   selector: 'app-login',
@@ -60,14 +60,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     return {
       callbacks: {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-
           // after logon, request a token and create an entry for user
           this.afMessaging.requestToken
             .subscribe(
               (token) => {
 
                 // NOTE(Kelosky): saves entire user - need to update just token
-                this.u.setUser(token);
+                this.u.setUser({
+                  name: this.afAuth.auth.currentUser.uid,
+                  token
+                });
               },
               (error) => {
                 // TODO(Kelosky): warning - you will not receive any notifications

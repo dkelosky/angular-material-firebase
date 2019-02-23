@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ViewChild } fro
 import { moveItemInArray, transferArrayItem, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ToggleSideNavService } from 'src/app/service/toggle-side-nav.service';
-import { MatSidenav, MatDialog } from '@angular/material';
+import { MatSidenav, MatDialog, MatBottomSheet } from '@angular/material';
 import { AddChildComponent } from '../add-child/add-child.component';
 import { EditChildComponent } from '../edit-child/edit-child.component';
 import { ChildrenService } from 'src/app/service/children.service';
@@ -11,6 +11,11 @@ import { ContainersService } from 'src/app/service/containers.service';
 import { Observable, combineLatest } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
 import { ContainerId } from 'src/app/interface/container.interface';
+import { Confirm } from 'src/app/interface/confirm.interface';
+import { AngularFireMessaging } from '@angular/fire/messaging';
+import { UsersService } from 'src/app/service/users.service';
+import { ConfirmComponent } from '../confirm/confirm.component';
+import { UserId } from 'src/app/interface/user.interface';
 
 interface CdkDLValuePair {
   values: ChildId[];
@@ -34,9 +39,13 @@ export class InComponent implements OnInit, OnDestroy {
 
   $children: Observable<ChildId[]>;
   $containers: Observable<ContainerId[]>;
+  $user: Observable<UserId>;
+
   children: ChildId[] = [];
   unallocatedChildren: ChildId[] = [];
   containers: ContainerId[] = [];
+
+  user: UserId;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -44,6 +53,7 @@ export class InComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private toggleService: ToggleSideNavService,
     private childrenService: ChildrenService,
+    private u: UsersService,
     private organizationsService: OrganizationsService,
     private containersService: ContainersService,
   ) {
@@ -61,14 +71,20 @@ export class InComponent implements OnInit, OnDestroy {
       // get observables from database
       this.$containers = this.containersService.getContainers(orgs[0].id);
       this.$children = this.childrenService.getChildren();
+      this.$user = this.u.getUser();
 
       // combine to single subscribe (and provide custom mapping)
-      combineLatest(this.$children, this.$containers, (children, containers) => {
+      combineLatest(this.$user, this.$children, this.$containers, (user, children, containers) => {
         return {
+          user,
           children,
           containers
         };
       }).subscribe((combined) => {
+
+        this.user = combined.user;
+
+        // this.initWebToken(orgs[0].name);
 
         this.unallocatedChildren = combined.children.filter((child => child.in != null));
         this.children = combined.children.filter((child => child.in == null));
@@ -124,6 +140,36 @@ export class InComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
+  // initWebToken(orgName: string) {
+
+  //   const data: Confirm = {
+  //     entity: { name: '' },
+  //     message: `Do you want ${orgName} web notifications?`,
+  //     affirm: 'Yes',
+  //     deny: 'Cancel',
+  //     affirmAction: () => {
+  //       // after logon, request a token and create an entry for user
+  //       this.afMessaging.requestToken
+  //         .subscribe(
+  //           (token) => {
+  //             if (this)
+  //             this.u.setUser(this.u);
+  //           },
+  //           (error) => {
+  //             // TODO(Kelosky): warning - you will not receive any notifications
+  //             console.error(error);
+  //           },
+  //         );
+  //     },
+  //     denyAction: () => {
+
+  //     },
+  //   };
+  //   this.bottomSheet.open(ConfirmComponent, {
+  //     data,
+  //   });
+  // }
+
   drop(event: CdkDragDrop<ChildId[]>, containers: ContainerId) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -131,7 +177,7 @@ export class InComponent implements OnInit, OnDestroy {
 
       // update DB
       if (containers) {
-        event.previousContainer.data[event.previousIndex].in = this.containersService.getCategoryRef(`lmcc`, containers);
+        event.previousContainer.data[event.previousIndex].in = this.containersService.getContainerRef(`lmcc`, containers);
         this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
       } else {
         delete event.previousContainer.data[event.previousIndex].in;

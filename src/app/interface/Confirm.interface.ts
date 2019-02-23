@@ -8,5 +8,6 @@ export interface Confirm {
     affirm?: string;
     affirmAction?: () => void;
     deny?: string;
+    denyAction?: () => void;
     successMessage?: string;
 }

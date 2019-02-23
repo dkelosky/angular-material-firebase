@@ -35,12 +35,17 @@ export class ConfirmComponent implements OnInit {
   }
 
   denied() {
-    console.log(`Denied removal of ${this.data.entity.name}`);
+    console.log(`Denied ${this.data.entity.name}`);
+
+    if (this.data.denyAction) {
+      this.data.denyAction();
+    }
+
     this.bottomSheetRef.dismiss();
   }
 
   affirmed() {
-    console.log(`Affirmed to delete ${this.data.entity.name}`);
+    console.log(`Affirmed ${(this.data.entity.name)}`);
 
     if (this.data.affirmAction) {
       this.data.affirmAction();
@@ -58,6 +63,9 @@ export class ConfirmComponent implements OnInit {
 
     // close sheet and dialogg
     this.bottomSheetRef.dismiss();
-    this.data.ref.close();
+
+    if (this.data.ref) {
+      this.data.ref.close();
+    }
   }
 }

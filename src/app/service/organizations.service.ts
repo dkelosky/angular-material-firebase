@@ -1,19 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
-
-// NOTE(Kelosky): unused
-
-export interface Organization {
-  name: string;
-  description: string;
-  ownerUid?: string;
-}
-
-export interface OrganizationId extends Organization {
-  id: string;
-}
+import { OrganizationId, Organization } from '../interface/organization.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,18 +22,4 @@ export class OrganizationsService {
         }))
       );
   }
-
-  // async addOrganization(organization: Organization) {
-  //   organization.ownerUid = this.afAuth.auth.currentUser.uid;
-  //   try {
-  //     await this.afs.collection<Organization>(this.getCollectionString()).add(organization);
-  //   } catch (err) {
-  //     console.log(`addOrganization error`);
-  //     console.error(err);
-  //   }
-  // }
-
-  // private getCollectionString() {
-  //   return `organizations`;
-  // }
 }

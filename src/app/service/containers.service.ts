@@ -23,7 +23,7 @@ export class ContainersService {
       );
   }
 
-  getCategoryRef(orgId: string, container: ContainerId) {
+  getContainerRef(orgId: string, container: ContainerId) {
     return this.afs.doc<Container>(`organizations/${orgId}/categories/${container.id}`).ref;
   }
 
