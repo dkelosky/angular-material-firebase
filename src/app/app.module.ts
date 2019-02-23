@@ -53,6 +53,7 @@ import { AddChildComponent } from './component/add-child/add-child.component';
 import { EditChildComponent } from './component/edit-child/edit-child.component';
 import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
 import { ConfirmComponent } from './component/confirm/confirm.component';
+import { AdminComponent } from './component/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ConfirmComponent } from './component/confirm/confirm.component';
     AddChildComponent,
     EditChildComponent,
     LmccHomeComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    AdminComponent
   ],
   imports: [
     FlexLayoutModule,

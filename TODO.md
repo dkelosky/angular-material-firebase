@@ -6,10 +6,9 @@ Subscribe to group (like LMCC) for generic info (like classes canceled or need a
 
 View info on individual classes -> age group information, teachers, curriculum.
 
-Require code
+Calendar
 
-Share info with other parents
-Share info with other account
+Require code if requested
 
 Admin UI to:
 -> see students
@@ -26,10 +25,16 @@ Admin UI to add containers
 
 Admin to certain classes only
 
+Share info with other parents
+
+Share info with other account
+
 ## v2.0 (future)
 
 Genericise for other churches
+
 Genericise for other child care activities (dances)
+
 Genericise for everything:
 
 class of categories and admin panel
