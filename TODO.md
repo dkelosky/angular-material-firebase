@@ -10,12 +10,16 @@ Custom prompt prior to asking for notifications.
 
 Profile setting to enable notifications if previously dismissed.
 Profile setting to remove token if previously agreed.
-How it works -> Check notifies on behalf of organizations.  Organizations can't access personal information, they can trigger notifications, but they shouldn't be able
-to send advertisements unsolicited.
+How it works page:
+
+- Check notifies on behalf of organizations.
+  - Organizations can't access personal information, they can trigger notifications, but they shouldn't be able to send advertisements unsolicited.
 
 Calendar
 
-Require code if requested
+Require code if requested to pick (multi factor agreement)
+
+service to deal with Org names, uniqueness, and URI
 
 Admin UI to:
 -> see students
