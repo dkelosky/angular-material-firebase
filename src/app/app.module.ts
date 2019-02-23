@@ -36,7 +36,7 @@ import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
@@ -114,7 +114,9 @@ import { AdminComponent } from './component/admin/admin.component';
     EditChildComponent,
     ConfirmComponent,
   ],
-  providers: [],
+  providers: [{
+    provide: FirestoreSettingsToken, useValue: {}
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -90,11 +90,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       ],
       // Terms of service url/callback.
       tosUrl: () => {
-        console.log('TODO(Kelosky) - launch ToS');
         this.openTocDialog();
       },
       privacyPolicyUrl: () => {
-        console.log('TODO(Kelosky) - launch Privacy policy');
         this.openPrivacyDialog();
       }
     };
