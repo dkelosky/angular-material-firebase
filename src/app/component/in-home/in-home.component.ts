@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.less', '../../app.component.less']
+  selector: 'app-in-home',
+  templateUrl: './in-home.component.html',
+  styleUrls: ['./in-home.component.less', '../../app.component.less']
 })
-export class HeaderComponent implements OnInit {
+export class InHomeComponent implements OnInit {
 
   constructor(
     public afAuth: AngularFireAuth,
   ) { }
-
 
   ngOnInit() {
   }

@@ -1,9 +1,10 @@
-<app-header></app-header>
 <section class="mat-typography">
   <div *ngIf="afAuth.user | async as user; else showLogin">
-    <app-organization></app-organization>
+    <app-sidenav-header></app-sidenav-header>
+    <app-in></app-in>
   </div>
   <ng-template #showLogin>
+    <app-header></app-header>
     <app-login></app-login>
   </ng-template>
 </section>

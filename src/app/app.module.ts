@@ -56,6 +56,8 @@ import { OrganizationHomeComponent } from "./component/organization-home/organiz
 import { ConfirmComponent } from './component/confirm/confirm.component';
 import { OrganizationComponent } from './component/organization/organization.component';
 import { ContainerComponent } from './component/container/container.component';
+import { InHomeComponent } from './component/in-home/in-home.component';
+import { SidenavHeaderComponent } from './component/sidenav-header/sidenav-header.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { ContainerComponent } from './component/container/container.component';
     OrganizationHomeComponent,
     ConfirmComponent,
     OrganizationComponent,
-    ContainerComponent
+    ContainerComponent,
+    InHomeComponent,
+    SidenavHeaderComponent
   ],
   imports: [
     FlexLayoutModule,

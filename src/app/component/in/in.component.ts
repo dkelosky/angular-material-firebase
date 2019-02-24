@@ -41,9 +41,9 @@ export class InComponent implements OnInit, OnDestroy {
   $children: Observable<ChildId[]>;
   $containers: Observable<ContainerId[]>;
 
-  children: ChildId[] = [];
-  unallocatedChildren: ChildId[] = [];
-  containers: ContainerId[] = [];
+  children: ChildId[];
+  unallocatedChildren: ChildId[];
+  containers: ContainerId[];
 
   user: UserId;
 
