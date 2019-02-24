@@ -1,0 +1,29 @@
+[debug] [2019-02-24T23:35:10.042Z] ----------------------------------------------------------------------
+[debug] [2019-02-24T23:35:10.045Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\KELDA16\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-02-24T23:35:10.045Z] CLI Version:   6.3.1
+[debug] [2019-02-24T23:35:10.045Z] Platform:      win32
+[debug] [2019-02-24T23:35:10.045Z] Node Version:  v10.13.0
+[debug] [2019-02-24T23:35:10.046Z] Time:          Sun Feb 24 2019 18:35:10 GMT-0500 (Eastern Standard Time)
+[debug] [2019-02-24T23:35:10.047Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-24T23:35:10.056Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-24T23:35:10.056Z] > authorizing via signed-in user
+[debug] [2019-02-24T23:35:10.056Z] [iam] checking project kelosky-check-in for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-02-24T23:35:10.058Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-02-24T23:35:10.058Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-02-24T23:35:10.357Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-24T23:35:10.376Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/kelosky-check-in:testIamPermissions  
+
+[debug] [2019-02-24T23:35:10.913Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-24T23:35:10.917Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/kelosky-check-in  
+ 
+[debug] [2019-02-24T23:35:11.421Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'kelosky-check-in'...
+[info] 
+[info] i  deploying firestore, functions, hosting
+[info] Running command: npm --prefix "%RESOURCE_DIR%" run lint
+[info] Running command: npm --prefix "%RESOURCE_DIR%" run build
+[info] +  functions: Finished running predeploy script.
+[info] Running command: npm run lint

@@ -30,7 +30,7 @@ export class ContainerComponent implements OnInit {
       this.containersService.getContainers(orgs[0].id).subscribe((containers) => {
         let match = false;
         containers.forEach((container) => {
-          console.log(`Container ${container.name}`)
+          console.log(`Container ${container.name}`);
           if (container.uri === containerRoute) {
             this.container = container;
             match = true;

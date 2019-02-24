@@ -172,7 +172,7 @@ export class InComponent implements OnInit, OnDestroy {
 
   initWebToken(orgName: string) {
 
-    const data: Confirm = {
+    const confirm: Confirm = {
       entity: { name: '' },
       message: `Do you want ${orgName} web notifications?`,
       affirm: 'Yes',
@@ -190,7 +190,7 @@ export class InComponent implements OnInit, OnDestroy {
       },
     };
     const bottomRef = this.bottomSheet.open(ConfirmComponent, {
-      data,
+      data: confirm,
     });
 
     bottomRef.afterDismissed().subscribe((data) => {
