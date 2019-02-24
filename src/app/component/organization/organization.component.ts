@@ -5,6 +5,7 @@ import { OrganizationsService } from 'src/app/service/organizations.service';
 import { Observable, combineLatest } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
 import { ChildrenService } from 'src/app/service/children.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-organization',
@@ -18,32 +19,46 @@ export class OrganizationComponent implements OnInit {
   containers: ContainerId[];
   children: ChildId[];
 
+  error: string;
+
   constructor(
     private organizationsService: OrganizationsService,
     private containersService: ContainersService,
     private childrenService: ChildrenService,
+    private activatedRoute: ActivatedRoute,
   ) {
-    this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
 
-      // get observables from database
-      this.$containers = this.containersService.getContainers(orgs[0].id);
-      this.$children = this.childrenService.getChildren();
+    const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
+    console.log(`Init for ${organizationRoute}`);
+    this.organizationsService.getOrganizations(organizationRoute).subscribe((orgs) => {
 
-      // combine to single subscribe (and provide custom mapping)
-      combineLatest(this.$children, this.$containers, (children, containers) => {
-        return {
-          children,
-          containers
-        };
-      }).subscribe((combined) => {
+      if (orgs.length === 1) {
+
+        // get observables from database
+        this.$containers = this.containersService.getContainers(orgs[0].id);
+        this.$children = this.childrenService.getChildren();
+
+        // combine to single subscribe (and provide custom mapping)
+        combineLatest(this.$children, this.$containers, (children, containers) => {
+          return {
+            children,
+            containers
+          };
+        }).subscribe((combined) => {
 
 
-        // get children that are in a container
-        this.children = combined.children.filter((child => child.in != null));
-        this.containers = combined.containers;
+          // get children that are in a container
+          this.children = combined.children.filter((child => child.in != null));
+          this.containers = combined.containers;
 
-      });
+        });
+      } else if (orgs.length > 1) {
+        this.error = `Unexpected same named organization, total: ${orgs.length}`;
+      } else {
+        this.error = `${organizationRoute} entry does not exist`;
+      }
     });
+
   }
 
   ngOnInit() {

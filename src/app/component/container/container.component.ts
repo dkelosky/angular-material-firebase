@@ -15,17 +15,18 @@ export class ContainerComponent implements OnInit {
   error: string;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private organizationsService: OrganizationsService,
     private containersService: ContainersService,
   ) { }
 
   ngOnInit() {
-    const containerRoute = this.route.snapshot.paramMap.get('container');
-    console.log(`Init for ${containerRoute}`);
+    const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
+    const containerRoute = this.activatedRoute.snapshot.paramMap.get('container');
+    console.log(`Init for ${organizationRoute}/${containerRoute}`);
 
     // TODO(Kelosky): remove hard code
-    this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
+    this.organizationsService.getOrganizations(organizationRoute).subscribe((orgs) => {
 
       // TODO(Kelosky): handle multiple org responses
       this.containersService.getContainers(orgs[0].id).subscribe((containers) => {
@@ -39,7 +40,7 @@ export class ContainerComponent implements OnInit {
         });
 
         if (!match) {
-          this.error = `${containerRoute} entry does not exist`;
+          this.error = `'/${organizationRoute}/${containerRoute}' entry does not exist`;
           this.container = undefined;
         } else {
           this.error = undefined;

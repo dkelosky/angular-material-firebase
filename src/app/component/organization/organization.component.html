@@ -1,17 +1,19 @@
 <div ngClass="body" fxLayout="column" fxLayoutGap="20px">
-  <div *ngFor="let container of containers" fxLayout="column" fxLayoutGap="20px">
-    <mat-card>
+  <div *ngIf="containers; else loading">
 
-      <mat-card-header>
-        <mat-card-title>
-          {{container.name}}
-        </mat-card-title>
-        <mat-card-subtitle>
-          {{container.requirements}} | {{container.description}}
-        </mat-card-subtitle>
-      </mat-card-header>
+    <div *ngFor="let container of containers" fxLayout="column" fxLayoutGap="20px">
+      <mat-card>
 
-      <!-- <mat-card-content>
+        <mat-card-header>
+          <mat-card-title>
+            {{container.name}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{container.requirements}} | {{container.description}}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <!-- <mat-card-content>
         <div *ngFor="let child of children; let i=index">
           <div *ngIf="child.in && child.in.id == container.id">
             <mat-card>
@@ -47,12 +49,18 @@
         </div>
       </mat-card-content> -->
 
-      <mat-action-row fxLayout="row">
-        <div fxFlex></div>
-        <button mat-icon-button (click)="edit(container)" color="primary">
-          <mat-icon aria-label="Edit">edit</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-card>
+        <mat-action-row fxLayout="row">
+          <div fxFlex></div>
+          <button mat-icon-button (click)="edit(container)" color="primary">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-card>
+    </div>
   </div>
+
+  <ng-template #loading>
+    <app-indeterminate-loading [error]="error"></app-indeterminate-loading>
+  </ng-template>
+
 </div>
