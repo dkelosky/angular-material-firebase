@@ -55,7 +55,7 @@ export class OrganizationComponent implements OnInit {
       } else if (orgs.length > 1) {
         this.error = `Unexpected same named organization, total: ${orgs.length}`;
       } else {
-        this.error = `${organizationRoute} entry does not exist`;
+        this.error = `'/${organizationRoute}' entry does not exist`;
       }
     });
 

@@ -1,7 +1,8 @@
-<div ngClass="body" fxLayout="column" fxLayoutGap="20px">
-  <div *ngIf="containers; else loading">
+<div *ngIf="containers; else loading">
 
-    <div *ngFor="let container of containers" fxLayout="column" fxLayoutGap="20px">
+  <div ngClass="body" fxLayout="column" fxLayoutGap="20px">
+
+    <div *ngFor="let container of containers">
       <mat-card>
 
         <mat-card-header>
@@ -58,9 +59,8 @@
       </mat-card>
     </div>
   </div>
-
-  <ng-template #loading>
-    <app-indeterminate-loading [error]="error"></app-indeterminate-loading>
-  </ng-template>
-
 </div>
+
+<ng-template #loading>
+  <app-indeterminate-loading [error]="error"></app-indeterminate-loading>
+</ng-template>
