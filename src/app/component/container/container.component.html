@@ -1,3 +1,8 @@
 <div ngClass="body">
-  container works!
+  <div *ngIf="container; else showLoading">
+    {{container.name}} container works!
+  </div>
+  <ng-template #showLoading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>

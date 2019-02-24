@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ContainerId } from 'src/app/interface/container.interface';
+import { ContainersService } from 'src/app/service/containers.service';
+import { OrganizationsService } from 'src/app/service/organizations.service';
 
 @Component({
   selector: 'app-container',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContainerComponent implements OnInit {
 
-  constructor() { }
+  container: ContainerId;
+  constructor(
+    private route: ActivatedRoute,
+    private organizationsService: OrganizationsService,
+    private containersService: ContainersService,
+  ) { }
 
   ngOnInit() {
+    const containerRoute = this.route.snapshot.paramMap.get('container');
+    console.log(`Init for ${containerRoute}`);
+
+    // TODO(Kelosky): remove hard code
+    this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
+
+      // TODO(Kelosky): handle multiple org responses
+      this.containersService.getContainers(orgs[0].id).subscribe((containers) => {
+        containers.forEach((container) => {
+          console.log(`Container ${container.name}`)
+          if (container.name.toLowerCase() == containerRoute) {
+            this.container = container;
+          }
+        })
+      });
+    });
   }
 
 }

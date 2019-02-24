@@ -26,7 +26,8 @@ import {
   MatTabsModule,
   MatSelectModule,
   MatRadioModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -93,6 +94,7 @@ import { ContainerComponent } from './component/container/container.component';
     MatCardModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatProgressBarModule,
     MatFormFieldModule,
