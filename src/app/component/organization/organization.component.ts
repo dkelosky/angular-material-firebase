@@ -5,7 +5,7 @@ import { OrganizationsService } from 'src/app/service/organizations.service';
 import { Observable, combineLatest } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
 import { ChildrenService } from 'src/app/service/children.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-organization',
@@ -26,6 +26,7 @@ export class OrganizationComponent implements OnInit {
     private containersService: ContainersService,
     private childrenService: ChildrenService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {
 
     const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
@@ -62,6 +63,16 @@ export class OrganizationComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  edit(container: ContainerId) {
+    console.log(`Called to edit ${container.name}`);
+  }
+
+  launch(container: ContainerId) {
+    const url = `/org/${this.activatedRoute.snapshot.paramMap.get('organization')}/${container.uri}`;
+    console.log(`Called to launch ${url}`);
+    this.router.navigateByUrl(url);
   }
 
 }

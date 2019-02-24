@@ -25,15 +25,13 @@ export class ContainerComponent implements OnInit {
     const containerRoute = this.activatedRoute.snapshot.paramMap.get('container');
     console.log(`Init for ${organizationRoute}/${containerRoute}`);
 
-    // TODO(Kelosky): remove hard code
     this.organizationsService.getOrganizations(organizationRoute).subscribe((orgs) => {
 
-      // TODO(Kelosky): handle multiple org responses
       this.containersService.getContainers(orgs[0].id).subscribe((containers) => {
         let match = false;
         containers.forEach((container) => {
           console.log(`Container ${container.name}`)
-          if (container.name.toLowerCase() === containerRoute) {
+          if (container.uri === containerRoute) {
             this.container = container;
             match = true;
           }

@@ -17,7 +17,7 @@
         </div>
         <h2></h2>
 
-        <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children" class="example-list"
+        <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children" class="simple-cdk-list"
           (cdkDropListDropped)="drop($event)" fxLayout="column" fxLayoutGap="10px">
 
           <mat-card cdkDrag *ngFor="let child of children">
@@ -51,7 +51,7 @@
 
           <h1>{{container.name}}</h1>
           <div cdkDropList #containerHolder="cdkDropList" [cdkDropListData]="allocate(containerHolder, container)"
-            class="example-list" (cdkDropListDropped)="drop($event, container)" fxLayout="column" fxLayoutGap="10px">
+            class="simple-cdk-list" (cdkDropListDropped)="drop($event, container)" fxLayout="column" fxLayoutGap="10px">
 
             <mat-card cdkDrag *ngFor="let child of retrieve(containerHolder)">
               <mat-card-header>

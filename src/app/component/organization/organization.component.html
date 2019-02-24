@@ -1,6 +1,7 @@
 <div *ngIf="containers; else loading">
 
-  <div ngClass="body" fxLayout="column" fxLayoutGap="20px">
+  <div ngClass="body main-view-content" fxLayout="column" fxLayoutGap="20px">
+    <h2></h2>
 
     <div *ngFor="let container of containers">
       <mat-card>
@@ -51,8 +52,11 @@
       </mat-card-content> -->
 
         <mat-action-row fxLayout="row">
+          <button mat-icon-button (click)="launch(container)" color="primary">
+            <mat-icon aria-label="Launch">launch</mat-icon>
+          </button>
           <div fxFlex></div>
-          <button mat-icon-button (click)="edit(container)" color="primary">
+          <button mat-icon-button (click)="edit(container)" color="primary" disabled>
             <mat-icon aria-label="Edit">edit</mat-icon>
           </button>
         </mat-action-row>

@@ -15,7 +15,7 @@ How it works page:
 - Check notifies on behalf of organizations.
   - Organizations can't access personal information, they can trigger notifications, but they shouldn't be able to send advertisements unsolicited.
 
-Calendar
+Server field validation, unique name or url mapping in organization
 
 Require code if requested to pick (multi factor agreement)
 
@@ -31,6 +31,7 @@ Admin UI to:
 -> end class, reset all
 
 ## v1.x (future)
+Calendar view
 
 Admin UI to add containers
 
