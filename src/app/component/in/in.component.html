@@ -2,8 +2,9 @@
 
   <div cdkDropListGroup ngClass="body">
     <mat-sidenav-container>
-  
-      <mat-sidenav ngClass="sidenav" #snav fixedTopGap="56" mode="side" [opened]="mobileQuery.matches ? 'false' : 'true'">
+
+      <mat-sidenav ngClass="sidenav" #snav fixedTopGap="56" mode="side"
+        [opened]="mobileQuery.matches ? 'false' : 'true'">
         <h2></h2>
         <div fxLayout="row" fxLayoutAlign="center">
           <span fxFlex></span>
@@ -15,10 +16,10 @@
           <span fxFlex></span>
         </div>
         <h2></h2>
-  
+
         <div cdkDropList #childrenList="cdkDropList" [cdkDropListData]="children" class="example-list"
           (cdkDropListDropped)="drop($event)" fxLayout="column" fxLayoutGap="10px">
-  
+
           <mat-card cdkDrag *ngFor="let child of children">
             <mat-card-header fxFlexLayout="row">
               <mat-icon mat-card-avatar ngClass="md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">
@@ -38,20 +39,20 @@
               <mat-icon cdkDragHandle ngClass="md-36">drag_indicator</mat-icon>
             </mat-card-actions>
           </mat-card>
-  
+
         </div>
-  
+
       </mat-sidenav>
-  
+
       <mat-sidenav-content ngClass="sidenav-content">
         <h2></h2> <!-- padding -->
-  
+
         <div *ngFor="let container of containers">
-  
+
           <h1>{{container.name}}</h1>
           <div cdkDropList #containerHolder="cdkDropList" [cdkDropListData]="allocate(containerHolder, container)"
             class="example-list" (cdkDropListDropped)="drop($event, container)" fxLayout="column" fxLayoutGap="10px">
-  
+
             <mat-card cdkDrag *ngFor="let child of retrieve(containerHolder)">
               <mat-card-header>
                 <mat-icon mat-card-avatar ngClass="mat-icon md-48"
@@ -71,7 +72,7 @@
                 </div>
               </mat-card-content>
               <mat-card-actions fxLayout="row" fxLayoutAlign="start">
-  
+
                 <mat-icon cdkDragHandle ngClass="md-36">drag_indicator</mat-icon>
                 <div fxFlex></div>
                 <button mat-icon-button (click)="edit(child)" color="primary">
@@ -79,30 +80,18 @@
                 </button>
               </mat-card-actions>
             </mat-card>
-  
+
           </div>
           <h2></h2>
-  
+
         </div>
-  
+
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>
 
 </div>
+
 <ng-template #loading>
-  <div *ngIf="error; else showLoading">
-
-    <div ngClass="body" fxLayout="row" fxLayoutAlign="center center">
-      {{error}}
-    </div>
-
-  </div>
-  <ng-template #showLoading>
-
-    <div ngClass="body" fxLayout="row" fxLayoutAlign="center center">
-      <mat-spinner></mat-spinner>
-    </div>
-
-  </ng-template>
+  <app-indeterminate-loading [error]="error"></app-indeterminate-loading>
 </ng-template>

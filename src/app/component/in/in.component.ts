@@ -17,6 +17,7 @@ import { UsersService } from 'src/app/service/users.service';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { UserId } from 'src/app/interface/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ActivatedRoute } from '@angular/router';
 
 interface CdkDLValuePair {
   values: ChildId[];
@@ -48,6 +49,7 @@ export class InComponent implements OnInit, OnDestroy {
   user: UserId;
 
   justDenied = false;
+  error: string;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -61,7 +63,11 @@ export class InComponent implements OnInit, OnDestroy {
     public afAuth: AngularFireAuth,
     private organizationsService: OrganizationsService,
     private containersService: ContainersService,
+    private activatedRoute: ActivatedRoute,
   ) {
+    const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
+    console.log(`Init for ${organizationRoute}`);
+
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -90,29 +96,34 @@ export class InComponent implements OnInit, OnDestroy {
     });
 
     // TODO(Kelosky): make generic
-    this.organizationsService.getOrganizations('lmcc').subscribe((orgs) => {
+    this.organizationsService.getOrganizations(organizationRoute).subscribe((orgs) => {
+      if (orgs.length === 1) {
 
-      // get observables from database
-      this.$containers = this.containersService.getContainers(orgs[0].id);
-      this.$children = this.childrenService.getChildren();
+        // get observables from database
+        this.$containers = this.containersService.getContainers(orgs[0].id);
+        this.$children = this.childrenService.getChildren();
 
-      // combine to single subscribe (and provide custom mapping)
-      combineLatest(this.$children, this.$containers, (children, containers) => {
-        return {
-          children,
-          containers
-        };
-      }).subscribe((combined) => {
+        // combine to single subscribe (and provide custom mapping)
+        combineLatest(this.$children, this.$containers, (children, containers) => {
+          return {
+            children,
+            containers
+          };
+        }).subscribe((combined) => {
 
+          this.unallocatedChildren = combined.children.filter((child => child.in != null));
+          this.children = combined.children.filter((child => child.in == null));
 
-        this.unallocatedChildren = combined.children.filter((child => child.in != null));
-        this.children = combined.children.filter((child => child.in == null));
+          this.containers = combined.containers;
 
-        this.containers = combined.containers;
-
-        // TODO(Kelosky): BUGS.md here if we have the cdkDL we should get
-        // values and update with unallocated children below on filter
-      });
+          // TODO(Kelosky): BUGS.md here if we have the cdkDL we should get
+          // values and update with unallocated children below on filter
+        });
+      } else if (orgs.length > 1) {
+        this.error = `Unexpected same named organization, total: ${orgs.length}`;
+      } else {
+        this.error = `'/${organizationRoute}' entry does not exist`;
+      }
     });
   }
 
@@ -227,7 +238,7 @@ export class InComponent implements OnInit, OnDestroy {
         this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
       } else {
         console.log(`${event.previousContainer.data[event.previousIndex].name} ` +
-        `will be removed from ${event.previousContainer.data[event.previousIndex].in.id}`);
+          `will be removed from ${event.previousContainer.data[event.previousIndex].in.id}`);
         delete event.previousContainer.data[event.previousIndex].in;
         this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);
       }
