@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   }
 
   lmcc() {
-    this.router.navigateByUrl('/lmcc');
+    this.router.navigateByUrl('/in/lmcc');
   }
 
 }

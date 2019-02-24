@@ -6,12 +6,12 @@ import { AdminComponent } from './component/admin/admin.component';
 
 const routes: Routes = [
   {
-    path: 'lmcc',
+    path: 'in/lmcc',
     pathMatch: 'full',
     component: LmccHomeComponent,
   },
   {
-    path: 'lmcc/admin',
+    path: 'org/lmcc',
     pathMatch: 'full',
     component: AdminComponent,
   },
