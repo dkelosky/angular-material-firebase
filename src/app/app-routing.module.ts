@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
 import { HomeComponent } from './component/home/home.component';
 import { OrganizationComponent } from './component/organization/organization.component';
+import { ContainerComponent } from './component/container/container.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
     path: 'org/lmcc',
     pathMatch: 'full',
     component: OrganizationComponent,
+  },
+  {
+    path: 'org/lmcc/:container',
+    pathMatch: 'full',
+    component: ContainerComponent,
   },
   {
     path: '**',
