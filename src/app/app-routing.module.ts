@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
 import { HomeComponent } from './component/home/home.component';
-import { AdminComponent } from './component/admin/admin.component';
+import { OrganizationComponent } from './component/organization/organization.component';
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'org/lmcc',
     pathMatch: 'full',
-    component: AdminComponent,
+    component: OrganizationComponent,
   },
   {
     path: '**',

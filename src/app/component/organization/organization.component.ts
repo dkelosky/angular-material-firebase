@@ -7,11 +7,11 @@ import { ChildId } from 'src/app/interface/child.interface';
 import { ChildrenService } from 'src/app/service/children.service';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.less', '../../app.component.less']
+  selector: 'app-organization',
+  templateUrl: './organization.component.html',
+  styleUrls: ['./organization.component.less', '../../app.component.less']
 })
-export class AdminComponent implements OnInit {
+export class OrganizationComponent implements OnInit {
   $children: Observable<ChildId[]>;
   $containers: Observable<ContainerId[]>;
 
