@@ -12,6 +12,8 @@ import { OrganizationsService } from 'src/app/service/organizations.service';
 export class ContainerComponent implements OnInit {
 
   container: ContainerId;
+  error: string;
+
   constructor(
     private route: ActivatedRoute,
     private organizationsService: OrganizationsService,
@@ -27,12 +29,22 @@ export class ContainerComponent implements OnInit {
 
       // TODO(Kelosky): handle multiple org responses
       this.containersService.getContainers(orgs[0].id).subscribe((containers) => {
+        let match = false;
         containers.forEach((container) => {
           console.log(`Container ${container.name}`)
-          if (container.name.toLowerCase() == containerRoute) {
+          if (container.name.toLowerCase() === containerRoute) {
             this.container = container;
+            match = true;
           }
-        })
+        });
+
+        if (!match) {
+          this.error = `${containerRoute} entry does not exist`;
+          this.container = undefined;
+        } else {
+          this.error = undefined;
+        }
+
       });
     });
   }

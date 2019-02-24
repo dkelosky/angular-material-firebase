@@ -1,10 +1,23 @@
 <div ngClass="body">
-  <div *ngIf="container; else showLoading">
+
+  <div *ngIf="container; else loading">
     {{container.name}} container works!
   </div>
-  <ng-template #showLoading >
-    <div fxLayout="row" fxFlex fxLayoutAlign="center center">
-      <mat-spinner></mat-spinner>
+
+  <ng-template #loading>
+    <div *ngIf="error; else showLoading">
+
+      <div ngClass="body" fxLayout="row" fxLayoutAlign="center center">
+        {{error}}
+      </div>
+
     </div>
+    <ng-template #showLoading>
+
+      <div ngClass="body" fxLayout="row" fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
+      </div>
+
+    </ng-template>
   </ng-template>
 </div>
