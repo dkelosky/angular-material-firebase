@@ -1,7 +1,7 @@
 <div *ngIf="containers; else loading">
 
-  <div cdkDropListGroup ngClass="body">
-    <mat-sidenav-container>
+  <div cdkDropListGroup >
+    <mat-sidenav-container ngClass="body">
 
       <mat-sidenav ngClass="sidenav" #snav fixedTopGap="56" mode="side"
         [opened]="mobileQuery.matches ? 'false' : 'true'">
