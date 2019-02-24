@@ -5,19 +5,7 @@
   </div>
 
   <ng-template #loading>
-    <div *ngIf="error; else showLoading">
-
-      <div ngClass="body" fxLayout="row" fxLayoutAlign="center center">
-        {{error}}
-      </div>
-
-    </div>
-    <ng-template #showLoading>
-
-      <div ngClass="body" fxLayout="row" fxLayoutAlign="center center">
-        <mat-spinner></mat-spinner>
-      </div>
-
-    </ng-template>
+    <app-indeterminate-loading [error]="error"></app-indeterminate-loading>
   </ng-template>
+
 </div>

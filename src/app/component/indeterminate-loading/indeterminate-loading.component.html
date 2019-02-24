@@ -1,0 +1,11 @@
+<div ngClass="body" fxLayout="row" fxLayoutAlign="center center">
+
+  <div *ngIf="error; else showLoading">
+    {{error}}
+  </div>
+  
+  <ng-template #showLoading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+
+</div>

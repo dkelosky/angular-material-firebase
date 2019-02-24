@@ -58,6 +58,8 @@ import { OrganizationComponent } from './component/organization/organization.com
 import { ContainerComponent } from './component/container/container.component';
 import { InHomeComponent } from './component/in-home/in-home.component';
 import { SidenavHeaderComponent } from './component/sidenav-header/sidenav-header.component';
+import { ContainerHomeComponent } from './component/container-home/container-home.component';
+import { IndeterminateLoadingComponent } from './component/indeterminate-loading/indeterminate-loading.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { SidenavHeaderComponent } from './component/sidenav-header/sidenav-heade
     OrganizationComponent,
     ContainerComponent,
     InHomeComponent,
-    SidenavHeaderComponent
+    SidenavHeaderComponent,
+    ContainerHomeComponent,
+    IndeterminateLoadingComponent
   ],
   imports: [
     FlexLayoutModule,
