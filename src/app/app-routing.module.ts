@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LmccHomeComponent } from './component/lmcc-home/lmcc-home.component';
 import { HomeComponent } from './component/home/home.component';
 import { OrganizationComponent } from './component/organization/organization.component';
 import { ContainerComponent } from './component/container/container.component';
+import { OrganizationHomeComponent } from './component/organization-home/organization-home.component';
 
 const routes: Routes = [
   {
-    path: 'in/lmcc',
-    pathMatch: 'full',
-    component: LmccHomeComponent,
+    path: 'in/:organization',
+    component: OrganizationHomeComponent,
   },
   {
-    path: 'org/lmcc',
-    pathMatch: 'full',
+    path: 'org/:organization',
     component: OrganizationComponent,
   },
   {
-    path: 'org/lmcc/:container',
-    pathMatch: 'full',
+    path: 'org/:organization/:container',
     component: ContainerComponent,
   },
   {

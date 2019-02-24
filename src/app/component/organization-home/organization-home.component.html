@@ -1,7 +1,7 @@
 <section class="mat-typography">
 
   <div *ngIf="afAuth.user | async as user; else showLogin">
-    <app-in>[hidden]="hidden"></app-in>
+    <app-in></app-in>
   </div>
   <ng-template #showLogin>
     <app-login></app-login>

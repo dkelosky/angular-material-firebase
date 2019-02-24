@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LmccHomeComponent } from './lmcc-home.component';
+import { LmccHomeComponent } from "./LmccHomeComponent";
 
 describe('LmccHomeComponent', () => {
   let component: LmccHomeComponent;
