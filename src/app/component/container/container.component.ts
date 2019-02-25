@@ -60,7 +60,6 @@ export class ContainerComponent implements OnInit {
             this.error = `'/${organizationRoute}/${containerRoute}' entry does not exist`;
             this.container = undefined;
           } else {
-            console.log('@TEST8')
             this.children = combined.children.filter((child => child.in && child.in.id === this.container.id));
             this.error = undefined;
           }

@@ -12,7 +12,6 @@ export class HeaderComponent implements OnInit {
     public afAuth: AngularFireAuth,
   ) { }
 
-
   ngOnInit() {
   }
 

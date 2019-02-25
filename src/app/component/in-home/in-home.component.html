@@ -2,9 +2,11 @@
   <div *ngIf="afAuth.user | async as user; else showLogin">
     <app-sidenav-header></app-sidenav-header>
     <app-in></app-in>
+    <app-footer></app-footer>
   </div>
   <ng-template #showLogin>
     <app-header></app-header>
     <app-login></app-login>
+    <app-footer></app-footer>
   </ng-template>
 </section>

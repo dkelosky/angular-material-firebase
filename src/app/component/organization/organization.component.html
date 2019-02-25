@@ -1,68 +1,37 @@
 <div *ngIf="containers; else loading">
 
-  <div ngClass="body main-view-content" fxLayout="column" fxLayoutGap="20px">
-    <h2></h2>
+  <mat-sidenav-container ngClass="body">
 
-    <div *ngFor="let container of containers">
-      <mat-card>
+    <div ngClass="main-view-content" fxLayout="column" fxLayoutGap="20px">
+      <h2></h2>
 
-        <mat-card-header>
-          <mat-card-title>
-            {{container.name}}
-          </mat-card-title>
-          <mat-card-subtitle>
-            {{container.requirements}} | {{container.description}}
-          </mat-card-subtitle>
-        </mat-card-header>
+      <div *ngFor="let container of containers">
+        <mat-card>
 
-        <!-- <mat-card-content>
-        <div *ngFor="let child of children; let i=index">
-          <div *ngIf="child.in && child.in.id == container.id">
-            <mat-card>
-              <mat-card-header>
-                <mat-icon mat-card-avatar ngClass="md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">
-                  face</mat-icon>
-                <mat-card-title>
-                  {{child.name}}
-                </mat-card-title>
-                <mat-card-subtitle>
-                  (Age {{child.age}})
-                </mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
-                <div *ngIf="child.important" fxLayout="row">
-                  <mat-icon color="warn">warning</mat-icon>
-                  <div>{{child.important}}</div>
-                </div>
-              </mat-card-content>
-              <mat-action-row>
-                <button mat-icon-button (click)="message(child)" color="primary">
-                  <mat-icon aria-label="Message">message</mat-icon>
-                </button>
-                <button mat-icon-button (click)="call(child)" color="primary">
-                  <mat-icon aria-label="Call">phone</mat-icon>
-                </button>
-                <button mat-icon-button (click)="info(child)" color="primary">
-                  <mat-icon aria-label="More Info">launch</mat-icon>
-                </button>
-              </mat-action-row>
-            </mat-card>
-          </div>
-        </div>
-      </mat-card-content> -->
+          <mat-card-header>
+            <mat-card-title>
+              {{container.name}}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{container.requirements}} | {{container.description}}
+            </mat-card-subtitle>
+          </mat-card-header>
 
-        <mat-action-row fxLayout="row">
-          <button mat-icon-button (click)="launch(container)" color="primary">
-            <mat-icon aria-label="Launch">launch</mat-icon>
-          </button>
-          <div fxFlex></div>
-          <button mat-icon-button (click)="edit(container)" color="primary" disabled>
-            <mat-icon aria-label="Edit">edit</mat-icon>
-          </button>
-        </mat-action-row>
-      </mat-card>
+          <mat-action-row fxLayout="row">
+            <button mat-icon-button (click)="launch(container)" color="primary">
+              <mat-icon aria-label="Launch">launch</mat-icon>
+            </button>
+            <div fxFlex></div>
+            <button mat-icon-button (click)="edit(container)" color="primary" disabled>
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+          </mat-action-row>
+        </mat-card>
+      </div>
+      <h2></h2>
     </div>
-  </div>
+  </mat-sidenav-container>
+
 </div>
 
 <ng-template #loading>

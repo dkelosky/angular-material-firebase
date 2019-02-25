@@ -1,43 +1,46 @@
 <div *ngIf="container; else loading">
-  <div ngClass="body main-view-content" fxLayout="column" fxLayoutGap="20px">
-    <h2></h2>
-    <h2>
-      {{container.name}}
-    </h2>
-    <div *ngFor="let child of children">
-      <div *ngIf="child.in && child.in.id == container.id">
-        <mat-card>
-          <mat-card-header>
-            <mat-icon mat-card-avatar ngClass="md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">
-              face</mat-icon>
-            <mat-card-title>
-              {{child.name}}
-            </mat-card-title>
-            <mat-card-subtitle>
-              (Age {{child.age}})
-            </mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <div *ngIf="child.important" fxLayout="row">
-              <mat-icon color="warn">warning</mat-icon>
-              <div>{{child.important}}</div>
-            </div>
-          </mat-card-content>
-          <mat-action-row>
-            <button mat-icon-button (click)="message(child)" color="primary" disabled>
-              <mat-icon aria-label="Message">message</mat-icon>
-            </button>
-            <button mat-icon-button (click)="call(child)" color="primary" disabled>
-              <mat-icon aria-label="Call">phone</mat-icon>
-            </button>
-            <button mat-icon-button (click)="info(child)" color="primary" disabled>
-              <mat-icon aria-label="More Info">launch</mat-icon>
-            </button>
-          </mat-action-row>
-        </mat-card>
+  <mat-sidenav-container ngClass="body">
+    <div ngClass="main-view-content" fxLayout="column" fxLayoutGap="20px">
+      <h2></h2>
+      <h2>
+        {{container.name}}
+      </h2>
+      <div *ngFor="let child of children">
+        <div *ngIf="child.in && child.in.id == container.id">
+          <mat-card>
+            <mat-card-header>
+              <mat-icon mat-card-avatar ngClass="md-48" [color]="child.gender === 'boy' ? 'primary' : 'accent'">
+                face</mat-icon>
+              <mat-card-title>
+                {{child.name}}
+              </mat-card-title>
+              <mat-card-subtitle>
+                (Age {{child.age}})
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div *ngIf="child.important" fxLayout="row">
+                <mat-icon color="warn">warning</mat-icon>
+                <div>{{child.important}}</div>
+              </div>
+            </mat-card-content>
+            <mat-action-row>
+              <button mat-icon-button (click)="message(child)" color="primary" disabled>
+                <mat-icon aria-label="Message">message</mat-icon>
+              </button>
+              <button mat-icon-button (click)="call(child)" color="primary" disabled>
+                <mat-icon aria-label="Call">phone</mat-icon>
+              </button>
+              <button mat-icon-button (click)="info(child)" color="primary" disabled>
+                <mat-icon aria-label="More Info">launch</mat-icon>
+              </button>
+            </mat-action-row>
+          </mat-card>
+        </div>
       </div>
+      <h2></h2>
     </div>
-  </div>
+  </mat-sidenav-container>
 </div>
 
 <ng-template #loading>

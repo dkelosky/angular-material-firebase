@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 @Component({
   selector: 'app-organization-home',
   templateUrl: './organization-home.component.html',
-  styleUrls: ['./organization-home.component.less']
+  styleUrls: ['./organization-home.component.less', '../../app.component.less']
 })
 export class OrganizationHomeComponent implements OnInit {
 
