@@ -6,10 +6,9 @@ Subscribe to group (like LMCC) for generic info (like classes canceled or need a
 
 View info on individual classes -> age group information, teachers, curriculum.
 
-Custom prompt prior to asking for notifications.
-
 Profile setting to enable notifications if previously dismissed.
 Profile setting to remove token if previously agreed.
+
 How it works page:
 
 - Check notifies on behalf of organizations.
@@ -17,9 +16,9 @@ How it works page:
 
 Server field validation, unique name or url mapping in organization
 
-Require code if requested to pick (multi factor agreement)
+- service to deal with Org names, uniqueness, and URI
 
-service to deal with Org names, uniqueness, and URI
+Require code if requested to pick up child (multi factor agreement)
 
 Admin UI to:
 -> see students
