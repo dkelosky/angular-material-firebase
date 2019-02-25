@@ -3,6 +3,8 @@
 0. Have all child in container and then delete child from db - does not remove entry
 0. Cannot use Facebook or twitter auth
 0. Cannot use domain checkin.kelosky.com
+0. npm run lint errors
+0. console lint errors when editings
 
 ## Low Priority
 
