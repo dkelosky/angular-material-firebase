@@ -55,12 +55,12 @@ export class HeaderMenuComponent implements OnInit {
   }
 
   home() {
-    console.log(`navigating to ${this.homeUrl}`)
+    console.log(`navigating to ${this.homeUrl}`);
     this.router.navigateByUrl(this.homeUrl);
   }
 
   dashboard() {
-    console.log(`navigating to ${this.orgUrl}`)
+    console.log(`navigating to ${this.orgUrl}`);
     this.router.navigateByUrl(this.orgUrl);
   }
 
