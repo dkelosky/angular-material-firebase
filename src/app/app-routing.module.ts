@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './component/home/home.component';
-import { ContainerComponent } from './component/container/container.component';
 import { OrganizationHomeComponent } from './component/organization-home/organization-home.component';
 import { InHomeComponent } from './component/in-home/in-home.component';
 import { ContainerHomeComponent } from './component/container-home/container-home.component';
+import { UrlConstant } from './constant/url.constant';
 
 const routes: Routes = [
   {
-    path: 'in/:organization',
+    path: `${UrlConstant.URL_CHECK_BASE}/:organization`,
     component: InHomeComponent,
   },
   {
-    path: 'org/:organization',
+    path: `${UrlConstant.URL_ORG_BASE}/:organization`,
     component: OrganizationHomeComponent,
   },
   {
-    path: 'org/:organization/:container',
+    path: `${UrlConstant.URL_ORG_BASE}/:organization/:container`,
     component: ContainerHomeComponent,
   },
   {

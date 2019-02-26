@@ -1,7 +1,26 @@
-<button mat-icon-button [matMenuTriggerFor]="menu">
-  <mat-icon>person</mat-icon>
-</button>
+<div fxLayout="row">
+
+  <div *ngIf="!hidden">
+
+    <button mat-icon-button (click)="dashboard()" [disabled]="dashboardDisabled">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="home()" [disabled]="homeDisabled">
+      <mat-icon>home</mat-icon>
+    </button>
+
+  </div>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>person</mat-icon>
+  </button>
+
+</div>
+
 <mat-menu #menu="matMenu">
   <!-- <mat-divider></mat-divider> -->
-  <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>Logout
+  </button>
 </mat-menu>

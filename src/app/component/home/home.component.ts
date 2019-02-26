@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UrlConstant } from '../../constant/url.constant';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
   }
 
   lmcc() {
-    this.router.navigateByUrl('/in/lmcc');
+    this.router.navigateByUrl(`${UrlConstant.URL_CHECK_BASE}/lmcc`);
   }
 
 }
