@@ -12,7 +12,7 @@ export class OrganizationsService {
     private afs: AngularFirestore,
   ) { }
 
-  getOrganizations(orgName: string) {
+  getOrganizationsWhere(orgName: string) {
     console.log(`getting organizations`);
     return this.afs.collection<OrganizationId>('organizations/', ref => ref.where('name', '==', orgName))
       .snapshotChanges().pipe(

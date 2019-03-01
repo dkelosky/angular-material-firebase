@@ -22,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 interface CdkDLValuePair {
   values: ChildId[];
   cdkDL: CdkDropList;
-  containers: ContainerId;
+  container: ContainerId;
 }
 
 @Component({
@@ -96,7 +96,7 @@ export class InComponent implements OnInit, OnDestroy {
     });
 
     // TODO(Kelosky): make generic
-    this.organizationsService.getOrganizations(organizationRoute).subscribe((orgs) => {
+    this.organizationsService.getOrganizationsWhere(organizationRoute).subscribe((orgs) => {
       if (orgs.length === 1) {
 
         // get observables from database
@@ -127,15 +127,15 @@ export class InComponent implements OnInit, OnDestroy {
     });
   }
 
-  allocate(cdkDL: CdkDropList, containers: ContainerId) {
+  allocate(cdkDL: CdkDropList, container: ContainerId) {
     if (!this.cdkDLs.get(cdkDL.id)) {
 
       // TODO(Kelosky): error for children that are not allocated anywhere
-      const values = this.unallocatedChildren.filter((child => containers.id.trim() === child.in.id.trim()));
+      const values = this.unallocatedChildren.filter((child => container.id.trim() === child.in.id.trim()));
       this.cdkDLs.set(cdkDL.id, {
         values,
         cdkDL,
-        containers,
+        container,
       });
     }
     return this.retrieve(cdkDL);
@@ -225,14 +225,14 @@ export class InComponent implements OnInit, OnDestroy {
       );
   }
 
-  drop(event: CdkDragDrop<ChildId[]>, containers: ContainerId) {
+  drop(event: CdkDragDrop<ChildId[]>, container: ContainerId) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
 
       // update DB
-      if (containers) {
-        event.previousContainer.data[event.previousIndex].in = this.containersService.getContainerRef(`lmcc`, containers);
+      if (container) {
+        event.previousContainer.data[event.previousIndex].in = this.containersService.getContainerRef(`lmcc`, container);
         console.log(`${event.previousContainer.data[event.previousIndex].name} ` +
           `will be added to ${event.previousContainer.data[event.previousIndex].in.id}`);
         this.childrenService.setChild(event.previousContainer.data[event.previousIndex]);

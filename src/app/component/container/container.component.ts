@@ -31,7 +31,7 @@ export class ContainerComponent implements OnInit {
     const containerRoute = this.activatedRoute.snapshot.paramMap.get('container');
     console.log(`Init for ${organizationRoute}/${containerRoute}`);
 
-    this.organizationsService.getOrganizations(organizationRoute).subscribe((orgs) => {
+    this.organizationsService.getOrganizationsWhere(organizationRoute).subscribe((orgs) => {
 
 
       if (orgs.length === 1) {

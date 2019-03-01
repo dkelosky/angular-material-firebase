@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ChildId, Child } from '../interface/child.interface';
+import { ContainerId } from '../interface/container.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,30 @@ export class ChildrenService {
     private afAuth: AngularFireAuth,
   ) { }
 
+  // getChildrenWhere(containerRef: DocumentReference) {
+  //   console.log(`Getting with container reference ${containerRef}`);
+  //   return this.afs.collection<ChildId>(`${this.getCollectionString()}`, (ref) => {
+
+  //     ref;
+
+  //     return ref.where('in.id', '==', containerRef.id.trim())
+  //   })
+  //     .snapshotChanges().pipe(
+  //       map(actions => actions.map(a => {
+  //         const data = a.payload.doc.data() as Child;
+  //         const id = a.payload.doc.id;
+  //         return { id, ...data };
+  //       }))
+  //     );
+  // }
+
   getChildren() {
     console.log(`getting children`);
     return this.afs.collection<ChildId>(this.getCollectionString()).snapshotChanges().pipe(
       map(actions => actions.map((a) => {
         const data = a.payload.doc.data() as Child;
         const id = a.payload.doc.id;
-        return { id, ...data};
+        return { id, ...data };
       }))
     );
   }
@@ -37,8 +55,10 @@ export class ChildrenService {
 
   async setChild(child: ChildId) {
     console.log(`Updating ${child.name}, id: ${child.id}`);
+    const tempChild = Object.assign({}, child);
+    delete tempChild.id;
     try {
-      await this.afs.doc<Child>(`${this.getCollectionString()}${child.id}`).set(child);
+      await this.afs.doc<Child>(`${this.getCollectionString()}${child.id}`).set(tempChild);
     } catch (err) {
       console.log('set error');
       console.error(err);
@@ -62,4 +82,5 @@ export class ChildrenService {
   private getCollectionString() {
     return `users/${this.afAuth.auth.currentUser.uid}/children/`;
   }
+
 }
