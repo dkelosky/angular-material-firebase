@@ -15,10 +15,22 @@ export class ContainersService {
 
   getContainers(orgId: string) {
     console.log(`organizations/${orgId}/containers/`);
-    return this.afs.collection<Container>(`organizations/${orgId}/containers/`)
+    return this.afs.collection<ContainerId>(`organizations/${orgId}/containers/`)
       .snapshotChanges().pipe(
         map(actions => actions.map(a => {
           const data = a.payload.doc.data() as Container;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        }))
+      );
+  }
+
+  getChildren(orgId: string, container: ContainerId) {
+    console.log(`organizations/${orgId}/containers/`);
+    return this.afs.collection<ContainerChild>(`organizations/${orgId}/container/${container.id}/children`)
+      .snapshotChanges().pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as ContainerChild;
           const id = a.payload.doc.id;
           return { id, ...data };
         }))
