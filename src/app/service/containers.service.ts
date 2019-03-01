@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Container, ContainerId } from '../interface/container.interface';
+import { ContainerChild } from '../interface/container-child.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ContainersService {
   ) { }
 
   getContainers(orgId: string) {
-    console.log(`getting containers`);
+    console.log(`organizations/${orgId}/containers/`);
     return this.afs.collection<Container>(`organizations/${orgId}/containers/`)
       .snapshotChanges().pipe(
         map(actions => actions.map(a => {
@@ -22,6 +23,29 @@ export class ContainersService {
           return { id, ...data };
         }))
       );
+  }
+
+  async addChild(orgId: string, container: ContainerId, child: DocumentReference) {
+    console.log(`Adding to organizations/${orgId}/containers/${container.id}`);
+
+    try {
+      await this.afs.collection<ContainerChild>(`organizations/${orgId}/containers/${container.id}/children`).add({
+        ref: child
+      });
+    } catch (err) {
+      console.log(`addChild error`);
+      console.error(err);
+    }
+  }
+
+  async deleteChild(orgId: string, container: ContainerId, child: DocumentReference) {
+    console.log(`Deleting from organizations/${orgId}/containers/${container.id}`);
+    try {
+      await this.afs.doc<ContainerChild>(`organizations/${orgId}/containers/${container.id}/children/${child.id}`).delete();
+    } catch (err) {
+      console.log('delete error');
+      console.error(err);
+    }
   }
 
   getContainerRef(orgId: string, container: ContainerId) {

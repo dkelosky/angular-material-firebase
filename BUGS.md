@@ -4,7 +4,7 @@
 0. Cannot use Facebook or twitter auth
 0. Cannot use domain checkin.kelosky.com
 0. npm run lint errors
-0. console lint errors when editings
+0. console lint errors when editing
 
 ## Low Priority
 

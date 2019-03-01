@@ -55,6 +55,10 @@ export class ChildrenService {
     }
   }
 
+  getChildRef(child: ChildId) {
+    return this.afs.doc<Child>(`${this.getCollectionString()}${child.id}`).ref;
+  }
+
   private getCollectionString() {
     return `users/${this.afAuth.auth.currentUser.uid}/children/`;
   }
