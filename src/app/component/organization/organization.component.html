@@ -4,6 +4,13 @@
 
     <div ngClass="main-view-content" fxLayout="column" fxLayoutGap="20px">
       <h2></h2>
+      
+      <div fxLayout="row" fxLayoutGap="20px">
+        <h2>Groups</h2>
+        <button mat-mini-fab color="primary">
+          <mat-icon aria-label="Add" (click)="add()">add</mat-icon>
+        </button>
+      </div>
 
       <div *ngFor="let container of containers">
         <mat-card>
@@ -19,7 +26,7 @@
 
           <mat-action-row fxLayout="row">
             <button mat-icon-button (click)="launch(container)" color="primary">
-              <mat-icon aria-label="Launch">launch</mat-icon>
+              <mat-icon aria-label="Forward">arrow_forward</mat-icon>
             </button>
             <div fxFlex></div>
             <button mat-icon-button (click)="edit(container)" color="primary" disabled>

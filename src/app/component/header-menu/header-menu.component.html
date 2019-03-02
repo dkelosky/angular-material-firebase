@@ -10,6 +10,10 @@
       <mat-icon>home</mat-icon>
     </button>
 
+    <button mat-icon-button (click)="dashboard()" [disabled]="true">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
   </div>
 
   <button mat-icon-button [matMenuTriggerFor]="menu">

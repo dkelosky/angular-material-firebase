@@ -3,9 +3,10 @@ import { ContainerId } from 'src/app/interface/container.interface';
 import { ContainersService } from 'src/app/service/containers.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
 import { Observable, combineLatest } from 'rxjs';
-import { ChildId } from 'src/app/interface/child.interface';
-import { ChildrenService } from 'src/app/service/children.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { AddContainerComponent } from '../add-container/add-container.component';
+import { EditContainerComponent } from '../edit-container/edit-container.component';
 
 @Component({
   selector: 'app-organization',
@@ -13,44 +14,30 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./organization.component.less', '../../app.component.less']
 })
 export class OrganizationComponent implements OnInit {
-  $children: Observable<ChildId[]>;
   $containers: Observable<ContainerId[]>;
 
   containers: ContainerId[];
-  children: ChildId[];
 
   error: string;
 
   constructor(
     private organizationsService: OrganizationsService,
     private containersService: ContainersService,
-    private childrenService: ChildrenService,
     private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
     private router: Router,
   ) {
 
     const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
-    console.log(`Init for ${organizationRoute}`);
     this.organizationsService.getOrganizationsWhere(organizationRoute).subscribe((orgs) => {
 
       if (orgs.length === 1) {
 
-        // get observables from database
         this.$containers = this.containersService.getContainers(orgs[0].id);
-        this.$children = this.childrenService.getChildren();
 
-        // combine to single subscribe (and provide custom mapping)
-        combineLatest(this.$children, this.$containers, (children, containers) => {
-          return {
-            children,
-            containers
-          };
-        }).subscribe((combined) => {
+        this.$containers.subscribe((containers) => {
 
-
-          // get children that are in a container
-          this.children = combined.children.filter((child => child.in != null));
-          this.containers = combined.containers;
+          this.containers = containers;
 
         });
       } else if (orgs.length > 1) {
@@ -65,8 +52,20 @@ export class OrganizationComponent implements OnInit {
   ngOnInit() {
   }
 
+  add() {
+    this.openAddDialog();
+  }
+
   edit(container: ContainerId) {
-    console.log(`Called to edit ${container.name}`);
+    this.openEditDialog(container);
+  }
+
+  openAddDialog() {
+    this.dialog.open(AddContainerComponent);
+  }
+
+  openEditDialog(container: ContainerId) {
+    this.dialog.open(EditContainerComponent, { data: container });
   }
 
   launch(container: ContainerId) {
