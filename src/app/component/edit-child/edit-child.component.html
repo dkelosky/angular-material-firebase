@@ -13,7 +13,7 @@
 
     <div fxLayout="row">
       <mat-form-field fxFlex>
-        <mat-select [(ngModel)]="child.age" placeholder="Child's Age" required formControlName="age">
+        <mat-select placeholder="Child's Age" required formControlName="age">
           <div *ngFor="let age of ages">
             <mat-option value="{{age}}">{{age}}</mat-option>
           </div>
@@ -25,7 +25,7 @@
 
       <div fxLayout="row">
         <mat-form-field fxFlex>
-          <textarea matInput [(ngModel)]="child.important" placeholder="Important"
+          <textarea matInput placeholder="Important"
             formControlName="important"></textarea>
           <mat-hint>Special instructions, e.g. medical conditions, food allergies, special needs, etc.</mat-hint>
         </mat-form-field>

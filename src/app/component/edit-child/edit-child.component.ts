@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatBottomSheet, MatSnackBarConfig, MatSnackBar } from '@angular/material';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, Form, FormGroup } from '@angular/forms';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { ChildId } from 'src/app/interface/child.interface';
 import { Confirm } from 'src/app/interface/confirm.interface';
@@ -16,6 +16,9 @@ export class EditChildComponent implements OnInit {
 
   ages = ChildConstant.AGE_RANGE;
 
+  childAge: number;
+  childImportant: string;
+
   childForm = this.fb.group({
     age: ['', Validators.required],
     important: [''],
@@ -30,6 +33,8 @@ export class EditChildComponent implements OnInit {
     private sb: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public child: ChildId,
   ) {
+    this.childForm.get('age').setValue(this.child.age);
+    this.childForm.get('important').setValue(this.child.important);
   }
 
   ngOnInit() {
@@ -39,8 +44,8 @@ export class EditChildComponent implements OnInit {
     console.log(`Form input: ${JSON.stringify(this.childForm.value, null, 2)}`);
 
     // change values from form
-    this.child.important = this.childForm.value.important;
     this.child.age = this.childForm.value.age;
+    this.child.important = this.childForm.value.important;
 
     this.childrenService.setChild(this.child);
     const message = `Updated child ${this.child.name}!`;
