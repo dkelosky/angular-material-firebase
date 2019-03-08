@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ContainersService } from 'src/app/service/containers.service';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatSnackBarConfig } from '@angular/material';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ContainerId } from 'src/app/interface/container.interface';
+import { FormBuilder, Validators } from '@angular/forms';
 import { OrganizationId } from 'src/app/interface/organization.interface';
 
 @Component({
@@ -32,7 +31,7 @@ export class AddContainerComponent implements OnInit {
   submit() {
     console.log(`Form input: ${JSON.stringify(this.containerForm.value, null, 2)}`);
     const name: string = this.containerForm.value.name;
-    this.containerForm.value.uri = name.replace(/\s+/g, '_').toLowerCase();
+    this.containerForm.value.uri = name.replace(/\s+/g, '-').toLowerCase();
     this.containerService.addContainer(this.organization.id, this.containerForm.value);
     const message = `Created container ${this.containerForm.value.name}!`;
     const config: MatSnackBarConfig = {
