@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AddContainerComponent } from '../add-container/add-container.component';
 import { EditContainerComponent } from '../edit-container/edit-container.component';
+import { OrganizationId } from 'src/app/interface/organization.interface';
 
 @Component({
   selector: 'app-organization',
@@ -17,6 +18,7 @@ export class OrganizationComponent implements OnInit {
   $containers: Observable<ContainerId[]>;
 
   containers: ContainerId[];
+  organization: OrganizationId;
 
   error: string;
 
@@ -32,6 +34,8 @@ export class OrganizationComponent implements OnInit {
     this.organizationsService.getOrganizationsWhere(organizationRoute).subscribe((orgs) => {
 
       if (orgs.length === 1) {
+
+        this.organization = orgs[0];
 
         this.$containers = this.containersService.getContainers(orgs[0].id);
 
@@ -61,7 +65,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   openAddDialog() {
-    this.dialog.open(AddContainerComponent);
+    this.dialog.open(AddContainerComponent, { data: this.organization });
   }
 
   openEditDialog(container: ContainerId) {

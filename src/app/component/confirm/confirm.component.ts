@@ -54,7 +54,7 @@ export class ConfirmComponent implements OnInit {
     // if success message, show after the bottom sheet disappears
     if (this.data.successMessage) {
       this.bottomSheetRef.afterDismissed().subscribe(() => {
-        const config: MatSnackBarConfig<any> = {
+        const config: MatSnackBarConfig = {
           duration: 1000 * 1.5
         };
         this.snackbarService.open(this.data.successMessage, null, config);

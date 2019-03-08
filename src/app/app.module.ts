@@ -130,6 +130,8 @@ import { EditContainerComponent } from './component/edit-container/edit-containe
     TermsOfServiceComponent,
     AddChildComponent,
     EditChildComponent,
+    AddContainerComponent,
+    EditChildComponent,
     ConfirmComponent,
   ],
   providers: [{

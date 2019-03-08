@@ -60,6 +60,27 @@ export class ContainersService {
     }
   }
 
+  // TODO(Kelosky): ensure uniqueness on URI
+  async addContainer(orgId: string, container: Container) {
+    console.log(`adding container: ${container.name}`);
+    try {
+      await this.afs.collection<Container>(`organizations/${orgId}/containers`).add(container);
+    } catch (err) {
+      console.log(`addContainer error`);
+      console.error(err);
+    }
+  }
+
+  async deleteContainer(orgId: string, container: ContainerId) {
+    console.log(`Deleting ${container.name}, id: ${container.id}`);
+    try {
+      await this.afs.doc<Container>(`organizations/${orgId}/containers/${container.id}`).delete();
+    } catch (err) {
+      console.log('delete error');
+      console.error(err);
+    }
+  }
+
   getContainerRef(orgId: string, container: ContainerId) {
     return this.afs.doc<Container>(`organizations/${orgId}/containers/${container.id}`).ref;
   }

@@ -44,7 +44,7 @@ export class EditChildComponent implements OnInit {
 
     this.childrenService.setChild(this.child);
     const message = `Updated child ${this.child.name}!`;
-    const config: MatSnackBarConfig<any> = {
+    const config: MatSnackBarConfig = {
       duration: 1000 * 1.5
     };
     this.dialogRef.close();

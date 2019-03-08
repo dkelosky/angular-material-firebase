@@ -2,9 +2,10 @@ import { Entity } from './Entity.interface';
 import { Routeable } from './routeable.interface';
 
 export interface Container extends Entity, Routeable {
-    description: string;
+  description: string;
+  requirements?: string;
 }
 
 export interface ContainerId extends Container {
-    id: string;
+  id: string;
 }
