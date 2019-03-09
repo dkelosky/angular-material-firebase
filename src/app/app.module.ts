@@ -131,7 +131,7 @@ import { EditContainerComponent } from './component/edit-container/edit-containe
     AddChildComponent,
     EditChildComponent,
     AddContainerComponent,
-    EditChildComponent,
+    EditContainerComponent,
     ConfirmComponent,
   ],
   providers: [{

@@ -53,6 +53,7 @@ export class ChildrenService {
     }
   }
 
+  // TODO(Kelosky): set certain fields
   async setChild(child: ChildId) {
     console.log(`Updating ${child.name}, id: ${child.id}`);
     const tempChild = Object.assign({}, child);

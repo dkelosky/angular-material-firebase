@@ -71,6 +71,19 @@ export class ContainersService {
     }
   }
 
+  // TODO(Kelosky): set certain fields
+  async setContainer(orgId: string, container: ContainerId) {
+    console.log(`Updating ${container.name}, id: ${container.id}`);
+    const tempContainer = Object.assign({}, container);
+    delete tempContainer.id;
+    try {
+      await this.afs.doc<Container>(`organizations/${orgId}/containers/${container.id}`).set(tempContainer);
+    } catch (err) {
+      console.log('set error');
+      console.error(err);
+    }
+  }
+
   async deleteContainer(orgId: string, container: ContainerId) {
     console.log(`Deleting ${container.name}, id: ${container.id}`);
     try {

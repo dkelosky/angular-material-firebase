@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatBottomSheet, MatSnackBarConfig, MatSnackBar } from '@angular/material';
-import { FormBuilder, Validators, Form, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { ChildId } from 'src/app/interface/child.interface';
 import { Confirm } from 'src/app/interface/confirm.interface';
@@ -15,9 +15,6 @@ import { ChildConstant } from 'src/app/constant/child.constant';
 export class EditChildComponent implements OnInit {
 
   ages = ChildConstant.AGE_RANGE;
-
-  childAge: number;
-  childImportant: string;
 
   childForm = this.fb.group({
     age: ['', Validators.required],

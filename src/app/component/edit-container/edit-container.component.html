@@ -1,3 +1,38 @@
-<p>
-  edit-container works!
-</p>
+<div mat-dialog-content>
+
+  <form [formGroup]="containerForm" (ngSubmit)="submit()">
+    <div fxLayout="row" fxLayoutAlign="left center">
+      <h3 fxFlexAlign="start">
+        {{data.container.name}}
+      </h3>
+      <div fxFlex></div>
+      <button mat-icon-button type="button" color="warn" (click)="remove()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="20px">
+
+      <div fxLayout="row">
+        <mat-form-field fxFlex>
+          <textarea matInput placeholder="Description" formControlName="description"></textarea>
+          <mat-hint>Description</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row">
+        <mat-form-field fxFlex>
+          <textarea matInput placeholder="Requirements" formControlName="requirements"></textarea>
+          <mat-hint>Requirements</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div mat-dialog-actions fxLayout="row">
+        <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
+        <button mat-button fxFlex fxFlexAlign="end" color="primary" [disabled]="!containerForm.valid">Save</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

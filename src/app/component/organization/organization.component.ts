@@ -69,7 +69,12 @@ export class OrganizationComponent implements OnInit {
   }
 
   openEditDialog(container: ContainerId) {
-    this.dialog.open(EditContainerComponent, { data: container });
+    this.dialog.open(EditContainerComponent, {
+      data: {
+        organization: this.organization,
+        container
+      }
+    });
   }
 
   launch(container: ContainerId) {
