@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContainerId } from 'src/app/interface/container.interface';
 import { ContainersService } from 'src/app/service/containers.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
 import { ChildId } from 'src/app/interface/child.interface';
 import { ChildrenService } from 'src/app/service/children.service';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, Subject, Subscription } from 'rxjs';
 import { ToggleService } from 'src/app/service/toggle.service';
 import { OrganizationId } from 'src/app/interface/organization.interface';
 import { UrlConstant } from 'src/app/constant/url.constant';
@@ -15,7 +15,7 @@ import { UrlConstant } from 'src/app/constant/url.constant';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.less', '../../app.component.less']
 })
-export class ContainerComponent implements OnInit {
+export class ContainerComponent implements OnInit, OnDestroy {
   children: ChildId[];
 
   organization: OrganizationId;
@@ -26,6 +26,8 @@ export class ContainerComponent implements OnInit {
   $children: Observable<ChildId[]>;
   $containers: Observable<ContainerId[]>;
 
+  toggle: Subscription;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private organizationsService: OrganizationsService,
@@ -35,6 +37,24 @@ export class ContainerComponent implements OnInit {
     private router: Router
   ) {
 
+    const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
+
+
+    this.toggle = this.toggleService.toggle.subscribe(() => {
+
+          // this.toggleService.toggle.unsubscribe();
+          const url = `/${UrlConstant.URL_ORG_BASE}/${organizationRoute}`;
+          console.log(`navigating to ${url}`);
+          this.router.navigateByUrl(url);
+    });
+
+    // .subscribe(() => {
+
+    // });
+  }
+
+  ngOnDestroy() {
+    this.toggle.unsubscribe();
   }
 
   ngOnInit() {
@@ -46,15 +66,6 @@ export class ContainerComponent implements OnInit {
 
       if (orgs.length === 1) {
         this.organization = orgs[0];
-
-        this.toggleService.toggle.subscribe(() => {
-
-          if (this.organization) {
-            const url = `/${UrlConstant.URL_ORG_BASE}/${organizationRoute}`;
-            console.log(`navigating to ${url}`);
-            this.router.navigateByUrl(url);
-          }
-        });
 
         // get observables from database
         this.$containers = this.containersService.getContainers(orgs[0].id);
@@ -91,6 +102,10 @@ export class ContainerComponent implements OnInit {
         this.error = `'/${organizationRoute}' entry does not exist`;
       }
     });
+  }
+
+  alert(child: ChildId) {
+    console.log(`prompt to alert for child ${child.name}`);
   }
 
 }

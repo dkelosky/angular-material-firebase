@@ -8,7 +8,7 @@ import { EditChildComponent } from '../edit-child/edit-child.component';
 import { ChildrenService } from 'src/app/service/children.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
 import { ContainersService } from 'src/app/service/containers.service';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, Subscription } from 'rxjs';
 import { ChildId } from 'src/app/interface/child.interface';
 import { ContainerId } from 'src/app/interface/container.interface';
 import { Confirm } from 'src/app/interface/confirm.interface';
@@ -51,6 +51,8 @@ export class InComponent implements OnInit, OnDestroy {
   justDenied = false;
   error: string;
 
+  toggle: Subscription;
+
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
@@ -72,7 +74,7 @@ export class InComponent implements OnInit, OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.toggleService.toggle.subscribe(() => {
+    this.toggle = this.toggleService.toggle.subscribe(() => {
       this.snav.toggle();
     });
 
@@ -167,6 +169,7 @@ export class InComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.toggle.unsubscribe();
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 

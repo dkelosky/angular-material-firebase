@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 export class ToggleService {
 
   public toggle: Subject<void>;
+
   constructor() {
     this.toggle = new Subject<void>();
   }
