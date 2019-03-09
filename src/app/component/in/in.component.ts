@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { moveItemInArray, transferArrayItem, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ToggleSideNavService } from 'src/app/service/toggle-side-nav.service';
+import { ToggleService } from 'src/app/service/toggle.service';
 import { MatSidenav, MatDialog, MatBottomSheet } from '@angular/material';
 import { AddChildComponent } from '../add-child/add-child.component';
 import { EditChildComponent } from '../edit-child/edit-child.component';
@@ -55,7 +55,7 @@ export class InComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public dialog: MatDialog,
-    private toggleService: ToggleSideNavService,
+    private toggleService: ToggleService,
     private childrenService: ChildrenService,
     private afMessaging: AngularFireMessaging,
     private u: UsersService,

@@ -3,22 +3,21 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ToggleService } from 'src/app/service/toggle.service';
 
 @Component({
-  selector: 'app-sidenav-header',
-  templateUrl: './sidenav-header.component.html',
-  styleUrls: ['./sidenav-header.component.less', '../../app.component.less']
+  selector: 'app-back-header',
+  templateUrl: './back-header.component.html',
+  styleUrls: ['./back-header.component.less', '../../app.component.less']
 })
-export class SidenavHeaderComponent implements OnInit {
+export class BackHeaderComponent implements OnInit {
 
   constructor(
     public afAuth: AngularFireAuth,
     private toggleService: ToggleService,
   ) { }
 
-  runToggle() {
-    this.toggleService.trigger();
-  }
-
   ngOnInit() {
   }
 
+  runToggle() {
+    this.toggleService.trigger();
+  }
 }

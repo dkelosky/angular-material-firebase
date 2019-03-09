@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ToggleSideNavService {
+export class ToggleService {
 
   public toggle: Subject<void>;
   constructor() {

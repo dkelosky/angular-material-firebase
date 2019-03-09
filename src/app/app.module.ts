@@ -63,6 +63,7 @@ import { IndeterminateLoadingComponent } from './component/indeterminate-loading
 import { FooterComponent } from './component/footer/footer.component';
 import { AddContainerComponent } from './component/add-container/add-container.component';
 import { EditContainerComponent } from './component/edit-container/edit-container.component';
+import { BackHeaderComponent } from './component/back-header/back-header.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { EditContainerComponent } from './component/edit-container/edit-containe
     IndeterminateLoadingComponent,
     FooterComponent,
     AddContainerComponent,
-    EditContainerComponent
+    EditContainerComponent,
+    BackHeaderComponent
   ],
   imports: [
     FlexLayoutModule,

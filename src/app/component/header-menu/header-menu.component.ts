@@ -25,6 +25,9 @@ export class HeaderMenuComponent implements OnInit {
 
   ngOnInit() {
 
+    // TODO(Kelosky): is subscribe really needed here?  cant we do this?
+    // const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
+    // const containerRoute = this.activatedRoute.snapshot.paramMap.get('container');
     this.activatedRoute.url.subscribe((urlValue) => {
 
       console.log(`url value is ${urlValue}, items are ${urlValue.length}`);

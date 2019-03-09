@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ContainerId } from 'src/app/interface/container.interface';
 import { ContainersService } from 'src/app/service/containers.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AddContainerComponent } from '../add-container/add-container.component';
 import { EditContainerComponent } from '../edit-container/edit-container.component';
 import { OrganizationId } from 'src/app/interface/organization.interface';
+import { UrlConstant } from 'src/app/constant/url.constant';
 
 @Component({
   selector: 'app-organization',
@@ -78,7 +79,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   launch(container: ContainerId) {
-    const url = `/org/${this.activatedRoute.snapshot.paramMap.get('organization')}/${container.uri}`;
+    const url = `/${UrlConstant.URL_ORG_BASE}/${this.activatedRoute.snapshot.paramMap.get('organization')}/${container.uri}`;
     console.log(`Called to launch ${url}`);
     this.router.navigateByUrl(url);
   }

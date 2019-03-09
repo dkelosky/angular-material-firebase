@@ -1,7 +1,7 @@
 <mat-toolbar ngClass="header" color="primary">
   <div *ngIf="afAuth.user | async as user; else showLogin">
     <button mat-icon-button (click)="runToggle()">
-      <mat-icon>menu</mat-icon>
+      <mat-icon>arrow_backward</mat-icon>
     </button>
   </div>
   Check In
