@@ -9,6 +9,7 @@ import { Observable, combineLatest, Subject, Subscription } from 'rxjs';
 import { ToggleService } from 'src/app/service/toggle.service';
 import { OrganizationId } from 'src/app/interface/organization.interface';
 import { UrlConstant } from 'src/app/constant/url.constant';
+import { functions } from 'firebase';
 
 @Component({
   selector: 'app-container',
@@ -104,8 +105,17 @@ export class ContainerComponent implements OnInit, OnDestroy {
     });
   }
 
-  alert(child: ChildId) {
+  async alert(child: ChildId) {
     console.log(`prompt to alert for child ${child.name}`);
+
+    const notifyParent = functions().httpsCallable('notifyParent');
+
+    try {
+      await notifyParent({text: "you are the coolest person ever"});
+    } catch (err) {
+      console.error(`Notify failure`);
+      console.error(err);
+    }
   }
 
 }

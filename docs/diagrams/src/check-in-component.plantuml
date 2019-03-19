@@ -1,0 +1,67 @@
+@startuml
+
+skinparam {
+  ActorBorderColor blue
+}
+
+cloud server {
+
+}
+
+actor parent
+actor admin
+
+database users {
+
+  database children {
+
+    package child1 {
+
+    }
+
+    package child2 {
+
+      file container {
+
+      }
+
+    }
+
+  }
+
+}
+
+database organizations {
+
+  database containers {
+    package group1 {
+
+    }
+
+    package group2 {
+
+    }
+  }
+
+}
+
+database topics {
+  package container-child as containerChild {
+
+    file group1child2 {
+
+    }
+
+  }
+}
+
+parent -[#Green]-> child2: (0) add to container
+container .[#Green].^ group1: (1) add reference
+container ~[#Green]~> server: (2) trigger
+server -[#Green]> containerChild: (3) create topic
+admin --> server: request notify
+
+group1child2 +.[#Green].o parent: subscribe to topic
+
+
+@enduml
