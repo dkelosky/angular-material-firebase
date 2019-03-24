@@ -18,6 +18,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 import { UserId } from 'src/app/interface/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
+import { MessagesService } from 'src/app/service/messages.service';
 
 interface CdkDLValuePair {
   values: ChildId[];
@@ -61,6 +62,7 @@ export class InComponent implements OnInit, OnDestroy {
     private childrenService: ChildrenService,
     private afMessaging: AngularFireMessaging,
     private u: UsersService,
+    private messages: MessagesService,
     private bottomSheet: MatBottomSheet,
     public afAuth: AngularFireAuth,
     private organizationsService: OrganizationsService,
@@ -79,22 +81,34 @@ export class InComponent implements OnInit, OnDestroy {
     });
 
     this.u.getUser().subscribe((user) => {
-      this.user = user;
-      if (this.user.token) {
 
-        // TODO(Kelosky): Test if you can get the browser prompt for existing user without getting bottom sheet prompt
-        console.log(`This is an existing user which already as approved notifications, don't prompt again`);
-        this.requestToken();
-      } else {
+      // if (this.user && this.user.id === user.id) {
 
-        if (!this.justDenied) {
-          console.log(`This is a new user, ask for web notifications`);
-          this.initWebToken(`LMCC`);
+      //   console.log(`User changed but it is the same user; do nothing`);
+
+      // } else {
+
+        this.user = user;
+
+
+        if (this.user.token) {
+
+          // TODO(Kelosky): Test if you can get the browser prompt for existing user without getting bottom sheet prompt
+          console.log(`This is an existing user which already as approved notifications, don't prompt again`);
+          this.requestToken();
         } else {
-          console.log(`Not prompting user again, user was just created and denied web notifications`);
-        }
 
-      }
+          if (!this.justDenied) {
+            console.log(`This is a new user, ask for web notifications`);
+            this.initWebToken(`LMCC`);
+          } else {
+            console.log(`Not prompting user again, user was just created and denied web notifications`);
+          }
+
+        }
+      // }
+      console.log(`token: ${this.user.token}`);
+
     });
 
     // TODO(Kelosky): make generic

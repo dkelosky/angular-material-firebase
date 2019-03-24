@@ -137,6 +137,7 @@ import { BackHeaderComponent } from './component/back-header/back-header.compone
     ConfirmComponent,
   ],
   providers: [{
+    // suppress timestamp console message
     provide: FirestoreSettingsToken, useValue: {}
   }],
   bootstrap: [AppComponent]

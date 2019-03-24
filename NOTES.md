@@ -5,4 +5,8 @@
 https://github.com/angular/angularfire2/blob/master/docs/firestore/documents.md#using-angularfirestoredocument
 https://firebase.google.com/docs/firestore/solutions/role-based-access
 
+References
+https://favicon.io/
+https://paulferrett.com/fontawesome-favicon/
+
 document references appear to be cleaned up when the referenced document is deleted!!!

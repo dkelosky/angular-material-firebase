@@ -108,10 +108,15 @@ export class ContainerComponent implements OnInit, OnDestroy {
   async alert(child: ChildId) {
     console.log(`prompt to alert for child ${child.name}`);
 
+    console.log(`parent: ${this.childrenService.getChildRef(child).parent.parent.id}`);
+
     const notifyParent = functions().httpsCallable('notifyParent');
 
     try {
-      await notifyParent({text: "you are the coolest person ever"});
+      await notifyParent({
+        user: this.childrenService.getChildRef(child).parent.parent.id,
+        child: child.id,
+      });
     } catch (err) {
       console.error(`Notify failure`);
       console.error(err);
