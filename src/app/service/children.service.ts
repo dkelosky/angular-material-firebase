@@ -3,7 +3,6 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ChildId, Child } from '../interface/child.interface';
-import { ContainerId } from '../interface/container.interface';
 
 @Injectable({
   providedIn: 'root'

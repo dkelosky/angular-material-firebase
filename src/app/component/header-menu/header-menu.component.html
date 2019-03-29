@@ -10,7 +10,7 @@
       <mat-icon>home</mat-icon>
     </button>
 
-    <button mat-icon-button (click)="dashboard()" [disabled]="true">
+    <button mat-icon-button [matBadge]="count" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="count > 0 ? false : true">
       <mat-icon>notifications</mat-icon>
     </button>
 

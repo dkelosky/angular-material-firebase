@@ -1,10 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
-// const serviceAccount = require("../kelosky-check-in-firebase-adminsdk.json");
-
 const app = admin.initializeApp({
-  // credential: admin.credential.cert(serviceAccount),
   credential: admin.credential.applicationDefault(),
   databaseURL: 'https://kelosky-check-in.firebaseio.com',
 });
@@ -38,6 +35,15 @@ export const notifyParent = functions.https.onCall(async (data, context) => {
         data: {
           value: `this is your data`,
         },
+        notification: {
+          title: "title",
+          body: "body body"
+        },
+        webpush: {
+          fcmOptions: {
+            link: "https://dummypage.com"
+          }
+        }
       });
     } catch (err) {
       console.error(`Message send error`);

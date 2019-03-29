@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UrlConstant } from '../../constant/url.constant';
+import { MessagesService } from 'src/app/service/messages.service';
 @Component({
   selector: 'app-header-menu',
   templateUrl: './header-menu.component.html',
@@ -17,13 +18,20 @@ export class HeaderMenuComponent implements OnInit {
   homeDisabled = true;
   dashboardDisabled = true;
 
+  count: number;
+
   constructor(
     private afAuth: AngularFireAuth,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private messagesService: MessagesService,
   ) { }
 
   ngOnInit() {
+    this.messagesService.count.subscribe((count) => {
+      console.log(`messages services updates count: ${count}`);
+      this.count = count;
+    });
 
     // TODO(Kelosky): is subscribe really needed here?  cant we do this?
     // const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
