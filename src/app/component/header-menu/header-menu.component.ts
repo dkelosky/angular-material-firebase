@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UrlConstant } from '../../constant/url.constant';
@@ -8,7 +8,7 @@ import { MessagesService } from 'src/app/service/messages.service';
   templateUrl: './header-menu.component.html',
   styleUrls: ['./header-menu.component.less']
 })
-export class HeaderMenuComponent implements OnInit {
+export class HeaderMenuComponent implements OnInit, OnDestroy {
 
   hidden = true;
 
@@ -20,6 +20,8 @@ export class HeaderMenuComponent implements OnInit {
 
   count: number;
 
+  messages;
+
   constructor(
     private afAuth: AngularFireAuth,
     private activatedRoute: ActivatedRoute,
@@ -28,7 +30,7 @@ export class HeaderMenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.messagesService.count.subscribe((count) => {
+    this.messages = this.messagesService.count.subscribe((count) => {
       console.log(`messages services updates count: ${count}`);
       this.count = count;
     });
@@ -59,6 +61,10 @@ export class HeaderMenuComponent implements OnInit {
       }
 
     });
+  }
+
+  ngOnDestroy() {
+    this.messages.unsubscribe();
   }
 
   logout() {
