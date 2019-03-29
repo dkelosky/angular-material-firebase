@@ -7,6 +7,11 @@ Phone number on registration
 
 ## v1.0
 
+Lint
+TODO's in the code.
+Tests & CI
+Security Rules
+
 Subscribe to group (like LMCC) for generic info (like classes canceled or need a substitute)
 
 View info on individual classes -> age group information, teachers, curriculum.

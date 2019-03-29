@@ -64,6 +64,8 @@ import { FooterComponent } from './component/footer/footer.component';
 import { AddContainerComponent } from './component/add-container/add-container.component';
 import { EditContainerComponent } from './component/edit-container/edit-container.component';
 import { BackHeaderComponent } from './component/back-header/back-header.component';
+import { NotifyForChildComponent } from './component/notify-for-child/notify-for-child.component';
+import { PhoneNumberComponent } from './component/phone-number/phone-number.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { BackHeaderComponent } from './component/back-header/back-header.compone
     FooterComponent,
     AddContainerComponent,
     EditContainerComponent,
-    BackHeaderComponent
+    BackHeaderComponent,
+    NotifyForChildComponent,
+    PhoneNumberComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -132,6 +136,8 @@ import { BackHeaderComponent } from './component/back-header/back-header.compone
     TermsOfServiceComponent,
     AddChildComponent,
     EditChildComponent,
+    NotifyForChildComponent,
+    PhoneNumberComponent,
     AddContainerComponent,
     EditContainerComponent,
     ConfirmComponent,

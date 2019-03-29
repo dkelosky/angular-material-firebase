@@ -1,0 +1,27 @@
+<div mat-dialog-content>
+
+  <form [formGroup]="childForm" (ngSubmit)="submit()">
+    <div fxLayout="row" fxLayoutAlign="left center">
+      <h3 fxFlexAlign="start">
+        {{child.name}}
+      </h3>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="30px">
+
+      <div fxLayout="row">
+        <mat-form-field fxFlex>
+          <textarea matInput placeholder="Message" formControlName="message"></textarea>
+          <mat-hint>Message</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div mat-dialog-actions fxLayout="row">
+        <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
+        <button mat-button fxFlex fxFlexAlign="end" color="primary" [disabled]="!childForm.valid">Notify</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

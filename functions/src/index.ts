@@ -12,47 +12,49 @@ export const notifyParent = functions.https.onCall(async (data, context) => {
   console.log(app)
 
   if (!context.auth) {
-    // Throwing an HttpsError so that the client gets the error details.
     throw new functions.https.HttpsError('failed-precondition', 'The function must be called ' +
       'while authenticated.');
   }
 
-  let doc;
+  let userDoc;
+  let childDoc;
   try {
-    // await admin.firestore().doc(`users/${data.user}`).set({test: 1});
-    doc = await admin.firestore().doc(`users/${data.user}`).get();
+    userDoc = await admin.firestore().doc(`users/${data.user}`).get();
   } catch (err) {
     console.error(`Error getting users/${data.user}`);
     console.error(err);
+    throw new functions.https.HttpsError(`not-found`, `User not found`);
   }
 
-  if (doc) {
-    console.log(`Token is ${doc.data()!.token}`)
+  try {
+    childDoc = await admin.firestore().doc(`users/${data.user}/children/${data.child}`).get();
+  } catch (err) {
+    console.error(`Error getting users/${data.user}/children/${data.child}`);
+    console.error(err);
+    throw new functions.https.HttpsError(`not-found`, `Child not found`);
+  }
 
-    try {
-      await admin.messaging().send({
-        token: doc.data()!.token,
-        data: {
-          value: `this is your data`,
-        },
-        notification: {
-          title: "title",
-          body: "body body"
-        },
-        webpush: {
-          fcmOptions: {
-            link: "https://dummypage.com"
-          }
+  console.log(`Token is ${userDoc.data()!.token}`)
+
+  try {
+    await admin.messaging().send({
+      token: userDoc.data()!.token,
+      // data: {
+      //   value: `this is your data`,
+      // },
+      notification: {
+        title: childDoc.data()!.name,
+        body: data.message
+      },
+      webpush: {
+        fcmOptions: {
+          link: "https://dummypage.com"
         }
-      });
-    } catch (err) {
-      console.error(`Message send error`);
-      console.error(err);
-    }
-  } else {
-    console.warn(`Did not find doc for users/${data.user}`);
+      }
+    });
+  } catch (err) {
+    console.error(`Message send error`);
+    console.error(err);
   }
 
 });
-
-// TODO(Kelosky): topic messaging

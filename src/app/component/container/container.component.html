@@ -26,14 +26,15 @@
                   <mat-icon color="warn">warning</mat-icon>
                   <div>{{child.important}}</div>
                 </div>
+
               </mat-card-content>
               <mat-action-row>
                 <button mat-icon-button (click)="alert(child)" >
-                  <mat-icon aria-label="Add alert">add_alert</mat-icon>
+                  <mat-icon aria-label="Add alert" color="primary">add_alert</mat-icon>
                 </button>
-                <button mat-icon-button (click)="message(child)" color="primary" disabled>
+                <!-- <button mat-icon-button (click)="message(child)" color="primary" disabled>
                   <mat-icon aria-label="Message">message</mat-icon>
-                </button>
+                </button> -->
                 <button mat-icon-button (click)="call(child)" color="primary" disabled>
                   <mat-icon aria-label="Call">phone</mat-icon>
                 </button>

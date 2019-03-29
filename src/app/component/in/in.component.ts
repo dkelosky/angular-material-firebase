@@ -18,7 +18,6 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 import { UserId } from 'src/app/interface/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
-import { MessagesService } from 'src/app/service/messages.service';
 
 interface CdkDLValuePair {
   values: ChildId[];
@@ -62,7 +61,6 @@ export class InComponent implements OnInit, OnDestroy {
     private childrenService: ChildrenService,
     private afMessaging: AngularFireMessaging,
     private u: UsersService,
-    private messages: MessagesService,
     private bottomSheet: MatBottomSheet,
     public afAuth: AngularFireAuth,
     private organizationsService: OrganizationsService,

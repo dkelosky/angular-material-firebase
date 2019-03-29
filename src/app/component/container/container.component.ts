@@ -5,11 +5,12 @@ import { ContainersService } from 'src/app/service/containers.service';
 import { OrganizationsService } from 'src/app/service/organizations.service';
 import { ChildId } from 'src/app/interface/child.interface';
 import { ChildrenService } from 'src/app/service/children.service';
-import { Observable, combineLatest, Subject, Subscription } from 'rxjs';
+import { Observable, combineLatest, Subscription } from 'rxjs';
 import { ToggleService } from 'src/app/service/toggle.service';
 import { OrganizationId } from 'src/app/interface/organization.interface';
 import { UrlConstant } from 'src/app/constant/url.constant';
-import { functions } from 'firebase';
+import { MatDialog } from '@angular/material';
+import { NotifyForChildComponent } from '../notify-for-child/notify-for-child.component';
 
 @Component({
   selector: 'app-container',
@@ -31,6 +32,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
     private organizationsService: OrganizationsService,
     private containersService: ContainersService,
     private childrenService: ChildrenService,
@@ -40,18 +42,12 @@ export class ContainerComponent implements OnInit, OnDestroy {
 
     const organizationRoute = this.activatedRoute.snapshot.paramMap.get('organization');
 
-
     this.toggle = this.toggleService.toggle.subscribe(() => {
 
-          // this.toggleService.toggle.unsubscribe();
-          const url = `/${UrlConstant.URL_ORG_BASE}/${organizationRoute}`;
-          console.log(`navigating to ${url}`);
-          this.router.navigateByUrl(url);
+      const url = `/${UrlConstant.URL_ORG_BASE}/${organizationRoute}`;
+      console.log(`navigating to ${url}`);
+      this.router.navigateByUrl(url);
     });
-
-    // .subscribe(() => {
-
-    // });
   }
 
   ngOnDestroy() {
@@ -106,21 +102,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
   }
 
   async alert(child: ChildId) {
-    console.log(`prompt to alert for child ${child.name}`);
-
-    console.log(`parent: ${this.childrenService.getChildRef(child).parent.parent.id}`);
-
-    const notifyParent = functions().httpsCallable('notifyParent');
-
-    try {
-      await notifyParent({
-        user: this.childrenService.getChildRef(child).parent.parent.id,
-        child: child.id,
-      });
-    } catch (err) {
-      console.error(`Notify failure`);
-      console.error(err);
-    }
+    this.dialog.open(NotifyForChildComponent, { data: child });
   }
 
 }
