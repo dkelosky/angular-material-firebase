@@ -3,7 +3,6 @@
 ## First
 
 Code to match child to parent
-Phone number on registration
 
 ## v1.0
 

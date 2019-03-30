@@ -19,7 +19,7 @@ export class AddChildComponent implements OnInit {
     name: ['', Validators.required],
     gender: ['', Validators.required],
     age: ['', Validators.required],
-    phone: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("\\d+")])],
+    phone: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('\\d+')])],
     important: [''],
     info: [''],
   });
