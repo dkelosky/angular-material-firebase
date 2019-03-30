@@ -14,23 +14,6 @@ export class ChildrenService {
     private afAuth: AngularFireAuth,
   ) { }
 
-  // getChildrenWhere(containerRef: DocumentReference) {
-  //   console.log(`Getting with container reference ${containerRef}`);
-  //   return this.afs.collection<ChildId>(`${this.getCollectionString()}`, (ref) => {
-
-  //     ref;
-
-  //     return ref.where('in.id', '==', containerRef.id.trim())
-  //   })
-  //     .snapshotChanges().pipe(
-  //       map(actions => actions.map(a => {
-  //         const data = a.payload.doc.data() as Child;
-  //         const id = a.payload.doc.id;
-  //         return { id, ...data };
-  //       }))
-  //     );
-  // }
-
   getChildren() {
     console.log(`getting children`);
     return this.afs.collection<ChildId>(this.getCollectionString()).snapshotChanges().pipe(
@@ -52,7 +35,6 @@ export class ChildrenService {
     }
   }
 
-  // TODO(Kelosky): set certain fields
   async setChild(child: ChildId) {
     console.log(`Updating ${child.name}, id: ${child.id}`);
     const tempChild = Object.assign({}, child);

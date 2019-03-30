@@ -1,0 +1,14 @@
+[debug] [2019-03-30T00:56:02.341Z] ----------------------------------------------------------------------
+[debug] [2019-03-30T00:56:02.345Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\KELDA16\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-03-30T00:56:02.346Z] CLI Version:   6.3.1
+[debug] [2019-03-30T00:56:02.346Z] Platform:      win32
+[debug] [2019-03-30T00:56:02.346Z] Node Version:  v10.13.0
+[debug] [2019-03-30T00:56:02.347Z] Time:          Fri Mar 29 2019 20:56:02 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-03-30T00:56:02.347Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-03-30T00:56:02.355Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-30T00:56:02.356Z] > authorizing via signed-in user
+[debug] [2019-03-30T00:56:02.356Z] [iam] checking project kelosky-check-in for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-03-30T00:56:02.357Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-03-30T00:56:02.357Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>

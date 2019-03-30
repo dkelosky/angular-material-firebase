@@ -1,5 +1,8 @@
 <div mat-dialog-content>
-
-  <!-- <a href="tel:+1-303-499-7111">+1 (303) 499-7111</a> -->
-
+  <div fxLayout="row" fxLayoutAlign="center end">
+    <mat-icon mat-card-avatar color="primary">phone</mat-icon>
+    <h3>
+      <a [href]="tel">{{tel}}</a>
+    </h3>
+  </div>
 </div>

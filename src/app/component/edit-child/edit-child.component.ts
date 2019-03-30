@@ -44,6 +44,7 @@ export class EditChildComponent implements OnInit {
 
     // change values from form
     this.child.age = this.childForm.value.age;
+    this.child.phone = this.childForm.value.phone;
     this.child.important = this.childForm.value.important;
 
     this.childrenService.setChild(this.child);

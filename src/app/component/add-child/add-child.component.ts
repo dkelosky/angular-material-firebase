@@ -59,4 +59,8 @@ export class AddChildComponent implements OnInit {
     this.sb.open(message, null, config);
   }
 
+  cancel() {
+    this.dialogRef.close();
+  }
+
 }

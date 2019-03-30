@@ -11,6 +11,7 @@ import { OrganizationId } from 'src/app/interface/organization.interface';
 import { UrlConstant } from 'src/app/constant/url.constant';
 import { MatDialog } from '@angular/material';
 import { NotifyForChildComponent } from '../notify-for-child/notify-for-child.component';
+import { PhoneNumberComponent } from '../phone-number/phone-number.component';
 
 @Component({
   selector: 'app-container',
@@ -101,8 +102,12 @@ export class ContainerComponent implements OnInit, OnDestroy {
     });
   }
 
-  async alert(child: ChildId) {
+  alert(child: ChildId) {
     this.dialog.open(NotifyForChildComponent, { data: child });
+  }
+
+  call(child: ChildId) {
+    this.dialog.open(PhoneNumberComponent, {data: child});
   }
 
 }

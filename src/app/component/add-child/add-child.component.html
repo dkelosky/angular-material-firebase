@@ -44,7 +44,8 @@
       </mat-form-field>
 
       <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
-        <button color="primary" mat-button [disabled]="!childForm.valid">Add</button>
+        <button mat-button type="button" fxFlex fxFlexAlign="start" (click)="cancel()">Cancel</button>
+        <button color="primary" mat-button fxFlex fxFlexAlign="end" [disabled]="!childForm.valid">Add</button>
       </div>
 
     </div>
