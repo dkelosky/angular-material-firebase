@@ -35,10 +35,12 @@ Admin UI to:
 -> view all info
 -> notify (parents background and foreground)
 -> view parents contact
--> generate code
 -> end class, reset all
 
 ## v1.x (future)
+
+Auto dismissal after some period of time
+
 Calendar view
 
 Admin UI to add containers
@@ -48,6 +50,10 @@ Admin to certain classes only
 Share info with other parents
 
 Share info with other account
+
+Send email on missed attendance
+
+Send email on good attenance
 
 ## v2.0 (future)
 

@@ -18,7 +18,7 @@ export class EditChildComponent implements OnInit {
 
   childForm = this.fb.group({
     age: ['', Validators.required],
-    phone: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("\\d+")])],
+    phone: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('\\d+')])],
     important: [''],
     info: [''],
   });
