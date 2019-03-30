@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatDialogModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-polic
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderMenuComponent } from './component/header-menu/header-menu.component';
 import { HeaderComponent } from './component/header/header.component';
+import { IndeterminateLoadingComponent } from './component/indeterminate-loading/indeterminate-loading.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HeaderComponent } from './component/header/header.component';
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
     HeaderMenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    IndeterminateLoadingComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -54,6 +56,7 @@ import { HeaderComponent } from './component/header/header.component';
     MatIconModule,
     MatMenuModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

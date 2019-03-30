@@ -1,19 +1,12 @@
-<!-- <mat-sidenav-container ngClass="body">
-  <mat-sidenav ngClass="sidenav" mode="side" opened>
-    <button mat-button color="warn" (click)="logout()">Logout</button>
-    <div>hey</div>
+<!-- <div *ngIf="containers; else loading"> -->
 
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <div>test</div>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
-
-<div fxLayout="row" fxLayoutAlign="center center" ngClass="body">
-  <!-- <div fxLayout="column" fxLayoutGap="20px"> -->
+  <div fxLayout="row" fxLayoutAlign="center center" ngClass="body">
     <div *ngIf="afAuth.user | async as user">
       <div>Welcome {{user.displayName}}</div>
     </div>
-  <!-- </div> -->
-</div>
+  </div>
+<!-- </div> -->
+
+<ng-template #loading>
+  <app-indeterminate-loading [error]="error"></app-indeterminate-loading>
+</ng-template>

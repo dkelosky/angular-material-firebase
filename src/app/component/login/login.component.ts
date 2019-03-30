@@ -62,20 +62,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       callbacks: {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
 
-          // after logon, request a token and create an entry for user
-          this.afMessaging.requestToken
-            .subscribe(
-              (token) => {
-                // save token
-                console.log(`Permission granted; saving token server: ${token}`);
-                this.u.setUser(token); // NOTE(Kelosky): saves entire user - need to update just token
-                // this.router.navigateByUrl('/in');
-              },
-              (error) => {
-                // TODO(Kelosky): warning - you will not receive any notifications
-                console.error(error);
-              },
-            );
           return true;
         }
       },
@@ -89,11 +75,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       ],
       // Terms of service url/callback.
       tosUrl: () => {
-        console.log('TODO(Kelosky) - launch ToS');
         this.openTocDialog();
       },
       privacyPolicyUrl: () => {
-        console.log('TODO(Kelosky) - launch Privacy policy');
         this.openPrivacyDialog();
       }
     };
