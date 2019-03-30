@@ -13,7 +13,7 @@ import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
@@ -67,7 +67,10 @@ import { IndeterminateLoadingComponent } from './component/indeterminate-loading
     PrivacyPolicyComponent,
     TermsOfServiceComponent,
   ],
-  providers: [],
+  providers: [{
+    // suppress timestamp console message
+    provide: FirestoreSettingsToken, useValue: {}
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
