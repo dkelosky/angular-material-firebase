@@ -17,8 +17,10 @@ export class UsersService {
   // NOTE(Kelosky): note UserId because caller cannot influence the .id
   async setUser(user: User) {
     console.log(`setting user ${user.name}`);
+    const tempUser = Object.assign({}, user);
+    delete (tempUser as UserId).id;
     try {
-      await this.afs.doc<User>(`users/${this.afAuth.auth.currentUser.uid}`).set(user);
+      await this.afs.doc<User>(`users/${this.afAuth.auth.currentUser.uid}`).set(tempUser, {merge: true});
     } catch (err) {
       console.log(`setUser error`);
       console.error(err);

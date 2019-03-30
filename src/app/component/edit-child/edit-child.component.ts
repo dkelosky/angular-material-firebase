@@ -18,6 +18,7 @@ export class EditChildComponent implements OnInit {
 
   childForm = this.fb.group({
     age: ['', Validators.required],
+    phone: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("\\d+")])],
     important: [''],
     info: [''],
   });
@@ -31,6 +32,7 @@ export class EditChildComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public child: ChildId,
   ) {
     this.childForm.get('age').setValue(this.child.age);
+    this.childForm.get('phone').setValue(this.child.phone);
     this.childForm.get('important').setValue(this.child.important);
   }
 

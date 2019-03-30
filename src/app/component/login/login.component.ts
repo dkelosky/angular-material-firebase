@@ -5,8 +5,6 @@ import * as firebaseui from 'firebaseui';
 import { MatDialog } from '@angular/material';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
-import { AngularFireMessaging } from '@angular/fire/messaging';
-import { UsersService } from 'src/app/service/users.service';
 
 @Component({
   selector: 'app-login',

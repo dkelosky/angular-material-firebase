@@ -18,6 +18,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 import { UserId } from 'src/app/interface/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
+import { MessagesService } from 'src/app/service/messages.service';
 
 interface CdkDLValuePair {
   values: ChildId[];
@@ -173,7 +174,7 @@ export class InComponent implements OnInit, OnDestroy {
   }
 
   openAddDialog() {
-    this.dialog.open(AddChildComponent);
+    this.dialog.open(AddChildComponent, { data: this.user});
   }
 
   openEditDialog(child: ChildId) {
@@ -201,6 +202,7 @@ export class InComponent implements OnInit, OnDestroy {
         this.justDenied = true;
         this.u.setUser({
           name: this.afAuth.auth.currentUser.displayName,
+          phone: this.user.phone,
         });
       },
     };
@@ -218,6 +220,7 @@ export class InComponent implements OnInit, OnDestroy {
         this.justDenied = true;
         this.u.setUser({
           name: this.afAuth.auth.currentUser.displayName,
+          phone: this.user.phone,
         });
       }
     });
@@ -230,7 +233,8 @@ export class InComponent implements OnInit, OnDestroy {
         (token) => {
           this.u.setUser({
             name: this.afAuth.auth.currentUser.displayName,
-            token
+            // phone: this.user.phone,
+            token,
           });
         },
         (error) => {

@@ -10,6 +10,7 @@ export interface Child extends Entity {
     gender: 'boy' | 'girl';
     important?: string;
     info?: string;
+    phone: number;
     in?: DocumentReference;
     contacts?: Contact[];
 }
