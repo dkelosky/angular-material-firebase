@@ -18,11 +18,6 @@ otherwise show content for a logged in user.
   * [Cloud Functions for Firebase](https://firebase.google.com/docs/functions/) - server side operations (without management responsibilities)
   * [Firebase Hosting](https://firebase.google.com/docs/hosting/) - host static HTML
 
-## TODO
-
-* Privacy policy & terms of service don't yet work
-* templating of project name (right now you must find an replace instances of "lmcc")
-
 ## Setup
 
 Plenty of details to work through (will fill this out more later)

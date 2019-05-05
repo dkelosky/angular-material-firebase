@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
-import { AngularFireMessaging } from '@angular/fire/messaging';
-import { UsersService } from '../../service/users.service';
 import { MatDialog } from '@angular/material';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
@@ -16,11 +14,11 @@ import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.co
 export class LoginComponent implements OnInit, OnDestroy {
 
   private ui: firebaseui.auth.AuthUI;
+  uiShown = false;
 
   constructor(
     public afAuth: AngularFireAuth,
-    private afMessaging: AngularFireMessaging,
-    private u: UsersService,
+
     public dialog: MatDialog,
   ) {
   }
@@ -38,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   openPrivacyDialog() {
     const dialogRef = this.dialog.open(PrivacyPolicyComponent);
 
-    dialogRef.afterClosed().subscribe( (result) => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
@@ -56,20 +54,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private get config(): firebaseui.auth.Config {
-    // console.log(this.location.path() + " full")
-    // console.log(this.url)
     return {
       callbacks: {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-
           return true;
+        },
+        uiShown: () => {
+          this.uiShown = true;
         }
       },
-      // signInSuccessUrl: this.url + '/subscribe',
+
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.PhoneAuthProvider.PROVIDER_ID,
       ],

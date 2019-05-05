@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatDialogModule, MatProgressSpinnerModule, MatProgressBarModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,14 +12,14 @@ import { LoginMessageComponent } from './component/login-message/login-message.c
 import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
 
-import { AngularFireModule } from '@angular/fire';
+// import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { environment } from '../environments/environment';
+// import { environment } from '../environments/environment';
 import { InComponent } from './component/in/in.component';
 import { TermsOfServiceComponent } from './component/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
@@ -57,8 +57,9 @@ import { IndeterminateLoadingComponent } from './component/indeterminate-loading
     MatMenuModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireMessagingModule,
