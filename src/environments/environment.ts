@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyCcaa3qLSyksED14s7-81vc2pmCrJuncfs',
-    authDomain: 'kelosky-check-in.firebaseapp.com',
-    databaseURL: 'https://kelosky-check-in.firebaseio.com',
-    projectId: 'kelosky-check-in',
-    storageBucket: 'kelosky-check-in.appspot.com',
-    messagingSenderId: '223666143636'
+    apiKey: "AIzaSyB14SaasJIiJW5vfxpYUzclA0z_kmMYcQs",
+    authDomain: "angular-material-firebase-demo.firebaseapp.com",
+    databaseURL: "https://angular-material-firebase-demo.firebaseio.com",
+    projectId: "angular-material-firebase-demo",
+    storageBucket: "angular-material-firebase-demo.appspot.com",
+    messagingSenderId: "966963370132",
+    appId: "1:966963370132:web:739ecb2185002aab"
   }
 };
 
